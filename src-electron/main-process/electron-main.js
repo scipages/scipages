@@ -1,4 +1,4 @@
-import { app, BrowserWindow, nativeTheme } from 'electron'
+import { app, BrowserWindow, nativeTheme, ipcMain } from 'electron'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -23,6 +23,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    frame: false,
+    titleBarStyle: "hidden",
     useContentSize: true,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
@@ -40,6 +42,19 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  mainWindow.on('maximize', (e) => {
+    mainWindow.webContents.send('window-maximized', {})
+  })
+  mainWindow.on('unmaximize', (e) => {
+    mainWindow.webContents.send('window-unmaximized', {})
+  })
+  // mainWindow.on('minimize', (e) => {
+  //   // ..
+  // })
+  // mainWindow.on('restore', (e) => {
+  //   // ..
+  // })
 }
 
 app.on('ready', createWindow)
@@ -53,5 +68,45 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
+  }
+})
+
+ipcMain.handle("window-controls-channel", function(e, args) {
+  if (args.minimize == true) {
+    mainWindow.minimize()
+  }
+  if (args.maximize == true) {
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize()
+      return false
+    } else {
+      mainWindow.maximize()
+      return true
+    }
+  }
+  if (args.close == true) {
+    // Close DevTools before closing the window:
+    // https://github.com/electron/electron/issues/25012
+    if (mainWindow.webContents.isDevToolsOpened()) {
+      mainWindow.webContents.closeDevTools()
+    }
+    mainWindow.close()
+    //app.quit()
+    //app.exit(0)
+  }
+  if (args.showModal == true) {
+    const child = new BrowserWindow({ parent: mainWindow, modal: true, show: false })
+    child.setMenu(null)
+    child.setMenuBarVisibility(false)
+    child.loadURL('https://www.google.com')
+    child.once('ready-to-show', () => {
+      child.show()
+    })
+  }
+})
+
+ipcMain.handle('get-data-channel', async (event, args) => {
+  if (args.version == true) {
+    return app.getVersion()
   }
 })
