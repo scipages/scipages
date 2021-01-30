@@ -99,7 +99,7 @@ export default defineComponent({
     function showElectronModal () {
       void ipcRenderer.invoke('window-controls-channel', { showModal: true })
 
-      void ipcRenderer.invoke('get-data-channel', { version: true }).then((result) => {
+      void ipcRenderer.invoke('get-data-channel', { version: true }).then((result: string) => {
         console.log('Version #1: ' + result)
       })
     }

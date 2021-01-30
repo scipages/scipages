@@ -186,7 +186,14 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'scipages'
+        appId: 'com.scipages.scipages',
+        win: {
+          target: 'nsis'
+        }
+        // publish: {
+        //   provider: 's3',
+        //   bucket: 'myS3bucket'
+        // }
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
