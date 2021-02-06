@@ -2,7 +2,13 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
 // import example from './module-example'
-// import { ExampleStateInterface } from './module-example/state';
+// import { ExampleStateInterface } from './module-example/state'
+
+import notifications from './module-notifications'
+import { NotificationsStateInterface } from './module-notifications/state'
+
+import packageInfo from './module-package-info'
+import { PackageInfoStateInterface } from './module-package-info/state'
 
 /*
  * If not building with SSR mode, you can
@@ -17,13 +23,17 @@ export interface StateInterface {
   // Define your own store structure, using submodules if needed
   // example: ExampleStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  example: unknown;
+  // example: unknown;
+  notifications: NotificationsStateInterface;
+  packageInfo: PackageInfoStateInterface;
 }
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
-      // example
+      // example,
+      notifications,
+      packageInfo
     },
 
     // enable strict mode (adds overhead!)
