@@ -1,119 +1,64 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+      <TitleBar></TitleBar>
+      <!--<MenuBar></MenuBar>-->
+      <!--<MainToolBar v-if="showMainToolBar"></MainToolBar>-->
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
+    <q-footer class="bg-grey-2" bordered>
+      <Footer></Footer>
+    </q-footer>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+    <LeftDrawer></LeftDrawer>
 
-    <q-page-container>
-      <router-view />
+    <RightDrawer v-bind:show="showRightDrawer"></RightDrawer>
+
+    <q-page-container class="absolute-full">
+      <div class="row fit">
+        <!--<q-scroll-area class="fit" style="border: 1px solid red">-->
+        <q-scroll-area class="fit">
+          <q-page class="row justify-evenly">
+            <!--<q-btn v-on:click="showRightDrawer=showRightDrawer ? false : true">Toggle Right Drawer</q-btn>-->
+            <router-view />
+          </q-page>
+        </q-scroll-area>
+      </div>
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
 import { defineComponent, ref } from 'vue'
+import TitleBar from 'components/main-layout/TitleBar.vue'
+// import MenuBar from 'components/main-layout/MenuBar.vue'
+// import MainToolBar from 'components/main-layout/MainToolBar.vue'
+import Footer from 'components/main-layout/Footer.vue'
+import LeftDrawer from 'components/main-layout/LeftDrawer.vue'
+import RightDrawer from 'components/main-layout/RightDrawer.vue'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    TitleBar,
+    // MenuBar,
+    // MainToolBar,
+    Footer,
+    LeftDrawer,
+    RightDrawer
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
-
+    // const showMainToolBar = ref(false)
+    const showRightDrawer = ref(true)
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      // showMainToolBar,
+      showRightDrawer
     }
   }
 })
 </script>
+
+<style lang="scss">
+</style>

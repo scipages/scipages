@@ -1,1 +1,10 @@
-// app global css in SCSS form
+body {
+  overflow: hidden;
+}
+
+.cursor-pointer:hover {
+  cursor: default !important;
+}
+.q-btn--actionable {
+  cursor: default !important;
+}

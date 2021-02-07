@@ -2,28 +2,21 @@
   <div class="fit relative-position">
     <div class="q-pa-md">
       <p class="q-pa-md text-weight-bolder">
-        Projects
+        Pages<br />
+        ( {{ uuid }} )
         <q-separator />
       </p>
 
-      <q-list class="non-selectable">
+      <q-list>
         <q-item>
           <q-item-section>
-            <q-item-label>My project title goes here</q-item-label>
-            <q-item-label caption lines="2">Some more information about the project.</q-item-label>
+            <q-item-label>A page</q-item-label>
+            <q-item-label caption lines="2">Some more information about the page.</q-item-label>
           </q-item-section>
 
           <q-item-section side top>
             <q-item-label caption>5 min ago</q-item-label>
-            <q-btn icon="keyboard_arrow_down" color="grey" padding="none xs">
-              <q-menu anchor="bottom right" self="top right">
-                <q-list>
-                  <q-item clickable>
-                    <q-item-section>Permanently Delete</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
+            <q-btn size="xs" label="Open" />
           </q-item-section>
         </q-item>
 
@@ -31,8 +24,8 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label>My project title goes here</q-item-label>
-            <q-item-label caption lines="2">Some more information about the project.</q-item-label>
+            <q-item-label>Another page</q-item-label>
+            <q-item-label caption lines="2">Some more information about the other page.</q-item-label>
           </q-item-section>
 
           <q-item-section side top>
@@ -49,6 +42,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageProjectIndex',
+  props: {
+    uuid: {
+      type: String,
+      default: ''
+    }
+  }
 })
 </script>
