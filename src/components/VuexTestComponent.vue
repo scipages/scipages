@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <p>
-      <button v-on:click="showNotification('test', 'test')">
+      <button v-on:click="addNotification(notificationFactory('test', 'test'))">
         Add Notification
       </button>
     </p>
@@ -22,44 +22,22 @@
 
 <script lang="ts">
 import {
-  defineComponent,
-  computed
+  defineComponent
 } from 'vue'
-import { Notification } from './../store/module-notifications/state'
-import { useStore } from 'vuex'
+import useNotifications from 'src/use/useNotifications'
+import usePackageInfo from 'src/use/usePackageInfo'
 
 export default defineComponent({
   name: 'VuexTestComponent',
   setup () {
-    const store = useStore()
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const notifications = computed(() => store.state.notifications.notifications)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const countNotifications = computed(() => store.getters['notifications/count'])
-
-    function showNotification (type: string, message: string) {
-      const notification: Notification = {
-        id: 0,
-        type: type,
-        message: message
-      }
-      void store.dispatch('notifications/add', notification, { root: true })
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const name = computed(() => store.state.packageInfo.name)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const productName = computed(() => store.state.packageInfo.productName)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const description = computed(() => store.state.packageInfo.description)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-    const version = computed(() => store.state.packageInfo.version)
-
+    const { notifications, countNotifications, notificationFactory, addNotification, removeNotification } = useNotifications()
+    const { name, productName, description, version } = usePackageInfo()
     return {
       notifications,
       countNotifications,
-      showNotification,
+      notificationFactory,
+      addNotification,
+      removeNotification,
       name,
       productName,
       description,

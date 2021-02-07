@@ -1,19 +1,37 @@
 import { MutationTree } from 'vuex'
 import { PackageInfoStateInterface } from './state'
 
-const mutation: MutationTree<PackageInfoStateInterface> = {
-  SET_NAME (state: PackageInfoStateInterface, name: string) {
+export enum PackageInfoMutationTypes {
+  // eslint-disable-next-line no-unused-vars
+  SET_NAME = 'SET_NAME',
+  // eslint-disable-next-line no-unused-vars
+  SET_PRODUCT_NAME = 'SET_PRODUCT_NAME',
+  // eslint-disable-next-line no-unused-vars
+  SET_DESCRIPTION = 'SET_DESCRIPTION',
+  // eslint-disable-next-line no-unused-vars
+  SET_VERSION = 'SET_VERSION'
+}
+
+export type Mutations<S = PackageInfoStateInterface> = {
+  [PackageInfoMutationTypes.SET_NAME] (state: S, payload: string): void,
+  [PackageInfoMutationTypes.SET_PRODUCT_NAME] (state: S, payload: string): void,
+  [PackageInfoMutationTypes.SET_DESCRIPTION] (state: S, payload: string): void,
+  [PackageInfoMutationTypes.SET_VERSION] (state: S, payload: string): void
+}
+
+const mutations: MutationTree<PackageInfoStateInterface> = {
+  [PackageInfoMutationTypes.SET_NAME] (state: PackageInfoStateInterface, name: string) {
     state.name = name
   },
-  SET_PRODUCT_NAME (state: PackageInfoStateInterface, productName: string) {
+  [PackageInfoMutationTypes.SET_PRODUCT_NAME] (state: PackageInfoStateInterface, productName: string) {
     state.productName = productName
   },
-  SET_DESCRIPTION (state: PackageInfoStateInterface, description: string) {
+  [PackageInfoMutationTypes.SET_DESCRIPTION] (state: PackageInfoStateInterface, description: string) {
     state.description = description
   },
-  SET_VERSION (state: PackageInfoStateInterface, version: string) {
+  [PackageInfoMutationTypes.SET_VERSION] (state: PackageInfoStateInterface, version: string) {
     state.version = version
   }
 }
 
-export default mutation
+export default mutations

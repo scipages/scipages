@@ -2,9 +2,13 @@ import { GetterTree } from 'vuex'
 import { StateInterface } from '../index'
 import { PackageInfoStateInterface } from './state'
 
-const getters: GetterTree<PackageInfoStateInterface, StateInterface> = {
-  // someAction (/* context */) {
-  //   // your code
+export type Getters = {
+  // someAction(state: PackageInfoStateInterface): number
+}
+
+const getters: GetterTree<PackageInfoStateInterface, StateInterface> & Getters = {
+  // someAction (/* state */) {
+  //   // your code that returns a number
   // }
 }
 
