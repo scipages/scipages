@@ -7,17 +7,19 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "icons": "icongenie generate -i AppIcon.png --skip-trim --theme-color 1976d2"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.16",
+    "@quasar/extras": "^1.9.17",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "quasar": "^2.0.0-beta.2",
-    "vue-i18n": "^9.0.0-beta.0"
+    "lowdb": "^1.0.0",
+    "quasar": "^2.0.0-beta.4",
+    "vue-i18n": "^9.0.0-rc.6"
   },
   "devDependencies": {
-    "@quasar/app": "^3.0.0-beta.3",
+    "@quasar/app": "^3.0.0-beta.6",
+    "@types/lowdb": "^1.0.9",
     "@types/node": "^10.17.15",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
@@ -28,7 +30,7 @@
     "electron-debug": "^3.2.0",
     "electron-devtools-installer": "^3.1.1",
     "electron-packager": "^14.2.1",
-    "eslint": "^7.14.0",
+    "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^11.0.0",
