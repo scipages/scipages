@@ -8,7 +8,7 @@
     <q-btn dense flat icon="minimize" v-on:click="minimizeWindow()" />
     <q-btn dense flat icon="crop_square" v-if="maximized == false" v-on:click="maximizeUnmaximizeWindow()" />
     <q-btn dense flat icon="crop_square" v-else v-on:click="maximizeUnmaximizeWindow()" />
-    <q-btn dense flat icon="close" v-on:click="closeWindow()" />
+    <q-btn dense flat icon="close" class="close" v-on:click="closeWindow()" />
   </q-bar>
 </template>
 
@@ -67,3 +67,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped lang="scss">
+.close:hover {
+  background-color: #F04747;
+}
+</style>

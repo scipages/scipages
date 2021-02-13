@@ -10,13 +10,13 @@
       <q-list>
         <q-item>
           <q-item-section>
-            <q-item-label>A page</q-item-label>
+            <q-item-label>Home</q-item-label>
             <q-item-label caption lines="2">Some more information about the page.</q-item-label>
           </q-item-section>
 
           <q-item-section side top>
             <q-item-label caption>5 min ago</q-item-label>
-            <q-btn size="xs" label="Open" />
+            <q-btn size="xs" label="Edit" icon="fas fa-edit" />
           </q-item-section>
         </q-item>
 
@@ -30,7 +30,11 @@
 
           <q-item-section side top>
             <q-item-label caption>5 min ago</q-item-label>
-            <q-btn size="xs" label="Open" />
+            <q-btn-group push>
+              <q-btn size="xs" label="Edit" icon="fas fa-edit" />
+              <q-separator vertical />
+              <q-btn size="xs" label="Delete" icon="far fa-trash-alt" text-color="red-4" />
+            </q-btn-group>
           </q-item-section>
         </q-item>
       </q-list>
@@ -42,7 +46,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'PageProjectIndex',
+  name: 'PageMainIndex',
   props: {
     uuid: {
       type: String,

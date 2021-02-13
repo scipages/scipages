@@ -37,7 +37,11 @@
 
           <q-item-section side top>
             <q-item-label caption>5 min ago</q-item-label>
-            <q-btn size="xs" label="Open" />
+            <q-btn-group push>
+              <q-btn size="xs" label="Open" icon="fas fa-folder-open" :to="{name: 'main_index', params: { uuid: 'a_fake_uuid' }}" />
+              <q-separator vertical />
+              <q-btn size="xs" label="Delete" icon="far fa-trash-alt" text-color="red-4" />
+            </q-btn-group>
           </q-item-section>
         </q-item>
       </q-list>
@@ -49,6 +53,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageIntroIndex'
 })
 </script>

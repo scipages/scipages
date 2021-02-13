@@ -4,7 +4,8 @@
       Project: The open project's name goes here | followed by breadcrumbs items
     </span>
     <span class="col-3 text-right">
-      {{ productName }} v-{{ version }}
+      {{ productName }} v{{ version }}
+      <!--<span> / Quasar v{{ $q.version }}</span>-->
     </span>
   </div>
 </template>

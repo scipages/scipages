@@ -3,31 +3,32 @@ import { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'main-layout',
-    component: () => import('layouts/MainLayout.vue'),
+    name: 'intro-layout',
+    component: () => import('layouts/IntroLayout.vue'),
     children: [
       {
         path: '',
-        name: 'index',
-        component: () => import('pages/Index.vue')
+        name: 'intro_index',
+        component: () => import('pages/intro/Index.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/main/:uuid',
+    name: 'main-layout',
+    component: () => import('layouts/MainLayout.vue'),
+    props: true,
+    children: [
+      {
+        path: '/index',
+        name: 'main_index',
+        component: () => import('pages/main/Index.vue')
       },
       {
-        path: 'test',
-        name: 'test',
-        component: () => import('pages/Test.vue')
-      },
-      {
-        path: 'project/:uuid',
-        name: 'project',
-        component: () => import('pages/Project.vue'),
-        props: true,
-        children: [
-          {
-            path: '/index',
-            name: 'project_index',
-            component: () => import('pages/project/Index.vue')
-          }
-        ]
+        path: '/test',
+        name: 'main_test',
+        component: () => import('pages/main/Test.vue')
       }
     ]
   },

@@ -33,7 +33,7 @@ import VuexTestComponent from 'components/VuexTestComponent.vue'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'PageIndex',
+  name: 'PageMainTest',
   components: {
     ExampleComponent,
     VuexTestComponent

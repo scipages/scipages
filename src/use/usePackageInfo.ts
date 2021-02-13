@@ -4,7 +4,7 @@ import {
 import { useStore } from 'vuex'
 import { name, productName, description, version } from '../../package.json'
 
-export default function useNotifications () {
+export default function usePackageInfo () {
   const store = useStore()
 
   function setPackageInfo () {
