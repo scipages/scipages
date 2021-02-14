@@ -56,10 +56,6 @@ export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>
     return items
   }
 
-  find (item: T): T[] {
-    return [] // TODO
-  }
-
   findOne (id: string): T {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
     const item: T = this.db.get(this.collectionName)
