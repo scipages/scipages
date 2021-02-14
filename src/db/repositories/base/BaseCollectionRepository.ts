@@ -4,7 +4,7 @@ import lowdb from 'lowdb'
 import { IWrite } from '../interfaces/IWrite'
 import { IRead } from '../interfaces/IRead'
 
-export abstract class BaseRepository<T, DBSchema> implements IWrite<T>, IRead<T> {
+export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>, IRead<T> {
   public readonly db: lowdb.LowdbSync<DBSchema>
   // public readonly table/collection: _.LoDashExplicitArrayWrapper<T>
   // public readonly table/collection: _.LoDashExplicitWrapper<Array<T>>
@@ -57,7 +57,7 @@ export abstract class BaseRepository<T, DBSchema> implements IWrite<T>, IRead<T>
   }
 
   find (item: T): T[] {
-    return []
+    return [] // TODO
   }
 
   findOne (id: string): T {

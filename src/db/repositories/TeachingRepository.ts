@@ -1,5 +1,6 @@
 import { packageInfo } from 'src/helpers/packageInfo'
-import { BaseRepository } from './base/BaseRepository'
+import { BaseCollectionRepository } from './base/BaseCollectionRepository'
+import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 import { TeachingItem } from 'src/db/entities/TeachingItem'
 
 import FileSync from 'lowdb/adapters/FileSync'
@@ -44,8 +45,8 @@ export class TeachingDatabaseSingleton {
   }
 }
 
-export class TeachingRepository extends BaseRepository<TeachingItem, TeachingDatabaseSchema> {
-
+export class TeachingItemsRepository extends BaseCollectionRepository<TeachingItem, TeachingDatabaseSchema> {
 }
 
-export default TeachingRepository
+export class TeachingSimpleRepository extends BaseSimpleRepository<TeachingDatabaseSchema> {
+}

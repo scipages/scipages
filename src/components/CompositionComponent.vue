@@ -59,7 +59,7 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 import { TeachingItem } from 'src/db/entities/TeachingItem'
-import { TeachingDatabaseSingleton, TeachingRepository } from 'src/db/repositories/TeachingRepository'
+import { TeachingDatabaseSingleton, TeachingItemsRepository } from 'src/db/repositories/TeachingRepository'
 
 function useClickCount () {
   const clickCount = ref(0)
@@ -111,7 +111,7 @@ export default defineComponent({
       openURL('https://www.google.com')
     }
     function testLowDbCreate () {
-      const repository = new TeachingRepository(
+      const repository = new TeachingItemsRepository(
         TeachingDatabaseSingleton.getInstance(
           path.join(electronData.userDataProjectsPath, 'project-bla')
         ),
@@ -132,7 +132,7 @@ export default defineComponent({
       repository.create(newItem)
     }
     function testLowDbFindOne (id: string) {
-      const repository = new TeachingRepository(
+      const repository = new TeachingItemsRepository(
         TeachingDatabaseSingleton.getInstance(
           path.join(electronData.userDataProjectsPath, 'project-bla')
         ),
