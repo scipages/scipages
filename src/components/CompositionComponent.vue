@@ -8,6 +8,19 @@
         Open External URL
       </button>
     </p>
+    <p>
+      {{ electronData.userDataPath }}<br />
+      {{ electronData.userDataProjectsPath }}<br />
+      {{ electronData.userDataConfigurationPath }}
+    </p>
+    <p>
+      <button v-on:click="listProjects()">
+        ListProjects
+      </button>
+      <button v-on:click="openConfiguration()">
+        openConfiguration
+      </button>
+    </p>
     <p>{{ title }}</p>
     <ul>
       <li v-for="todo in todos" :key="todo.id" @click="increment">
@@ -32,6 +45,7 @@ import {
 import { Todo, Meta } from './models'
 import { ipcRenderer } from 'electron'
 import { openURL } from 'quasar'
+import useData, { ElectronData } from 'src/use/useData'
 
 function useClickCount () {
   const clickCount = ref(0)
@@ -68,11 +82,12 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { electronData, listProjects, openConfiguration } = useData()
     function showElectronModal () {
       void ipcRenderer.invoke('window-controls-channel', { showModal: true })
 
-      void ipcRenderer.invoke('get-data-channel', { version: true }).then((result: string) => {
-        console.log('Version: ' + result)
+      void ipcRenderer.invoke('get-data-channel', {}).then((result: ElectronData) => {
+        console.log('Version: ' + result.version)
       })
     }
     function openExternalURL () {
@@ -82,7 +97,10 @@ export default defineComponent({
       ...useClickCount(),
       ...useDisplayTodo(toRef(props, 'todos')),
       showElectronModal,
-      openExternalURL
+      openExternalURL,
+      electronData,
+      listProjects,
+      openConfiguration
     }
   }
 })

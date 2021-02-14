@@ -1,8 +1,11 @@
 import { app, BrowserWindow, nativeTheme, ipcMain } from 'electron'
+import fs from 'fs'
+import path from 'path'
+import electronData from './electron-data'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
-    require('fs').unlinkSync(require('path').join(app.getPath('userData'), 'DevTools Extensions'))
+    fs.unlinkSync(path.join(app.getPath('userData'), 'DevTools Extensions'))
   }
 } catch (_) { }
 
@@ -25,8 +28,10 @@ function createWindow () {
     height: 600,
     minWidth: 1000,
     minHeight: 600,
+    // show: false,
+    // backgroundColor: '#1976d2',
     frame: false,
-    titleBarStyle: "hidden",
+    titleBarStyle: 'hidden',
     useContentSize: true,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
@@ -39,6 +44,11 @@ function createWindow () {
     }
   })
 
+  // mainWindow.once('ready-to-show', () => {
+  //   mainWindow.show()
+  //   mainWindow.focus()
+  // })
+
   mainWindow.loadURL(process.env.APP_URL)
 
   mainWindow.on('closed', () => {
@@ -46,10 +56,14 @@ function createWindow () {
   })
 
   mainWindow.on('maximize', (e) => {
-    mainWindow.webContents.send('window-maximized', {})
+    if (mainWindow !== null) {
+      mainWindow.webContents.send('window-maximized', {})
+    }
   })
   mainWindow.on('unmaximize', (e) => {
-    mainWindow.webContents.send('window-unmaximized', {})
+    if (mainWindow !== null) {
+      mainWindow.webContents.send('window-unmaximized', {})
+    }
   })
   // mainWindow.on('minimize', (e) => {
   //   // ..
@@ -73,11 +87,15 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.handle("window-controls-channel", function(e, args) {
-  if (args.minimize == true) {
+ipcMain.handle('window-controls-channel', function (e, args) {
+  if (mainWindow === null) {
+    return
+  }
+
+  if (args.minimize === true) {
     mainWindow.minimize()
   }
-  if (args.maximize == true) {
+  if (args.maximize === true) {
     if (mainWindow.isMaximized()) {
       mainWindow.unmaximize()
       return false
@@ -86,17 +104,17 @@ ipcMain.handle("window-controls-channel", function(e, args) {
       return true
     }
   }
-  if (args.close == true) {
+  if (args.close === true) {
     // Close DevTools before closing the window:
     // https://github.com/electron/electron/issues/25012
     if (mainWindow.webContents.isDevToolsOpened()) {
       mainWindow.webContents.closeDevTools()
     }
     mainWindow.close()
-    //app.quit()
-    //app.exit(0)
+    // app.quit()
+    // app.exit(0)
   }
-  if (args.showModal == true) {
+  if (args.showModal === true) {
     const child = new BrowserWindow({ parent: mainWindow, modal: true, show: false })
     child.setMenu(null)
     child.setMenuBarVisibility(false)
@@ -107,8 +125,6 @@ ipcMain.handle("window-controls-channel", function(e, args) {
   }
 })
 
-ipcMain.handle('get-data-channel', async (event, args) => {
-  if (args.version == true) {
-    return app.getVersion()
-  }
+ipcMain.handle('get-data-channel', (event, args) => {
+  return electronData
 })
