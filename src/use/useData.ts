@@ -76,8 +76,8 @@ export default function useData () {
     }
   }
   function openConfiguration () {
-    const adapter = new FileSync<Database>(path.join(electronData.userDataConfigurationPath, '/main.json'))
-    const db = lowdb(adapter)
+    const adapter = new FileSync<Database>(path.join(electronData.userDataConfigurationPath, 'main.json'))
+    const db: lowdb.LowdbSync<Database> = lowdb(adapter)
     void db.defaults({
       title: '',
       users: []

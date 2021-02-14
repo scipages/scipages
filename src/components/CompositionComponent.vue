@@ -23,6 +23,12 @@
       <button v-on:click="openConfiguration()">
         openConfiguration
       </button>
+      <button v-on:click="testLowDbCreate()">
+        testLowDbCreate
+      </button>
+      <button v-on:click="testLowDbFindOne('7ef3e874-8b45-4800-a887-5c3d4bff3315')">
+        testLowDbFindOne
+      </button>
     </p>
     <p>{{ title }}</p>
     <ul>
@@ -49,6 +55,11 @@ import { Todo, Meta } from './models'
 import { ipcRenderer } from 'electron'
 import { openURL } from 'quasar'
 import useData, { ElectronData } from 'src/use/useData'
+import path from 'path'
+
+import { v4 as uuidv4 } from 'uuid'
+import { TeachingItem } from 'src/db/entities/TeachingItem'
+import { TeachingDatabaseSingleton, TeachingRepository } from 'src/db/repositories/TeachingRepository'
 
 function useClickCount () {
   const clickCount = ref(0)
@@ -99,6 +110,39 @@ export default defineComponent({
     function openExternalURL () {
       openURL('https://www.google.com')
     }
+    function testLowDbCreate () {
+      const repository = new TeachingRepository(
+        TeachingDatabaseSingleton.getInstance(
+          path.join(electronData.userDataProjectsPath, 'project-bla')
+        ),
+        'teachingItems'
+      )
+      const newItem = {
+        id: uuidv4(),
+        title: '123',
+        role: '123',
+        semester: 123,
+        semesterTaught: '123',
+        organization: '123',
+        department: '123',
+        links: [],
+        dateCreated: new Date(),
+        dateUpdated: new Date()
+      }
+      repository.create(newItem)
+    }
+    function testLowDbFindOne (id: string) {
+      const repository = new TeachingRepository(
+        TeachingDatabaseSingleton.getInstance(
+          path.join(electronData.userDataProjectsPath, 'project-bla')
+        ),
+        'teachingItems'
+      )
+      const item: TeachingItem = repository.findOne(
+        id
+      )
+      console.log(item)
+    }
     return {
       ...useClickCount(),
       ...useDisplayTodo(toRef(props, 'todos')),
@@ -107,7 +151,9 @@ export default defineComponent({
       openExternalURL,
       electronData,
       listProjects,
-      openConfiguration
+      openConfiguration,
+      testLowDbCreate,
+      testLowDbFindOne
     }
   }
 })
