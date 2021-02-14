@@ -2,7 +2,7 @@ import { app, BrowserWindow, nativeTheme, ipcMain } from 'electron'
 import fs from 'fs'
 import path from 'path'
 import electronData from './electron-data'
-import windowStateKeeper from './electron-window-state-keeper'
+// import windowStateKeeper from './electron-window-state-keeper'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -22,16 +22,18 @@ let mainWindow
 
 function createWindow () {
   // Get window state
-  const mainWindowStateKeeper = windowStateKeeper('main')
+  // const mainWindowStateKeeper = windowStateKeeper('main')
 
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    x: mainWindowStateKeeper.x,
-    y: mainWindowStateKeeper.y,
-    width: mainWindowStateKeeper.width,
-    height: mainWindowStateKeeper.height,
+    // x: mainWindowStateKeeper.x,
+    // y: mainWindowStateKeeper.y,
+    // width: mainWindowStateKeeper.width,
+    // height: mainWindowStateKeeper.height,
+    width: 1000,
+    height: 600,
     minWidth: 1000,
     minHeight: 600,
     // show: false,
@@ -51,7 +53,7 @@ function createWindow () {
   })
 
   // Track window state
-  mainWindowStateKeeper.track(mainWindow)
+  // mainWindowStateKeeper.track(mainWindow)
 
   // mainWindow.once('ready-to-show', () => {
   //   mainWindow.show()
