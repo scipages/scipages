@@ -87,7 +87,7 @@ export default defineComponent({
       void ipcRenderer.invoke('window-controls-channel', { showModal: true })
 
       void ipcRenderer.invoke('get-data-channel', {}).then((result: ElectronData) => {
-        console.log('Version: ' + result.version)
+        console.log('Version: ' + result.electronVersion)
       })
     }
     function openExternalURL () {

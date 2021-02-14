@@ -6,7 +6,7 @@ import lowdb from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
 
 export interface ElectronData {
-  version: string,
+  electronVersion: string,
   userDataPath: string,
   userDataProjectsPath: string,
   userDataConfigurationPath: string
@@ -32,7 +32,7 @@ interface Database {
 
 export default function useData () {
   const electronData: ElectronData = reactive({
-    version: '',
+    electronVersion: '',
     userDataPath: '',
     userDataProjectsPath: '',
     userDataConfigurationPath: ''
@@ -42,7 +42,7 @@ export default function useData () {
 
   function initPaths () {
     void ipcRenderer.invoke('get-data-channel', { }).then((result: ElectronData) => {
-      electronData.version = result.version
+      electronData.electronVersion = result.electronVersion
       electronData.userDataPath = result.userDataPath
       electronData.userDataProjectsPath = result.userDataProjectsPath
       electronData.userDataConfigurationPath = result.userDataConfigurationPath
