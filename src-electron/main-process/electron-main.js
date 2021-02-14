@@ -125,6 +125,10 @@ ipcMain.handle('window-controls-channel', function (e, args) {
     // app.quit()
     // app.exit(0)
   }
+  if (args.appRelaunch === true) {
+    app.relaunch()
+    app.exit()
+  }
   if (args.showModal === true) {
     const child = new BrowserWindow({ parent: mainWindow, modal: true, show: false })
     child.setMenu(null)

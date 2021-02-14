@@ -1,6 +1,9 @@
 <template>
   <div>
     <p>
+      <button v-on:click="appRelaunch()">
+        Relaunch
+      </button>
       <button v-on:click="showElectronModal()">
         Show Electron Modal
       </button>
@@ -83,6 +86,9 @@ export default defineComponent({
   },
   setup (props) {
     const { electronData, listProjects, openConfiguration } = useData()
+    function appRelaunch () {
+      void ipcRenderer.invoke('window-controls-channel', { appRelaunch: true })
+    }
     function showElectronModal () {
       void ipcRenderer.invoke('window-controls-channel', { showModal: true })
 
@@ -96,6 +102,7 @@ export default defineComponent({
     return {
       ...useClickCount(),
       ...useDisplayTodo(toRef(props, 'todos')),
+      appRelaunch,
       showElectronModal,
       openExternalURL,
       electronData,
