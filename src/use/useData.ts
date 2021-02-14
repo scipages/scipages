@@ -2,8 +2,6 @@ import { ipcRenderer } from 'electron'
 import { reactive } from 'vue'
 import path from 'path'
 import fs from 'fs'
-import lowdb from 'lowdb'
-import FileSync from 'lowdb/adapters/FileSync'
 
 export interface ElectronData {
   electronVersion: string,
@@ -18,16 +16,6 @@ export interface ProjectPathItem {
 }
 export interface ProjectPathList {
   items: Array<ProjectPathItem>
-}
-
-interface User {
-  email: string;
-  password: string;
-}
-
-interface Database {
-  title: string;
-  users: Array<User>;
 }
 
 export default function useData () {
@@ -55,8 +43,6 @@ export default function useData () {
       if (!fs.existsSync(electronData.userDataConfigurationPath)) {
         fs.mkdirSync(electronData.userDataConfigurationPath)
       }
-      console.log('userDataProjectsPath: ' + electronData.userDataProjectsPath)
-      console.log('userDataConfigurationPath: ' + electronData.userDataConfigurationPath)
     })
   }
   function listProjects () {
@@ -75,29 +61,10 @@ export default function useData () {
       console.log(`Project ${i}: ` + paths.items[i].filename)
     }
   }
-  function openConfiguration () {
-    const adapter = new FileSync<Database>(path.join(electronData.userDataConfigurationPath, 'main.json'))
-    const db: lowdb.LowdbSync<Database> = lowdb(adapter)
-    void db.defaults({
-      title: '',
-      users: []
-    }).write()
-    void db.get('users')
-      .push({
-        email: 'anexampleemail@example.com',
-        password: 'password'
-      })
-      .write()
-    const bla = db.get('users')
-      .find({ email: 'anexampleemail@example.com' })
-      .value()
-    console.log(bla)
-  }
 
   return {
     electronData,
     initPaths,
-    listProjects,
-    openConfiguration
+    listProjects
   }
 }

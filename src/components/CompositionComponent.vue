@@ -20,9 +20,6 @@
       <button v-on:click="listProjects()">
         ListProjects
       </button>
-      <button v-on:click="openConfiguration()">
-        openConfiguration
-      </button>
       <button v-on:click="testLowDbCreate()">
         testLowDbCreate
       </button>
@@ -96,7 +93,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { electronData, listProjects, openConfiguration } = useData()
+    const { electronData, listProjects } = useData()
     function appRelaunch () {
       void ipcRenderer.invoke('window-controls-channel', { appRelaunch: true })
     }
@@ -151,7 +148,6 @@ export default defineComponent({
       openExternalURL,
       electronData,
       listProjects,
-      openConfiguration,
       testLowDbCreate,
       testLowDbFindOne
     }
