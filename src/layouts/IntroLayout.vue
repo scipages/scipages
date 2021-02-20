@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated>
+    <q-header bordered>
       <TitleBar></TitleBar>
     </q-header>
 
@@ -36,5 +36,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+.q-header--bordered {
+  border-bottom-color: #cbcbcb !important;
+}
 </style>

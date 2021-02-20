@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated>
+    <q-header bordered>
       <TitleBar></TitleBar>
       <!--<MenuBar></MenuBar>-->
       <MainToolBar v-model:show="showMainToolBar"></MainToolBar>
@@ -61,5 +61,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+.q-header--bordered {
+  border-bottom-color: #cbcbcb !important;
+}
 </style>
