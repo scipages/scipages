@@ -1,28 +1,33 @@
 <template>
   <q-menu>
-    <q-list style="min-width: 100px">
-      <q-item clickable v-close-popup v-on:click="showPrompt = true">
+    <q-list style="min-width: 130px">
+      <q-item dense clickable v-close-popup v-on:click="showPrompt = true">
         <q-item-section>New Empty Website</q-item-section>
       </q-item>
       <q-separator />
-      <q-item clickable v-close-popup>
+      <q-item dense clickable v-close-popup>
         <q-item-section>New Personal Website</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="far fa-id-card" /></q-item-section>
       </q-item>
       <q-separator />
-      <q-item clickable v-close-popup>
+      <q-item dense clickable v-close-popup>
         <q-item-section>New Research Lab Website</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="fas fa-vial" /></q-item-section>
       </q-item>
       <q-separator />
-      <q-item clickable v-close-popup>
+      <q-item dense clickable v-close-popup>
         <q-item-section>New Course Website</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="fas fa-chalkboard-teacher" /></q-item-section>
       </q-item>
       <q-separator />
-      <q-item clickable v-close-popup>
+      <q-item dense clickable v-close-popup>
         <q-item-section>New Conference/Workshop Website</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="far fa-calendar-alt" /></q-item-section>
       </q-item>
       <q-separator />
-      <q-item clickable v-close-popup>
+      <q-item dense clickable v-close-popup>
         <q-item-section>Import from Git Repository</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="fab fa-git-alt" /></q-item-section>
       </q-item>
     </q-list>
   </q-menu>
@@ -45,7 +50,7 @@
       <!-- TODO: Git options will be added here (Credentials, Repository selection)  -->
 
       <q-card-section class="q-pt-none">
-        <q-select v-model="themeValue" :options="themeOptions" label="Theme" hint="* Can be changed later">
+        <q-select v-model="themeValue" :options="themeOptions" label="Theme" hint="* Can be changed later" emit-value>
           <template v-slot:option="scope">
             <q-item
               v-bind="scope.itemProps"
@@ -71,11 +76,12 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref
+  ref,
+  watch
 } from 'vue'
 
 export default defineComponent({
-  name: 'CreateProjectMenu',
+  name: 'NewProjectMenu',
   setup () {
     const showPrompt = ref(false)
     const title = ref('')
@@ -92,6 +98,10 @@ export default defineComponent({
         description: 'Based on https://github.com/ojroques/hugo-researcher'
       }
     ])
+
+    watch(themeValue, (newValue) => {
+      console.log(newValue)
+    })
 
     return {
       showPrompt,

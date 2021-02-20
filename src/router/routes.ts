@@ -23,7 +23,8 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/index',
         name: 'main_index',
-        component: () => import('pages/main/Index.vue')
+        component: () => import('pages/main/Index.vue'),
+        props: true
       },
       {
         path: '/test',

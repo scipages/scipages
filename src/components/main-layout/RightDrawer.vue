@@ -15,24 +15,12 @@
               <q-icon color="grey" name="web" size="sm" /> Pages
             </q-item-label>
           </q-item-section>
-
-          <q-item-section side>
-            <q-btn
-              round
-              size="sm"
-              color="primary"
-              icon="add"
-              aria-label="Create Project"
-            >
-              <CreateProjectMenu></CreateProjectMenu>
-            </q-btn>
-          </q-item-section>
         </q-item>
 
         <q-separator class="q-my-md" />
 
         <q-item>
-            <q-btn align="between" class="full-width" color="primary" label="Add Page" icon="add" no-caps />
+          <q-btn align="between" class="full-width" label="Add Page" icon="fas fa-plus" text-color="green-8"></q-btn>
         </q-item>
 
         <br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -69,13 +57,9 @@ import {
   ref,
   watch
 } from 'vue'
-import CreateProjectMenu from 'components/projects/CreateProjectMenu.vue'
 
 export default defineComponent({
   name: 'RightDrawer',
-  components: {
-    CreateProjectMenu
-  },
   props: {
     show: {
       type: Boolean,

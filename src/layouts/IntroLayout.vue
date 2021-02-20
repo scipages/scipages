@@ -10,12 +10,19 @@
 
     <q-page-container class="absolute-full">
       <div class="row fit">
-        <!--<q-scroll-area class="fit" style="border: 1px solid red">-->
-        <q-scroll-area class="fit">
-          <q-page class="row justify-evenly">
-            <router-view />
-          </q-page>
-        </q-scroll-area>
+        <div class="col-6 q-pa-xl" style="position: relative">
+          <div class="text-center vertical-center">
+            SciPages
+          </div>
+        </div>
+        <div class="col-6">
+          <!--<q-scroll-area class="fit" style="border: 1px solid red">-->
+          <q-scroll-area class="fit">
+            <q-page class="row justify-evenly">
+              <router-view />
+            </q-page>
+          </q-scroll-area>
+        </div>
       </div>
     </q-page-container>
   </q-layout>
@@ -39,5 +46,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .q-header--bordered {
   border-bottom-color: #cbcbcb !important;
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -30,7 +30,7 @@
         <q-separator class="q-my-md" />
         -->
 
-        <q-item v-for="link in links1" :key="link.text" v-ripple clickable :to="{name: 'main_index', params: { uuid: uuid }}">
+        <q-item v-for="link in links1" :key="link.text" v-ripple clickable :to="{name: 'main_index', params: { uuid: currentProject.uuid }}">
           <q-item-section avatar>
             <q-icon color="grey" :name="link.icon" />
           </q-item-section>
@@ -91,6 +91,7 @@ import {
   fasImages,
   fasAddressCard
 } from '@quasar/extras/fontawesome-v5'
+import useProjectManager from 'src/use/useProjectManager'
 
 export default defineComponent({
   name: 'LeftDrawer',
@@ -103,7 +104,7 @@ export default defineComponent({
   emits: ['update:show'],
   setup (props, { emit }) {
     const router = useRouter()
-    const uuid = ref('a_fake_uuid')
+    const { currentProject } = useProjectManager()
 
     const show = ref(props.show)
     watch(show, (newValue) => {
@@ -115,7 +116,7 @@ export default defineComponent({
     }
 
     return {
-      uuid,
+      currentProject,
       closeProject,
       links1: [
         { icon: 'web', text: 'Pages' }

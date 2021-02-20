@@ -1,7 +1,12 @@
 <template>
   <q-bar class="q-electron-drag">
     <q-icon name="science" />
-    <div class="non-selectable">{{ productName }}</div>
+    <div class="non-selectable">
+      {{ productName }}
+      <span v-if="currentProject.title !== null">
+        - {{ currentProject.title }}
+      </span>
+    </div>
 
     <q-space />
 
@@ -24,6 +29,7 @@ import { useStore } from 'vuex'
 // import {
 //   farWindowRestore
 // } from '@quasar/extras/fontawesome-v5'
+import useProjectManager from 'src/use/useProjectManager'
 
 export default defineComponent({
   name: 'TitleBar',
@@ -55,14 +61,18 @@ export default defineComponent({
     function closeWindow () {
       void ipcRenderer.invoke('window-controls-channel', { close: true })
     }
+
+    const { currentProject } = useProjectManager()
+
     return {
       maximized,
       productName,
       version,
       minimizeWindow,
       maximizeUnmaximizeWindow,
-      closeWindow
-      // farWindowRestore
+      closeWindow,
+      // farWindowRestore,
+      currentProject
     }
   }
 })

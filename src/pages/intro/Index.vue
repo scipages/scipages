@@ -6,53 +6,88 @@
         <q-separator />
       </p>
 
+      <div class="q-px-md q-pb-xl text-weight-bolder text-right">
+        <q-btn label="New Project" icon="fas fa-plus" text-color="green-8">
+          <NewProjectMenu></NewProjectMenu>
+        </q-btn>
+      </div>
+
       <q-list class="non-selectable">
-        <q-item>
-          <q-item-section>
-            <q-item-label>My project title goes here</q-item-label>
-            <q-item-label caption lines="2">Some more information about the project.</q-item-label>
-          </q-item-section>
 
-          <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
-            <q-btn icon="keyboard_arrow_down" color="grey" padding="none xs">
-              <q-menu anchor="bottom right" self="top right">
-                <q-list>
-                  <q-item clickable>
-                    <q-item-section>Permanently Delete</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-          </q-item-section>
-        </q-item>
+        <template
+          v-for="(project) in allProjects.items" :key="project.filename"
+        >
 
-        <q-separator spaced inset />
+          <q-item>
+            <q-item-section>
+              <q-item-label>{{ project.title }}</q-item-label>
+              <q-item-label caption lines="2">{{ project.uuid }}</q-item-label>
+            </q-item-section>
 
-        <q-item>
-          <q-item-section>
-            <q-item-label>My project title goes here</q-item-label>
-            <q-item-label caption lines="2">Some more information about the project.</q-item-label>
-          </q-item-section>
+            <q-item-section side top>
+              <q-item-label caption>5 min ago</q-item-label>
+              <q-btn-group push>
+                <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openProjectAndNavigate(project)" />
+                <q-separator vertical />
+                <q-btn size="xs" label="Delete" icon="far fa-trash-alt" text-color="red-4" />
+              </q-btn-group>
+            </q-item-section>
+          </q-item>
 
-          <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
-            <q-btn-group push>
-              <q-btn size="xs" label="Open" icon="fas fa-folder-open" :to="{name: 'main_index', params: { uuid: 'a_fake_uuid' }}" />
-              <q-separator vertical />
-              <q-btn size="xs" label="Delete" icon="far fa-trash-alt" text-color="red-4" />
-            </q-btn-group>
-          </q-item-section>
-        </q-item>
+          <q-separator spaced inset />
+
+        </template>
+
       </q-list>
+
+      <br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br>
+      text
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
+// import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import useProjectManager, { ProjectPathItem } from 'src/use/useProjectManager'
+import NewProjectMenu from 'components/projects/NewProjectMenu.vue'
 
 export default defineComponent({
-  name: 'PageIntroIndex'
+  name: 'PageIntroIndex',
+  components: {
+    NewProjectMenu
+  },
+  setup () {
+    const router = useRouter()
+    // const route = useRoute()
+    const { allProjects, openProject, closeProject, initPaths } = useProjectManager()
+
+    onMounted(() => {
+      closeProject()
+      initPaths()
+    })
+
+    function openProjectAndNavigate (project: ProjectPathItem) {
+      openProject(project)
+
+      if (project.filename === null || project.path === null || project.title === null || project.uuid === null) {
+        return
+      }
+
+      void router.push({
+        name: 'main_index',
+        params: {
+          uuid: project.uuid
+        }
+      })
+    }
+
+    return {
+      allProjects,
+      openProjectAndNavigate
+    }
+  }
 })
 </script>
