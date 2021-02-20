@@ -2,13 +2,9 @@ import { MutationTree } from 'vuex'
 import { PackageInfoStateInterface } from './state'
 
 export enum PackageInfoMutationTypes {
-  // eslint-disable-next-line no-unused-vars
   SET_NAME = 'SET_NAME',
-  // eslint-disable-next-line no-unused-vars
   SET_PRODUCT_NAME = 'SET_PRODUCT_NAME',
-  // eslint-disable-next-line no-unused-vars
   SET_DESCRIPTION = 'SET_DESCRIPTION',
-  // eslint-disable-next-line no-unused-vars
   SET_VERSION = 'SET_VERSION'
 }
 

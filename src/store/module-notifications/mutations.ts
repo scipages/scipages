@@ -2,9 +2,7 @@ import { MutationTree } from 'vuex'
 import { NotificationsStateInterface, Notification } from './state'
 
 export enum NotificationsMutationTypes {
-  // eslint-disable-next-line no-unused-vars
   PUSH = 'PUSH',
-  // eslint-disable-next-line no-unused-vars
   DELETE = 'DELETE'
 }
 
