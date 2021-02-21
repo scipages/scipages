@@ -23,6 +23,18 @@
         <q-separator spaced inset />
 
         <q-item>
+          <q-item-section avatar top>
+            <q-toggle
+              size="xs"
+              v-model="testPageStatusValue"
+              true-value="1"
+              false-value="0"
+              color="green"
+              checked-icon="check"
+              unchecked-icon="clear"
+            />
+          </q-item-section>
+
           <q-item-section>
             <q-item-label>Another page</q-item-label>
             <q-item-label caption lines="2">Some more information about the other page.</q-item-label>
@@ -43,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'PageMainIndex',
@@ -51,6 +63,13 @@ export default defineComponent({
     uuid: {
       type: String,
       default: ''
+    }
+  },
+  setup () {
+    const testPageStatusValue = ref('1')
+
+    return {
+      testPageStatusValue
     }
   }
 })
