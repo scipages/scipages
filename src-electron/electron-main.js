@@ -10,14 +10,6 @@ try {
   }
 } catch (_) { }
 
-/**
- * Set `__statics` path to static files in production;
- * The reason we are setting it here is that the path needs to be evaluated at runtime
- */
-if (process.env.PROD) {
-  global.__statics = __dirname
-}
-
 let mainWindow
 
 function createWindow () {
@@ -42,13 +34,10 @@ function createWindow () {
     titleBarStyle: 'hidden',
     useContentSize: true,
     webPreferences: {
-      // Change from /quasar.conf.js > electron > nodeIntegration;
-      // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
-      nodeIntegration: process.env.QUASAR_NODE_INTEGRATION,
-      nodeIntegrationInWorker: process.env.QUASAR_NODE_INTEGRATION,
-
+      // (Electron 12+ has it enabled by default anyway)
+      contextIsolation: true,
       // More info: /quasar-cli/developing-electron-apps/electron-preload-script
-      // preload: path.resolve(__dirname, 'electron-preload.js')
+      preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD)
     }
   })
 
@@ -61,6 +50,16 @@ function createWindow () {
   // })
 
   mainWindow.loadURL(process.env.APP_URL)
+
+  if (process.env.DEBUGGING) {
+    // if on DEV or Production with debug enabled
+    mainWindow.webContents.openDevTools()
+  } else {
+    // we're on production; no access to devtools pls
+    mainWindow.webContents.on('devtools-opened', () => {
+      mainWindow.webContents.closeDevTools()
+    })
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null
