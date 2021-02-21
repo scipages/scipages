@@ -29,6 +29,11 @@
         <q-item-section>Import from Git Repository</q-item-section>
         <q-item-section side><q-icon size="xs" color="grey-6" name="fab fa-git-alt" /></q-item-section>
       </q-item>
+      <q-separator />
+      <q-item dense clickable v-close-popup>
+        <q-item-section>Import from Zip File</q-item-section>
+        <q-item-section side><q-icon size="xs" color="grey-6" name="far fa-file-archive" /></q-item-section>
+      </q-item>
     </q-list>
   </q-menu>
   <q-dialog v-model="showPrompt" persistent>
