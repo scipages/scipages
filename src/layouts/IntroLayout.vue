@@ -15,9 +15,9 @@
             <div class="welcome-text-title">Welcome to SciPages</div>
             <div class="welcome-text-subtitle">CMS and Static Site Generator for academic websites</div>
             <div class="welcome-text-icons">
-              <q-btn flat round size="17px" padding="13px" icon="fas fa-book" title="Documentation" v-on:click="openExternalURL('https://scipages.github.io/')" />
-              <q-btn flat round size="20px" padding="10px" icon="fab fa-github" title="GitHub" v-on:click="openExternalURL('https://github.com/scipages/scipages')" />
-              <q-btn flat round size="20px" padding="10px" icon="bug_report" title="Report Issue" v-on:click="openExternalURL('https://github.com/scipages/scipages/issues')" />
+              <q-btn flat round size="17px" padding="13px" icon="fas fa-book" title="Documentation" v-on:click="openURL('https://scipages.github.io/')" />
+              <q-btn flat round size="20px" padding="10px" icon="fab fa-github" title="GitHub" v-on:click="openURL('https://github.com/scipages/scipages')" />
+              <q-btn flat round size="20px" padding="10px" icon="bug_report" title="Report Issue" v-on:click="openURL('https://github.com/scipages/scipages/issues')" />
               <q-btn flat round size="20px" padding="10px" icon="update" title="Check for Updates" />
               <q-btn flat round size="20px" padding="10px" icon="info" title="About" />
             </div>
@@ -38,9 +38,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { openURL } from 'quasar'
 import TitleBar from 'components/TitleBar.vue'
 import Footer from 'components/main-layout/Footer.vue'
+import useMainWindow from 'src/use/useMainWindow'
 
 export default defineComponent({
   name: 'IntroLayout',
@@ -51,12 +51,10 @@ export default defineComponent({
   },
 
   setup () {
-    function openExternalURL (url: string) {
-      openURL(url)
-    }
+    const { openURL } = useMainWindow()
 
     return {
-      openExternalURL
+      openURL
     }
   }
 })

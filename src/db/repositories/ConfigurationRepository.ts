@@ -1,5 +1,5 @@
-import { packageInfo } from 'src/helpers/packageInfo'
-import { getDB } from 'src/db/db'
+import { packageInfo } from '../../helpers/packageInfo'
+import { getDB } from '../db'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 
 import lowdb from 'lowdb'

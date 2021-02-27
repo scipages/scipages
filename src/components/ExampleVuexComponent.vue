@@ -28,7 +28,7 @@ import useNotifications from 'src/use/useNotifications'
 import usePackageInfo from 'src/use/usePackageInfo'
 
 export default defineComponent({
-  name: 'VuexTestComponent',
+  name: 'ExampleVuexComponent',
   setup () {
     const { notifications, countNotifications, notificationFactory, addNotification, removeNotification } = useNotifications()
     const { name, productName, description, version } = usePackageInfo()

@@ -1,8 +1,8 @@
-import { packageInfo } from 'src/helpers/packageInfo'
-import { getDB } from 'src/db/db'
+import { packageInfo } from '../../helpers/packageInfo'
+import { getDB } from '../db'
 import { BaseCollectionRepository } from './base/BaseCollectionRepository'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
-import { Course } from 'src/db/entities/Course'
+import { Course } from '../entities/Course'
 
 import lowdb from 'lowdb'
 

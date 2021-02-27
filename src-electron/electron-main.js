@@ -1,8 +1,10 @@
-import { app, BrowserWindow, nativeTheme, ipcMain } from 'electron'
+import { app, BrowserWindow, nativeTheme } from 'electron'
 import fs from 'fs'
 import path from 'path'
-import electronData from './electron-data'
 // import windowStateKeeper from './electron-window-state-keeper'
+import initMainWindowHandlers from './electron-main-window'
+import initMainElectronDataHandlers from './electron-main-electron-data'
+import initMainProjectManagerHandlers from './electron-main-project-manager'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -34,6 +36,8 @@ function createWindow () {
     titleBarStyle: 'hidden',
     useContentSize: true,
     webPreferences: {
+      enableRemoteModule: false,
+      nodeIntegration: false,
       // (Electron 12+ has it enabled by default anyway)
       contextIsolation: true,
       // More info: /quasar-cli/developing-electron-apps/electron-preload-script
@@ -67,12 +71,12 @@ function createWindow () {
 
   mainWindow.on('maximize', (e) => {
     if (mainWindow !== null) {
-      mainWindow.webContents.send('window-maximized', {})
+      mainWindow.webContents.send('window-max-unmax', { max: true })
     }
   })
   mainWindow.on('unmaximize', (e) => {
     if (mainWindow !== null) {
-      mainWindow.webContents.send('window-unmaximized', {})
+      mainWindow.webContents.send('window-max-unmax', { max: false })
     }
   })
   // mainWindow.on('minimize', (e) => {
@@ -97,48 +101,6 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.handle('window-controls-channel', function (e, args) {
-  if (mainWindow === null) {
-    return
-  }
-
-  if (args.minimize === true) {
-    mainWindow.minimize()
-  }
-  if (args.maximize === true) {
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize()
-      return false
-    } else {
-      mainWindow.maximize()
-      return true
-    }
-  }
-  if (args.close === true) {
-    // Close DevTools before closing the window:
-    // https://github.com/electron/electron/issues/25012
-    if (mainWindow.webContents.isDevToolsOpened()) {
-      mainWindow.webContents.closeDevTools()
-    }
-    mainWindow.close()
-    // app.quit()
-    // app.exit(0)
-  }
-  if (args.appRelaunch === true) {
-    app.relaunch()
-    app.exit()
-  }
-  if (args.showModal === true) {
-    const child = new BrowserWindow({ parent: mainWindow, modal: true, show: false })
-    child.setMenu(null)
-    child.setMenuBarVisibility(false)
-    child.loadURL('https://www.google.com')
-    child.once('ready-to-show', () => {
-      child.show()
-    })
-  }
-})
-
-ipcMain.handle('get-data-channel', (event, args) => {
-  return electronData
-})
+initMainWindowHandlers()
+initMainElectronDataHandlers()
+initMainProjectManagerHandlers()

@@ -1,9 +1,16 @@
 <template>
   <div class="fit projects-list-page-wrapper">
-    <div class="q-pr-xl q-pt-xl text-weight-bolder">
-      Projects
+    <div class="row q-pr-xl q-pt-xl ">
+      <div class="col-6 text-weight-bolder">Projects</div>
+      <div class="col-6 text-right">
+        <q-btn round flat size="7px" padding="5px" text-color="grey-8" icon="fas fa-redo-alt" v-on:click="closeProjectInitPaths" />
+      </div>
+    </div>
+
+    <div class="q-pr-xl">
       <q-separator />
     </div>
+
     <div class="q-pr-xl q-py-md text-weight-bolder text-right">
       <q-btn label="New Project" icon="fas fa-plus" text-color="green-8">
         <NewProjectMenu></NewProjectMenu>
@@ -14,7 +21,7 @@
         <q-scroll-area class="full-width full-height q-pa-md">
 
           <div
-            v-if="allProjects.items.length == 0"
+            v-if="allProjects.items.length === 0"
             class="text-center"
           >
             ...
@@ -86,7 +93,8 @@
 import { defineComponent, onMounted } from 'vue'
 // import { useRouter, useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
-import useProjectManager, { ProjectPathItem } from 'src/use/useProjectManager'
+import useProjectManager from 'src/use/useProjectManager'
+import { ProjectPathItem } from 'src/types/ProjectPathItem'
 import NewProjectMenu from 'components/projects/NewProjectMenu.vue'
 
 export default defineComponent({
@@ -97,12 +105,16 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     // const route = useRoute()
-    const { allProjects, openProject, closeProject, initPaths } = useProjectManager()
+    const { allProjects, openProject, closeProject, initPathsSync } = useProjectManager()
 
     onMounted(() => {
-      closeProject()
-      initPaths()
+      closeProjectInitPaths()
     })
+
+    function closeProjectInitPaths () {
+      closeProject()
+      initPathsSync()
+    }
 
     function openProjectAndNavigate (project: ProjectPathItem) {
       openProject(project)
@@ -121,7 +133,8 @@ export default defineComponent({
 
     return {
       allProjects,
-      openProjectAndNavigate
+      openProjectAndNavigate,
+      closeProjectInitPaths
     }
   }
 })

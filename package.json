@@ -10,13 +10,13 @@
     "icons": "icongenie generate -i AppIcon.png --skip-trim --theme-color 1976d2"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.17",
+    "@quasar/extras": "^1.9.18",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "electron-store": "^7.0.2",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
-    "quasar": "^2.0.0-beta.6",
+    "quasar": "^2.0.0-beta.7",
     "uuid": "^8.3.2",
     "vue-i18n": "^9.0.0-rc.6"
   },

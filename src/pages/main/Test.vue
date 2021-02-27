@@ -1,17 +1,17 @@
 <template>
   <div class="fit relative-position">
     <div class="q-pa-md text-center">
-      <example-component
+      <ExampleComponent
         title="Example component"
         active
         :todos="todos"
         :meta="meta"
-      ></example-component>
+      ></ExampleComponent>
     </div>
 
     <hr />
 
-    <VuexTestComponent></VuexTestComponent>
+    <ExampleVuexComponent></ExampleVuexComponent>
 
     <hr />
 
@@ -28,15 +28,15 @@
 
 <script lang="ts">
 import { Todo, Meta } from 'components/models'
-import ExampleComponent from 'components/CompositionComponent.vue'
-import VuexTestComponent from 'components/VuexTestComponent.vue'
+import ExampleComponent from 'components/ExampleComponent.vue'
+import ExampleVuexComponent from 'components/ExampleVuexComponent.vue'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'PageMainTest',
   components: {
     ExampleComponent,
-    VuexTestComponent
+    ExampleVuexComponent
   },
   setup () {
     const todos = ref<Todo[]>([
