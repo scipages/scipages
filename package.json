@@ -12,34 +12,34 @@
   "dependencies": {
     "@quasar/extras": "^1.9.19",
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.9.1",
     "electron-store": "^7.0.2",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
     "quasar": "^2.0.0-beta.8",
     "uuid": "^8.3.2",
-    "vue-i18n": "^9.0.0-rc.6"
+    "vue-i18n": "^9.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^3.0.0-beta.8",
     "@types/lowdb": "^1.0.9",
-    "@types/node": "^10.17.15",
+    "@types/node": "^10.17.55",
     "@types/uuid": "^8.3.0",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "babel-eslint": "^10.0.1",
     "devtron": "^1.4.0",
-    "electron": "^11.2.2",
-    "electron-builder": "^22.9.1",
+    "electron": "^12.0.0",
+    "electron-builder": "^22.10.5",
     "electron-debug": "^3.2.0",
     "electron-devtools-installer": "^3.1.1",
     "electron-packager": "^14.2.1",
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.7.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
