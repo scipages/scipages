@@ -118,6 +118,13 @@ module.exports = configure(function (/* ctx */) {
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
+
+      // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
+      // if using workbox in InjectManifest mode
+      chainWebpackCustomSW (/* chain */) {
+        //
+      },
+
       manifest: {
         name: 'SciPages',
         short_name: 'SciPages',
