@@ -1,5 +1,8 @@
 # SciPages
 
+[![build](https://github.com/scipages/scipages/workflows/build/badge.svg)](https://github.com/scipages/scipages/actions)
+[![license](https://img.shields.io/github/license/scipages/scipages)](./LICENSE)
+
 A CMS and Static Site Generator for academic websites
 
 ## Install the dependencies
