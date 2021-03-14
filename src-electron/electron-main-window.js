@@ -59,4 +59,11 @@ export default function initMainWindowHandlers () {
   ipcMain.handle('window-open-url', (e, url) => {
     void shell.openExternal(url)
   })
+  ipcMain.on('window-get-current-url-sync', (event) => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win === null) {
+      return ''
+    }
+    event.returnValue = win.webContents.getURL()
+  })
 }

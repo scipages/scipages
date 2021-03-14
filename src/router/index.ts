@@ -8,6 +8,9 @@ import {
 import { StateInterface } from '../store'
 import routes from './routes'
 
+import useMainElectronData from './../use/useMainElectronData'
+const { electronData } = useMainElectronData()
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -35,6 +38,21 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     history: createHistory(
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     )
+  })
+
+  // Router.beforeEach((to, from, next) => {
+  //   next()
+  // })
+  //
+  // Router.beforeResolve((to, from, next) => {
+  //   next()
+  // })
+
+  // Router.afterEach((to, from) => {
+  Router.afterEach(() => {
+    if (electronData.debugging) {
+      console.log(window.myWindowAPI.getCurrentURLSync())
+    }
   })
 
   return Router

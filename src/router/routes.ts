@@ -21,13 +21,13 @@ const routes: RouteRecordRaw[] = [
     props: true,
     children: [
       {
-        path: '/index',
+        path: 'index',
         name: 'main_index',
         component: () => import('pages/main/Index.vue'),
         props: true
       },
       {
-        path: '/test',
+        path: 'test',
         name: 'main_test',
         component: () => import('pages/main/Test.vue')
       }

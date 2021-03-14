@@ -2,6 +2,7 @@ import { reactive, readonly } from 'vue'
 import { ElectronData } from 'src/types/ElectronData'
 
 const electronData: ElectronData = reactive({
+  debugging: false,
   electronVersion: '',
   userDataPath: '',
   userDataProjectsPath: '',
@@ -12,6 +13,7 @@ export default function useMainElectronData () {
   function retrieveElectronData () {
     // if (process.env.MODE === 'electron') {
     window.myElectronDataAPI.retrieveElectronData((data: ElectronData) => {
+      electronData.debugging = data.debugging
       electronData.electronVersion = data.electronVersion
       electronData.userDataPath = data.userDataPath
       electronData.userDataProjectsPath = data.userDataProjectsPath

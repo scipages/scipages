@@ -12,7 +12,8 @@ declare global {
       close: () => void,
       appRelaunch: () => void,
       showModal: (url: string) => void,
-      openURL: (url: string) => void
+      openURL: (url: string) => void,
+      getCurrentURLSync: () => string
     },
     'myElectronDataAPI': {
       retrieveElectronData: (func: (data: ElectronData) => void) => void,

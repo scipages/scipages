@@ -3,6 +3,7 @@ import { app, ipcMain } from 'electron'
 import path from 'path'
 
 export const electronData = {
+  debugging: process.env.DEBUGGING,
   electronVersion: app.getVersion(),
   userDataPath: app.getPath('userData'),
   userDataProjectsPath: path.join(app.getPath('userData'), 'scipages-projects'),

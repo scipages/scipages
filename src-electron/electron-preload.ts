@@ -59,6 +59,10 @@ contextBridge.exposeInMainWorld('myWindowAPI', {
   },
   openURL (url: string) {
     void ipcRenderer.invoke('window-open-url', url)
+  },
+  getCurrentURLSync (): string {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return ipcRenderer.sendSync('window-get-current-url-sync')
   }
 })
 
