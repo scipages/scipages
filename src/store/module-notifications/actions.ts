@@ -4,9 +4,7 @@ import { NotificationsStateInterface, Notification } from './state'
 import { Mutations, NotificationsMutationTypes } from './mutations'
 
 export enum NotificationsActionTypes {
-  // eslint-disable-next-line no-unused-vars
   ADD = 'add',
-  // eslint-disable-next-line no-unused-vars
   REMOVE = 'remove'
 }
 

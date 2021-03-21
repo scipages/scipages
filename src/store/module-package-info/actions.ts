@@ -4,13 +4,9 @@ import { PackageInfoStateInterface } from './state'
 import { Mutations, PackageInfoMutationTypes } from './mutations'
 
 export enum PackageInfoActionTypes {
-  // eslint-disable-next-line no-unused-vars
   SET_NAME = 'setName',
-  // eslint-disable-next-line no-unused-vars
   SET_PRODUCT_NAME = 'setProductName',
-  // eslint-disable-next-line no-unused-vars
   SET_DESCRIPTION = 'setDescription',
-  // eslint-disable-next-line no-unused-vars
   SET_VERSION = 'setVersion'
 }
 
