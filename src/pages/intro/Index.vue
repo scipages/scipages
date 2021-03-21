@@ -1,4 +1,13 @@
 <template>
+
+  <ProjectDelete
+    v-if="deleteProjectShow"
+    v-bind:show="deleteProjectShow"
+    v-bind:item="deleteProjectItem"
+    v-on:close="deleteProjectShow=false"
+    v-on:success="onDeleteProjectSuccess"
+  ></ProjectDelete>
+
   <div class="fit projects-list-page-wrapper">
     <div class="row q-pr-xl q-pt-xl ">
       <div class="col-6 text-weight-bolder">Projects</div>
@@ -50,7 +59,7 @@
                     <q-separator vertical />
                     <q-btn-dropdown size="xs">
                       <q-list>
-                        <q-item dense clickable v-close-popup label="Permanently Delete" v-on:click="onItemClick">
+                        <q-item dense clickable label="Permanently Delete" v-on:click="deleteProject(project)">
                           <q-item-section>
                             <q-item-label>Permanently Delete</q-item-label>
                           </q-item-section>
@@ -58,7 +67,7 @@
                             <q-icon size="xs" name="far fa-trash-alt" color="red-4" />
                           </q-item-section>
                         </q-item>
-                        <q-item dense clickable v-close-popup label="Export ZIP File" v-on:click="onItemClick">
+                        <q-item dense clickable label="Export ZIP File">
                           <q-item-section>
                             <q-item-label>Export to Zip File</q-item-label>
                           </q-item-section>
@@ -90,17 +99,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 // import { useRouter, useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 import useProjectManager from 'src/use/useProjectManager'
 import { ProjectPathItem } from 'src/types/ProjectPathItem'
 import NewProjectMenu from 'components/projects/NewProjectMenu.vue'
+import ProjectDelete from 'components/projects/ProjectDelete.vue'
 
 export default defineComponent({
   name: 'PageIntroIndex',
   components: {
-    NewProjectMenu
+    NewProjectMenu,
+    ProjectDelete
   },
   setup () {
     const router = useRouter()
@@ -131,10 +142,24 @@ export default defineComponent({
       })
     }
 
+    const deleteProjectShow = ref<boolean>(false)
+    const deleteProjectItem = ref<ProjectPathItem|null>(null)
+    function deleteProject (project: ProjectPathItem) {
+      deleteProjectShow.value = true
+      deleteProjectItem.value = project
+    }
+    function onDeleteProjectSuccess () {
+      closeProjectInitPaths()
+    }
+
     return {
       allProjects,
       openProjectAndNavigate,
-      closeProjectInitPaths
+      closeProjectInitPaths,
+      deleteProjectShow,
+      deleteProjectItem,
+      deleteProject,
+      onDeleteProjectSuccess
     }
   }
 })

@@ -88,6 +88,10 @@ contextBridge.exposeInMainWorld('myProjectManagerAPI', {
   },
   openProjectSync (item: ProjectPathItem) {
     ipcRenderer.sendSync('project-manager-open-project-sync', item)
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deleteProject (item: ProjectPathItem): Promise<any> {
+    return ipcRenderer.invoke('project-manager-delete-project', item)
   }
 })
 

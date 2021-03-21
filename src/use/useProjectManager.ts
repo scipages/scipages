@@ -25,18 +25,23 @@ export default function useProjectManager () {
     // }
   }
 
+  function copyItem (item: ProjectPathItem) {
+    const itemCopy: ProjectPathItem = {
+      filename: item.filename,
+      path: item.path,
+      title: item.title,
+      uuid: item.uuid
+    }
+    return itemCopy
+  }
+
   function openProject (item: ProjectPathItem) {
     currentProject.filename = item.filename
     currentProject.path = item.path
     currentProject.title = item.title
     currentProject.uuid = item.uuid
     if (item.path !== null && item.filename !== null && item.title !== null && item.uuid !== null) {
-      const itemCopy: ProjectPathItem = {
-        filename: item.filename,
-        path: item.path,
-        title: item.title,
-        uuid: item.uuid
-      }
+      const itemCopy: ProjectPathItem = copyItem(item)
       window.myProjectManagerAPI.openProjectSync(itemCopy)
     }
   }
@@ -49,15 +54,17 @@ export default function useProjectManager () {
   // function createProject () {
   //   // TODO
   // }
-  // function deleteProject () {
-  //   // TODO
-  // }
+  function deleteProject (item: ProjectPathItem) {
+    const itemCopy: ProjectPathItem = copyItem(item)
+    return window.myProjectManagerAPI.deleteProject(itemCopy)
+  }
 
   return {
     initPathsSync,
     allProjects: readonly(allProjects),
     currentProject: readonly(currentProject),
     openProject,
-    closeProject
+    closeProject,
+    deleteProject
   }
 }

@@ -55,4 +55,20 @@ export default function initMainProjectManagerHandlers () {
 
     event.returnValue = null
   })
+  ipcMain.handle('project-manager-delete-project', async (event, item) => {
+    if (item.path.startsWith(electronData.userDataProjectsPath)) {
+      return new Promise((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        fs.rmdir(item.path, { recursive: true }, (err, result) => {
+          if (err) {
+            reject('Error - Project path deletion failed')
+          } else {
+            resolve('Success - Project path deleted')
+          }
+        })
+      })
+
+      // fs.rmdirSync(item.path, { recursive: true })
+    }
+  })
 }

@@ -21,8 +21,10 @@ declare global {
     },
     'myProjectManagerAPI': {
       initPathsSync: () => void,
-      getProjectPathListSync: () => Array<ProjectPathItem>
-      openProjectSync: (item: ProjectPathItem) => void
+      getProjectPathListSync: () => Array<ProjectPathItem>,
+      openProjectSync: (item: ProjectPathItem) => void,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      deleteProject: (item: ProjectPathItem) => Promise<any>
     },
     'myDatabaseAPI': {
       // getAdapter: <TSchema>(projectPath: string, filename: string, databaseDefault: TSchema) => AdapterSync<TSchema>
