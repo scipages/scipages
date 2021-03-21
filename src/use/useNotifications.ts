@@ -1,5 +1,6 @@
 import {
-  computed
+  computed,
+  ComputedRef
 } from 'vue'
 import { Notification } from 'src/store/module-notifications/state'
 import { useStore } from 'vuex'
@@ -7,10 +8,10 @@ import { useStore } from 'vuex'
 export default function useNotifications () {
   const store = useStore()
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-  const notifications = computed(() => store.state.notifications.notifications)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-  const countNotifications = computed(() => store.getters['notifications/count'])
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-assignment
+  const notifications: ComputedRef<Array<Notification>> = computed(() => store.state.notifications.notifications)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-assignment
+  const countNotifications: ComputedRef<number> = computed(() => store.getters['notifications/count'])
 
   function notificationFactory (type: string, message: string): Notification {
     return {
@@ -25,12 +26,18 @@ export default function useNotifications () {
   function removeNotification (notification: Notification) {
     void store.dispatch('notifications/remove', notification, { root: true })
   }
+  function clearNotifications () {
+    for (const notification of notifications.value) {
+      void store.dispatch('notifications/remove', notification, { root: true })
+    }
+  }
 
   return {
     notifications,
     countNotifications,
     notificationFactory,
     addNotification,
-    removeNotification
+    removeNotification,
+    clearNotifications
   }
 }
