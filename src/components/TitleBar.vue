@@ -3,8 +3,8 @@
     <q-icon name="science" />
     <div class="non-selectable">
       {{ productName }}
-      <span v-if="currentProject.title !== null">
-        - {{ currentProject.title }}
+      <span v-if="currentWebsite.title !== null">
+        - {{ currentWebsite.title }}
       </span>
     </div>
 
@@ -27,7 +27,7 @@ import { useStore } from 'vuex'
 // import {
 //   farWindowRestore
 // } from '@quasar/extras/fontawesome-v5'
-import useProjectManager from 'src/use/useProjectManager'
+import useWebsitesManager from 'src/use/useWebsitesManager'
 import useMainWindow from 'src/use/useMainWindow'
 
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
     const version = computed(() => store.state.packageInfo.version)
 
-    const { currentProject } = useProjectManager()
+    const { currentWebsite } = useWebsitesManager()
 
     const {
       maximized,
@@ -56,7 +56,7 @@ export default defineComponent({
     return {
       productName,
       version,
-      currentProject,
+      currentWebsite,
       maximized,
       minimizeWindow,
       toggleMaximizeWindow,

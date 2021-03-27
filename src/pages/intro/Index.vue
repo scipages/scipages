@@ -1,18 +1,18 @@
 <template>
 
-  <ProjectDelete
-    v-if="deleteProjectShow"
-    v-bind:show="deleteProjectShow"
-    v-bind:item="deleteProjectItem"
-    v-on:close="deleteProjectShow=false"
-    v-on:success="onDeleteProjectSuccess"
-  ></ProjectDelete>
+  <WebsiteDelete
+    v-if="deleteWebsiteShow"
+    v-bind:show="deleteWebsiteShow"
+    v-bind:item="deleteWebsiteItem"
+    v-on:close="deleteWebsiteShow=false"
+    v-on:success="onDeleteWebsiteSuccess"
+  ></WebsiteDelete>
 
-  <div class="fit projects-list-page-wrapper">
+  <div class="fit websites-list-page-wrapper">
     <div class="row q-pr-xl q-pt-xl ">
-      <div class="col-6 text-weight-bolder">Projects</div>
+      <div class="col-6 text-weight-bolder">Websites</div>
       <div class="col-6 text-right">
-        <q-btn round flat size="7px" padding="5px" text-color="grey-8" icon="fas fa-redo-alt" v-on:click="closeProjectInitPaths" />
+        <q-btn round flat size="7px" padding="5px" text-color="grey-8" icon="fas fa-redo-alt" v-on:click="closeWebsiteInitPaths" />
       </div>
     </div>
 
@@ -21,8 +21,8 @@
     </div>
 
     <div class="q-pr-xl q-py-md text-weight-bolder text-right">
-      <q-btn label="New Project" icon="fas fa-plus" text-color="green-8">
-        <NewProjectMenu></NewProjectMenu>
+      <q-btn label="New Website" icon="fas fa-plus" text-color="green-8">
+        <NewWebsiteMenu></NewWebsiteMenu>
       </q-btn>
     </div>
     <div class="q-pr-xl q-pb-xl row row-flex-1">
@@ -30,7 +30,7 @@
         <q-scroll-area class="full-width full-height q-pa-md">
 
           <div
-            v-if="allProjects.items.length === 0"
+            v-if="allWebsites.items.length === 0"
             class="text-center"
           >
             ...
@@ -41,25 +41,25 @@
             class="non-selectable"
           >
             <template
-              v-for="(project) in allProjects.items" :key="project.filename"
+              v-for="(website) in allWebsites.items" :key="website.filename"
             >
 
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-weight-bold text-primary">
-                    {{ project.title }}
+                    {{ website.title }}
                   </q-item-label>
-                  <q-item-label caption lines="2">{{ project.uuid }}</q-item-label>
+                  <q-item-label caption lines="2">{{ website.uuid }}</q-item-label>
                 </q-item-section>
 
                 <q-item-section side top>
                   <q-item-label caption>5 min ago</q-item-label>
                   <q-btn-group push>
-                    <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openProjectAndNavigate(project)" />
+                    <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openWebsiteAndNavigate(website)" />
                     <q-separator vertical />
                     <q-btn-dropdown size="xs">
                       <q-list>
-                        <q-item dense clickable label="Permanently Delete" v-on:click="deleteProject(project)">
+                        <q-item dense clickable label="Permanently Delete" v-on:click="deleteWebsite(website)">
                           <q-item-section>
                             <q-item-label>Permanently Delete</q-item-label>
                           </q-item-section>
@@ -86,12 +86,6 @@
             </template>
           </q-list>
 
-          <br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br>
-          text
         </q-scroll-area>
       </div>
     </div>
@@ -102,71 +96,71 @@
 import { defineComponent, onMounted, ref } from 'vue'
 // import { useRouter, useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
-import useProjectManager from 'src/use/useProjectManager'
-import { ProjectPathItem } from 'src/types/ProjectPathItem'
-import NewProjectMenu from 'components/projects/NewProjectMenu.vue'
-import ProjectDelete from 'components/projects/ProjectDelete.vue'
+import useWebsitesManager from 'src/use/useWebsitesManager'
+import { WebsitePathItem } from 'src/types/WebsitePathItem'
+import NewWebsiteMenu from 'components/websites/NewWebsiteMenu.vue'
+import WebsiteDelete from 'components/websites/WebsiteDelete.vue'
 
 export default defineComponent({
   name: 'PageIntroIndex',
   components: {
-    NewProjectMenu,
-    ProjectDelete
+    NewWebsiteMenu,
+    WebsiteDelete
   },
   setup () {
     const router = useRouter()
     // const route = useRoute()
-    const { allProjects, openProject, closeProject, initPathsSync } = useProjectManager()
+    const { allWebsites, openWebsite, closeWebsite, initPathsSync } = useWebsitesManager()
 
     onMounted(() => {
-      closeProjectInitPaths()
+      closeWebsiteInitPaths()
     })
 
-    function closeProjectInitPaths () {
-      closeProject()
+    function closeWebsiteInitPaths () {
+      closeWebsite()
       initPathsSync()
     }
 
-    function openProjectAndNavigate (project: ProjectPathItem) {
-      openProject(project)
+    function openWebsiteAndNavigate (website: WebsitePathItem) {
+      openWebsite(website)
 
-      if (project.filename === null || project.path === null || project.title === null || project.uuid === null) {
+      if (website.filename === null || website.path === null || website.title === null || website.uuid === null) {
         return
       }
 
       void router.push({
         name: 'main_index',
         params: {
-          uuid: project.uuid
+          uuid: website.uuid
         }
       })
     }
 
-    const deleteProjectShow = ref<boolean>(false)
-    const deleteProjectItem = ref<ProjectPathItem|null>(null)
-    function deleteProject (project: ProjectPathItem) {
-      deleteProjectShow.value = true
-      deleteProjectItem.value = project
+    const deleteWebsiteShow = ref<boolean>(false)
+    const deleteWebsiteItem = ref<WebsitePathItem|null>(null)
+    function deleteWebsite (website: WebsitePathItem) {
+      deleteWebsiteShow.value = true
+      deleteWebsiteItem.value = website
     }
-    function onDeleteProjectSuccess () {
-      closeProjectInitPaths()
+    function onDeleteWebsiteSuccess () {
+      closeWebsiteInitPaths()
     }
 
     return {
-      allProjects,
-      openProjectAndNavigate,
-      closeProjectInitPaths,
-      deleteProjectShow,
-      deleteProjectItem,
-      deleteProject,
-      onDeleteProjectSuccess
+      allWebsites,
+      openWebsiteAndNavigate,
+      closeWebsiteInitPaths,
+      deleteWebsiteShow,
+      deleteWebsiteItem,
+      deleteWebsite,
+      onDeleteWebsiteSuccess
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
-.projects-list-page-wrapper {
+.websites-list-page-wrapper {
   display: flex;
   flex-direction: column;
 

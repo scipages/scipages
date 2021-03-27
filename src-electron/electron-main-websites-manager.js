@@ -3,18 +3,18 @@ import path from 'path'
 import fs from 'fs'
 
 import { electronData } from './electron-main-electron-data'
-// import { ProjectPathItem } from '../src/types/ProjectPathItem'
+// import { WebsitePathItem } from '../src/types/WebsitePathItem'
 import {
   openConfigurationDB, ConfigurationDB, ConfigurationSimpleRepository
 } from '../src/db/repositories/ConfigurationRepository'
 import { openPagesDB } from '../src/db/repositories/PagesRepository'
 import { openCoursesDB } from '../src/db/repositories/CoursesRepository'
 
-export default function initMainProjectManagerHandlers () {
-  ipcMain.on('project-manager-init-paths-sync', (event) => {
-    // Create the projects directory
-    if (!fs.existsSync(electronData.userDataProjectsPath)) {
-      fs.mkdirSync(electronData.userDataProjectsPath, { recursive: true })
+export default function initMainWebsitesManagerHandlers () {
+  ipcMain.on('websites-manager-init-paths-sync', (event) => {
+    // Create the websites directory
+    if (!fs.existsSync(electronData.userDataWebsitesPath)) {
+      fs.mkdirSync(electronData.userDataWebsitesPath, { recursive: true })
     }
     // Create the configuration directory
     if (!fs.existsSync(electronData.userDataConfigurationPath)) {
@@ -25,12 +25,12 @@ export default function initMainProjectManagerHandlers () {
     // will be blocked.
     event.returnValue = null
   })
-  ipcMain.on('project-manager-get-project-path-list-sync', (event) => {
-    // const paths: Array<ProjectPathItem> = []
+  ipcMain.on('websites-manager-get-website-path-list-sync', (event) => {
+    // const paths: Array<WebsitePathItem> = []
     const paths = []
-    fs.readdirSync(electronData.userDataProjectsPath).forEach(file => {
-      if (fs.lstatSync(path.resolve(electronData.userDataProjectsPath, file)).isDirectory() && file.startsWith('project-')) {
-        const pathTmp = path.join(electronData.userDataProjectsPath, file)
+    fs.readdirSync(electronData.userDataWebsitesPath).forEach(file => {
+      if (fs.lstatSync(path.resolve(electronData.userDataWebsitesPath, file)).isDirectory() && file.startsWith('website-')) {
+        const pathTmp = path.join(electronData.userDataWebsitesPath, file)
 
         openConfigurationDB(pathTmp)
         const repository = new ConfigurationSimpleRepository(
@@ -42,28 +42,28 @@ export default function initMainProjectManagerHandlers () {
           filename: file,
           path: pathTmp,
           title: title,
-          uuid: file.substring('project-'.length)
+          uuid: file.substring('website-'.length)
         })
       }
     })
     event.returnValue = paths
   })
-  ipcMain.on('project-manager-open-project-sync', (event, item) => {
+  ipcMain.on('websites-manager-open-website-sync', (event, item) => {
     openConfigurationDB(item.path)
     openPagesDB(item.path)
     openCoursesDB(item.path)
 
     event.returnValue = null
   })
-  ipcMain.handle('project-manager-delete-project', async (event, item) => {
-    if (item.path.startsWith(electronData.userDataProjectsPath)) {
+  ipcMain.handle('websites-manager-delete-website', async (event, item) => {
+    if (item.path.startsWith(electronData.userDataWebsitesPath)) {
       return new Promise((resolve, reject) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         fs.rmdir(item.path, { recursive: true }, (err, result) => {
           if (err) {
-            reject('Error - Project path deletion failed')
+            reject('Error - Website path deletion failed')
           } else {
-            resolve('Success - Project path deleted')
+            resolve('Success - Website path deleted')
           }
         })
       })

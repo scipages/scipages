@@ -21,9 +21,9 @@ const coursesDatabaseDefault = {
   courses: []
 }
 
-export function openCoursesDB (projectPath: string) {
+export function openCoursesDB (websitePath: string) {
   coursesDB = getDB<CoursesDatabaseSchema>(
-    projectPath,
+    websitePath,
     coursesRepositoryFilename,
     coursesDatabaseDefault
   )

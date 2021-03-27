@@ -50,7 +50,7 @@
         </q-menu>
       </q-btn>
       <q-separator inset spaced />
-      <q-btn icon="swap_horiz" label="Switch Project" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item" :to="{name: 'intro_index'}"></q-btn>
+      <q-btn icon="swap_horiz" label="Switch Website" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item" :to="{name: 'intro_index'}"></q-btn>
     </q-toolbar>
   <!--</div>-->
 </template>
@@ -81,12 +81,12 @@ export default defineComponent({
       emit('update:show', newValue)
     })
 
-    function closeProject () {
+    function closeWebsite () {
       void router.push({ name: 'index' })
     }
 
     return {
-      closeProject,
+      closeWebsite,
       productName,
       version
     }

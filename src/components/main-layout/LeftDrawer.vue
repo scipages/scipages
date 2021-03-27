@@ -11,8 +11,8 @@
       <q-list padding style="max-width: 240px" class="non-selectable">
         <!--
         <q-item-label header top class="text-weight-bold text-grey back-to-index-label">
-          <q-btn size="xs" icon="close" class="back-to-index-btn" v-on:click="closeProject" />
-          My project's title goes here
+          <q-btn size="xs" icon="close" class="back-to-index-btn" v-on:click="closeWebsite" />
+          My website's title goes here
         </q-item-label>
         -->
 
@@ -20,17 +20,17 @@
         <q-item-label>
           <q-bar class="fit bg-grey-2">
             <div class="cursor-pointer q-py-sm">
-              My project's title goes here
+              My website's title goes here
             </div>
             <q-space />
-            <q-btn dense flat icon="close" v-on:click="closeProject" />
+            <q-btn dense flat icon="close" v-on:click="closeWebsite" />
           </q-bar>
         </q-item-label>
 
         <q-separator class="q-my-md" />
         -->
 
-        <q-item v-for="link in links1" :key="link.text" v-ripple clickable :to="{name: 'main_index', params: { uuid: currentProject.uuid }}">
+        <q-item v-for="link in links1" :key="link.text" v-ripple clickable :to="{name: 'main_index', params: { uuid: currentWebsite.uuid }}">
           <q-item-section avatar>
             <q-icon color="grey" :name="link.icon" />
           </q-item-section>
@@ -91,7 +91,7 @@ import {
   fasImages,
   fasAddressCard
 } from '@quasar/extras/fontawesome-v5'
-import useProjectManager from 'src/use/useProjectManager'
+import useWebsitesManager from 'src/use/useWebsitesManager'
 
 export default defineComponent({
   name: 'LeftDrawer',
@@ -104,20 +104,20 @@ export default defineComponent({
   emits: ['update:show'],
   setup (props, { emit }) {
     const router = useRouter()
-    const { currentProject } = useProjectManager()
+    const { currentWebsite } = useWebsitesManager()
 
     const show = ref(props.show)
     watch(show, (newValue) => {
       emit('update:show', newValue)
     })
 
-    function closeProject () {
+    function closeWebsite () {
       void router.push({ name: 'index' })
     }
 
     return {
-      currentProject,
-      closeProject,
+      currentWebsite,
+      closeWebsite,
       links1: [
         { icon: 'web', text: 'Pages' }
       ],

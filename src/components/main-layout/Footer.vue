@@ -1,7 +1,7 @@
 <template>
   <div class="q-px-md row items-center text-black shadow-2 non-selectable text-caption">
     <span class="col-9 text-left">
-      Project: The open project's name goes here | followed by breadcrumbs items
+      Website: The open website's name goes here | followed by breadcrumbs items
     </span>
     <span class="col-3 text-right">
       {{ productName }} v{{ version }}

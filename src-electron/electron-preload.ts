@@ -27,7 +27,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 
 import { ElectronData } from 'src/types/ElectronData'
 import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
-import { ProjectPathItem } from 'src/types/ProjectPathItem'
+import { WebsitePathItem } from 'src/types/WebsitePathItem'
 
 let isWindowMaxUnmaxListenerSet = false
 
@@ -78,30 +78,30 @@ contextBridge.exposeInMainWorld('myElectronDataAPI', {
   }
 })
 
-contextBridge.exposeInMainWorld('myProjectManagerAPI', {
+contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   initPathsSync () {
-    ipcRenderer.sendSync('project-manager-init-paths-sync')
+    ipcRenderer.sendSync('websites-manager-init-paths-sync')
   },
-  getProjectPathListSync (): Array<ProjectPathItem> {
+  getWebsitePathListSync (): Array<WebsitePathItem> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return ipcRenderer.sendSync('project-manager-get-project-path-list-sync')
+    return ipcRenderer.sendSync('websites-manager-get-website-path-list-sync')
   },
-  openProjectSync (item: ProjectPathItem) {
-    ipcRenderer.sendSync('project-manager-open-project-sync', item)
+  openWebsiteSync (item: WebsitePathItem) {
+    ipcRenderer.sendSync('websites-manager-open-website-sync', item)
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deleteProject (item: ProjectPathItem): Promise<any> {
-    return ipcRenderer.invoke('project-manager-delete-project', item)
+  deleteWebsite (item: WebsitePathItem): Promise<any> {
+    return ipcRenderer.invoke('websites-manager-delete-website', item)
   }
 })
 
 contextBridge.exposeInMainWorld('myDatabaseAPI', {
-  // getAdapter (projectPath, filename, databaseDefault) {
-  //   // const adapter = new FileSync<TSchema>(path.join(projectPath, filename))
-  //   // const adapter = new FileSync(path.join(projectPath, filename))
+  // getAdapter (websitePath, filename, databaseDefault) {
+  //   // const adapter = new FileSync<TSchema>(path.join(websitePath, filename))
+  //   // const adapter = new FileSync(path.join(websitePath, filename))
   //   // const db = lowdb(adapter)
   //   // void db.defaults(_.cloneDeep(databaseDefault)).write()
   //   // return db
-  //   return new FileSync(path.join(projectPath, filename))
+  //   return new FileSync(path.join(websitePath, filename))
   // }
 })

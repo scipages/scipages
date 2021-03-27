@@ -25,9 +25,9 @@ const ConfigurationDatabaseDefault = {
   theme: ConfigurationThemeEnum.AlFolio
 }
 
-export function openConfigurationDB (projectPath: string) {
+export function openConfigurationDB (websitePath: string) {
   ConfigurationDB = getDB<ConfigurationDatabaseSchema>(
-    projectPath,
+    websitePath,
     ConfigurationRepositoryFilename,
     ConfigurationDatabaseDefault
   )

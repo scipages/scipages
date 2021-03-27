@@ -7,7 +7,7 @@
     </p>
     <p>
       {{ electronData.userDataPath }}<br />
-      {{ electronData.userDataProjectsPath }}<br />
+      {{ electronData.userDataWebsitesPath }}<br />
       {{ electronData.userDataConfigurationPath }}
     </p>
     <p>
@@ -22,14 +22,14 @@
         testLowDb SHOW db instance
       </button>
       <br />
-      <button v-on:click="tempCurrentProject = 'project-a'">
-        testLowDb project a
+      <button v-on:click="tempCurrentWebsite = 'website-a'">
+        testLowDb website a
       </button>
-      <button v-on:click="tempCurrentProject = 'project-b'">
-        testLowDb project b
+      <button v-on:click="tempCurrentWebsite = 'website-b'">
+        testLowDb website b
       </button>
-      <button v-on:click="tempCurrentProject = 'project-c'">
-        testLowDb project c
+      <button v-on:click="tempCurrentWebsite = 'website-c'">
+        testLowDb website c
       </button>
     </p>
   </div>
@@ -55,9 +55,9 @@ export default defineComponent({
 
     const { electronData } = useMainElectronData()
 
-    const tempCurrentProject = ref('project-a')
+    const tempCurrentWebsite = ref('website-a')
     function testLowDbCreate () {
-      // openCoursesDB(path.join(electronData.userDataProjectsPath, tempCurrentProject.value))
+      // openCoursesDB(path.join(electronData.userDataWebsitesPath, tempCurrentWebsite.value))
       const repository = new CoursesRepository(
         coursesDB,
         CoursesDatabaseCollections.Courses
@@ -82,7 +82,7 @@ export default defineComponent({
       console.log(item2)
     }
     function testLowDbFindOne (id: string) {
-      // openCoursesDB(path.join(electronData.userDataProjectsPath, tempCurrentProject.value))
+      // openCoursesDB(path.join(electronData.userDataWebsitesPath, tempCurrentWebsite.value))
       const repository = new CoursesRepository(
         coursesDB,
         CoursesDatabaseCollections.Courses
@@ -102,7 +102,7 @@ export default defineComponent({
       testLowDbCreate,
       testLowDbFindOne,
       testLowDbShow,
-      tempCurrentProject
+      tempCurrentWebsite
     }
   }
 })

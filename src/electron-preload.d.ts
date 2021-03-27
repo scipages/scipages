@@ -1,5 +1,5 @@
 import { ElectronData } from 'src/types/ElectronData'
-import { ProjectPathItem } from 'src/types/ProjectPathItem'
+import { WebsitePathItem } from 'src/types/WebsitePathItem'
 import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
 // import { AdapterSync } from 'lowdb'
 
@@ -19,15 +19,15 @@ declare global {
       retrieveElectronData: (func: (data: ElectronData) => void) => void,
       retrieveElectronDataSync: () => ElectronData
     },
-    'myProjectManagerAPI': {
+    'myWebsitesManagerAPI': {
       initPathsSync: () => void,
-      getProjectPathListSync: () => Array<ProjectPathItem>,
-      openProjectSync: (item: ProjectPathItem) => void,
+      getWebsitePathListSync: () => Array<WebsitePathItem>,
+      openWebsiteSync: (item: WebsitePathItem) => void,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      deleteProject: (item: ProjectPathItem) => Promise<any>
+      deleteWebsite: (item: WebsitePathItem) => Promise<any>
     },
     'myDatabaseAPI': {
-      // getAdapter: <TSchema>(projectPath: string, filename: string, databaseDefault: TSchema) => AdapterSync<TSchema>
+      // getAdapter: <TSchema>(websitePath: string, filename: string, databaseDefault: TSchema) => AdapterSync<TSchema>
     }
   }
 }

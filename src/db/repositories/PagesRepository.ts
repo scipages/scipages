@@ -21,9 +21,9 @@ const pagesDatabaseDefault = {
   pages: []
 }
 
-export function openPagesDB (projectPath: string) {
+export function openPagesDB (websitePath: string) {
   pagesDB = getDB<PagesDatabaseSchema>(
-    projectPath,
+    websitePath,
     pagesRepositoryFilename,
     pagesDatabaseDefault
   )

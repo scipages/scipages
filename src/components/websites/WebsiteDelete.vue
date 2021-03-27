@@ -14,8 +14,10 @@
         <div v-if="itemCopy!=null">
           <q-avatar class="float-left on-left" icon="far fa-trash-alt" color="negative" text-color="white" />
           <span>
-            You are about to delete the project
+            You are about to delete the website
             <strong>{{ itemCopy.title }}</strong>.
+            Do you really want to delete this website?
+            This action cannot be undone.
           </span>
         </div>
       </q-card-section>
@@ -32,8 +34,8 @@
 import {
   defineComponent, PropType, ref
 } from 'vue'
-import { ProjectPathItem } from 'src/types/ProjectPathItem'
-import useProjectManager from 'src/use/useProjectManager'
+import { WebsitePathItem } from 'src/types/WebsitePathItem'
+import useWebsitesManager from 'src/use/useWebsitesManager'
 import useNotifications from 'src/use/useNotifications'
 import useLoading from 'src/use/useLoading'
 import LoadingComponent from 'src/components/LoadingComponent.vue'
@@ -50,7 +52,7 @@ export default defineComponent({
       required: true
     },
     item: {
-      type: Object as PropType<ProjectPathItem>,
+      type: Object as PropType<WebsitePathItem>,
       required: true
     }
   },
@@ -59,7 +61,7 @@ export default defineComponent({
     'success'
   ],
   setup (props, { emit }) {
-    const { deleteProject } = useProjectManager()
+    const { deleteWebsite } = useWebsitesManager()
     const { addNotification, notificationFactory } = useNotifications()
     const { isLoading, startLoading, endLoading } = useLoading()
 
@@ -71,7 +73,7 @@ export default defineComponent({
     function deleteItem () {
       errors.value.clear()
       startLoading()
-      deleteProject(itemCopy.value)
+      deleteWebsite(itemCopy.value)
         .then(response => {
           console.log(response)
           close()

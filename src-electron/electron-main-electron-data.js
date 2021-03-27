@@ -6,7 +6,7 @@ export const electronData = {
   debugging: process.env.DEBUGGING,
   electronVersion: app.getVersion(),
   userDataPath: app.getPath('userData'),
-  userDataProjectsPath: path.join(app.getPath('userData'), 'scipages-projects'),
+  userDataWebsitesPath: path.join(app.getPath('userData'), 'scipages-websites'),
   userDataConfigurationPath: path.join(app.getPath('userData'), 'scipages-configuration')
 }
 

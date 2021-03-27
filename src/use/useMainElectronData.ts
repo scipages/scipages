@@ -5,7 +5,7 @@ const electronData: ElectronData = reactive({
   debugging: false,
   electronVersion: '',
   userDataPath: '',
-  userDataProjectsPath: '',
+  userDataWebsitesPath: '',
   userDataConfigurationPath: ''
 })
 
@@ -16,7 +16,7 @@ export default function useMainElectronData () {
       electronData.debugging = data.debugging
       electronData.electronVersion = data.electronVersion
       electronData.userDataPath = data.userDataPath
-      electronData.userDataProjectsPath = data.userDataProjectsPath
+      electronData.userDataWebsitesPath = data.userDataWebsitesPath
       electronData.userDataConfigurationPath = data.userDataConfigurationPath
     })
     // }

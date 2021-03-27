@@ -75,7 +75,7 @@ export default defineComponent({
 
     return {
       links1: [
-        { icon: 'science', text: 'My projects title goes here', uuid: 'a_fake_uuid' }
+        { icon: 'science', text: 'My website\'s title goes here', uuid: 'a_fake_uuid' }
       ]
     }
   }

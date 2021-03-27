@@ -86,7 +86,7 @@ import {
 } from 'vue'
 
 export default defineComponent({
-  name: 'NewProjectMenu',
+  name: 'NewWebsiteMenu',
   setup () {
     const showPrompt = ref(false)
     const title = ref('')

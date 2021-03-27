@@ -26,7 +26,7 @@
         <div class="col-6">
           <!--<q-scroll-area class="fit" style="border: 1px solid red">-->
           <q-page class="row justify-evenly">
-            <div class="projects-wrapper">
+            <div class="websites-wrapper">
               <router-view />
             </div>
           </q-page>
@@ -85,7 +85,7 @@ export default defineComponent({
     padding-top: 15px;
   }
 }
-.projects-wrapper {
+.websites-wrapper {
   width: 100%;
 }
 </style>
