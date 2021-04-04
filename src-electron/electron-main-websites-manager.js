@@ -1,6 +1,7 @@
-import { ipcMain } from 'electron'
+import { ipcMain, dialog, app, BrowserWindow } from 'electron'
 import path from 'path'
 import fs from 'fs'
+import archiver from 'archiver'
 
 import { electronData } from './electron-main-electron-data'
 // import { WebsitePathItem } from '../src/types/WebsitePathItem'
@@ -69,6 +70,56 @@ export default function initMainWebsitesManagerHandlers () {
       })
 
       // fs.rmdirSync(item.path, { recursive: true })
+    }
+  })
+  ipcMain.handle('websites-manager-export-website', async (event, item) => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (item.path.startsWith(electronData.userDataWebsitesPath) && win !== null) {
+      const options = {
+        title: "Save file for exported website",
+        defaultPath: app.getPath('documents') + '/' + item.filename,
+        buttonLabel: "Save Zip File",
+        filters: [
+          { name: 'Zip files', extensions: ['zip'] }
+          // { name: 'Custom File Type', extensions: ['as'] },
+          // { name: 'All Files', extensions: ['*'] }
+        ]
+      }
+      return new Promise((resolve, reject) => {
+        dialog.showSaveDialog(win, options).then((result) => {
+          if (result.canceled) {
+            resolve('Export cancelled')
+            return
+          } else if (result.filePath === undefined) {
+            resolve('Export filePath not set')
+            return
+          }
+          const output = fs.createWriteStream(result.filePath)
+          const archive = archiver('zip', {
+            zlib: { level: 9 } // Sets the compression level.
+          })
+          output.on('close', function () {
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            resolve(`Success - Website exported to ${result.filePath}. ${archive.pointer().toString()} total bytes written. ${warnings.join(' - ')}`)
+          })
+          const warnings = []
+          archive.on('warning', function (err) {
+            if (err.code === 'ENOENT') {
+              warnings.push(err.code + ', ' + err.name + ', ' + err.message)
+            } else {
+              throw err
+            }
+          })
+          archive.on('error', function (err) {
+            throw err
+          })
+          archive.pipe(output)
+          archive.directory(item.path, false)
+          void archive.finalize()
+        }).catch((err) => {
+          reject('Error - Website export failed')
+        })
+      })
     }
   })
 }

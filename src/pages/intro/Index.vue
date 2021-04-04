@@ -1,5 +1,7 @@
 <template>
 
+  <LoadingComponent v-if="isLoading"></LoadingComponent>
+
   <WebsiteDelete
     v-if="deleteWebsiteShow"
     v-bind:show="deleteWebsiteShow"
@@ -67,7 +69,7 @@
                             <q-icon size="xs" name="far fa-trash-alt" color="red-4" />
                           </q-item-section>
                         </q-item>
-                        <q-item dense clickable label="Export ZIP File">
+                        <q-item dense clickable label="Export ZIP File" v-on:click="onExportWebsiteClick(website)">
                           <q-item-section>
                             <q-item-label>Export to Zip File</q-item-label>
                           </q-item-section>
@@ -97,20 +99,26 @@ import { defineComponent, onMounted, ref } from 'vue'
 // import { useRouter, useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 import useWebsitesManager from 'src/use/useWebsitesManager'
+import useNotifications from 'src/use/useNotifications'
+import useLoading from 'src/use/useLoading'
 import { WebsitePathItem } from 'src/types/WebsitePathItem'
 import NewWebsiteMenu from 'components/websites/NewWebsiteMenu.vue'
 import WebsiteDelete from 'components/websites/WebsiteDelete.vue'
+import LoadingComponent from 'src/components/LoadingComponent.vue'
 
 export default defineComponent({
   name: 'PageIntroIndex',
   components: {
     NewWebsiteMenu,
-    WebsiteDelete
+    WebsiteDelete,
+    LoadingComponent
   },
   setup () {
     const router = useRouter()
     // const route = useRoute()
-    const { allWebsites, openWebsite, closeWebsite, initPathsSync } = useWebsitesManager()
+    const { allWebsites, openWebsite, closeWebsite, initPathsSync, exportWebsite } = useWebsitesManager()
+    const { notificationFactory, addNotification } = useNotifications()
+    const { startLoading, endLoading, isLoading } = useLoading()
 
     onMounted(() => {
       closeWebsiteInitPaths()
@@ -146,6 +154,21 @@ export default defineComponent({
       closeWebsiteInitPaths()
     }
 
+    function onExportWebsiteClick (website: WebsitePathItem) {
+      startLoading()
+      exportWebsite(website)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+          addNotification(
+            notificationFactory('error', error)
+          )
+        })
+        .finally(() => { endLoading() })
+    }
+
     return {
       allWebsites,
       openWebsiteAndNavigate,
@@ -153,7 +176,9 @@ export default defineComponent({
       deleteWebsiteShow,
       deleteWebsiteItem,
       deleteWebsite,
-      onDeleteWebsiteSuccess
+      onDeleteWebsiteSuccess,
+      onExportWebsiteClick,
+      isLoading
     }
   }
 })
