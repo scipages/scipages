@@ -133,8 +133,8 @@ export default defineComponent({
         { icon: fasImages, text: 'Static Files' }
       ],
       links3: [
-        { icon: 'settings', text: 'Configuration' },
-        { icon: fasPalette, text: 'Themes' },
+        { icon: 'settings', text: 'Site Settings' },
+        { icon: fasPalette, text: 'Theme' },
         { icon: fabGitAlt, text: 'Git Synchronization' },
         { icon: fasUpload, text: 'Generate & Deploy' }
       ]

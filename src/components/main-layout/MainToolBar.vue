@@ -1,6 +1,7 @@
 <template>
   <!--<div class="q-pa-md q-gutter-y-sm">-->
     <q-toolbar class="bg-grey-3" v-if="show">
+      <q-btn icon="remove_red_eye" label="Preview" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
       <q-btn icon="cloud_upload" label="Publish" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
       <!--
       <q-btn flat round dense style="color: #7A7D84; font-weight: 400;">
@@ -10,7 +11,8 @@
 
       <q-space></q-space>
 
-      <q-btn icon="settings" label="Settings" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
+      <q-btn icon="settings" label="Configuration" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
+      <q-btn icon="fas fa-palette" label="Themes" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
       <q-btn icon="help_outline" label="Help ▼" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item">
         <q-menu anchor="bottom right" self="top right" square class="bg-grey-3 non-selectable">
           <!--<q-item-label header>Header</q-item-label>-->
