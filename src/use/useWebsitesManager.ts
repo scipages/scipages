@@ -62,6 +62,9 @@ export default function useWebsitesManager () {
     const itemCopy: WebsitePathItem = copyItem(item)
     return window.myWebsitesManagerAPI.exportWebsite(itemCopy)
   }
+  function importWebsite () {
+    return window.myWebsitesManagerAPI.importWebsite()
+  }
 
   return {
     initPathsSync,
@@ -70,6 +73,7 @@ export default function useWebsitesManager () {
     openWebsite,
     closeWebsite,
     deleteWebsite,
-    exportWebsite
+    exportWebsite,
+    importWebsite
   }
 }

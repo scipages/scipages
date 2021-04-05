@@ -30,7 +30,7 @@
         <q-item-section side><q-icon size="xs" color="grey-6" name="fab fa-git-alt" /></q-item-section>
       </q-item>
       <q-separator />
-      <q-item dense clickable v-close-popup>
+      <q-item dense clickable v-close-popup v-on:click="onImportWebsiteClick()">
         <q-item-section>Import from Zip File</q-item-section>
         <q-item-section side><q-icon size="xs" color="grey-6" name="far fa-file-archive" /></q-item-section>
       </q-item>
@@ -87,7 +87,11 @@ import {
 
 export default defineComponent({
   name: 'NewWebsiteMenu',
-  setup () {
+  emits: [
+    'import-website-clicked'
+  ],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup (props, { emit }) {
     const showPrompt = ref(false)
     const title = ref('')
     const themeValue = ref('')
@@ -108,11 +112,16 @@ export default defineComponent({
       console.log(newValue)
     })
 
+    function onImportWebsiteClick () {
+      emit('import-website-clicked')
+    }
+
     return {
       showPrompt,
       title,
       themeValue,
-      themeOptions
+      themeOptions,
+      onImportWebsiteClick
     }
   }
 })

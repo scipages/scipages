@@ -1,7 +1,6 @@
 import { ElectronData } from 'src/types/ElectronData'
 import { WebsitePathItem } from 'src/types/WebsitePathItem'
 import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
-// import { AdapterSync } from 'lowdb'
 
 declare global {
   interface Window {
@@ -27,6 +26,8 @@ declare global {
       deleteWebsite: (item: WebsitePathItem) => Promise<any>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       exportWebsite: (item: WebsitePathItem) => Promise<any>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      importWebsite: () => Promise<any>
     },
     'myDatabaseAPI': {
       // getAdapter: <TSchema>(websitePath: string, filename: string, databaseDefault: TSchema) => AdapterSync<TSchema>

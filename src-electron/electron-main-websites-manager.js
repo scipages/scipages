@@ -2,6 +2,8 @@ import { ipcMain, dialog, app, BrowserWindow } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import archiver from 'archiver'
+import { v4 as uuidv4 } from 'uuid'
+import extract from 'extract-zip'
 
 import { electronData } from './electron-main-electron-data'
 // import { WebsitePathItem } from '../src/types/WebsitePathItem'
@@ -77,7 +79,7 @@ export default function initMainWebsitesManagerHandlers () {
     if (item.path.startsWith(electronData.userDataWebsitesPath) && win !== null) {
       const options = {
         title: "Save file for exported website",
-        defaultPath: app.getPath('documents') + '/' + item.filename,
+        defaultPath: path.join(app.getPath('documents'), (new Date()).toISOString().replaceAll(':', '.') + ' - ' + item.title),
         buttonLabel: "Save Zip File",
         filters: [
           { name: 'Zip files', extensions: ['zip'] }
@@ -118,6 +120,39 @@ export default function initMainWebsitesManagerHandlers () {
           void archive.finalize()
         }).catch((err) => {
           reject('Error - Website export failed')
+        })
+      })
+    }
+  })
+  ipcMain.handle('websites-manager-import-website', async (event) => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win !== null) {
+      const importPath = path.join(electronData.userDataWebsitesPath, 'website-' + uuidv4())
+      const options = {
+        title: "Select file for website import",
+        defaultPath: app.getPath('documents'),
+        buttonLabel: "Import Zip File",
+        filters: [
+          { name: 'Zip files', extensions: ['zip'] }
+          // { name: 'Custom File Type', extensions: ['as'] },
+          // { name: 'All Files', extensions: ['*'] }
+        ],
+        properties: ['openFile']
+        // properties: ['openFile', 'multiSelections']
+      }
+      return new Promise((resolve, reject) => {
+        dialog.showOpenDialog(win, options).then(async (result) => {
+          if (result.canceled) {
+            resolve('Import cancelled')
+            return
+          } else if (result.filePaths === undefined || result.filePaths.length === 0) {
+            resolve('Import filePath not set')
+            return
+          }
+          await extract(result.filePaths[0], { dir: importPath })
+          resolve(`Success - Website import completed: ${result.filePaths[0]}`)
+        }).catch((err) => {
+          reject('Error - Website import failed')
         })
       })
     }

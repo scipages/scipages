@@ -24,7 +24,9 @@
 
     <div class="q-pr-xl q-py-md text-weight-bolder text-right">
       <q-btn label="New Website" icon="fas fa-plus" text-color="green-8">
-        <NewWebsiteMenu></NewWebsiteMenu>
+        <NewWebsiteMenu
+          v-on:import-website-clicked="onImportWebsiteClick"
+        ></NewWebsiteMenu>
       </q-btn>
     </div>
     <div class="q-pr-xl q-pb-xl row row-flex-1">
@@ -61,7 +63,7 @@
                     <q-separator vertical />
                     <q-btn-dropdown size="xs">
                       <q-list>
-                        <q-item dense clickable label="Permanently Delete" v-on:click="deleteWebsite(website)">
+                        <q-item dense clickable label="Permanently Delete" v-close-popup v-on:click="deleteWebsite(website)">
                           <q-item-section>
                             <q-item-label>Permanently Delete</q-item-label>
                           </q-item-section>
@@ -69,7 +71,7 @@
                             <q-icon size="xs" name="far fa-trash-alt" color="red-4" />
                           </q-item-section>
                         </q-item>
-                        <q-item dense clickable label="Export ZIP File" v-on:click="onExportWebsiteClick(website)">
+                        <q-item dense clickable label="Export ZIP File" v-close-popup v-on:click="onExportWebsiteClick(website)">
                           <q-item-section>
                             <q-item-label>Export to Zip File</q-item-label>
                           </q-item-section>
@@ -116,7 +118,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     // const route = useRoute()
-    const { allWebsites, openWebsite, closeWebsite, initPathsSync, exportWebsite } = useWebsitesManager()
+    const { allWebsites, openWebsite, closeWebsite, initPathsSync, exportWebsite, importWebsite } = useWebsitesManager()
     const { notificationFactory, addNotification } = useNotifications()
     const { startLoading, endLoading, isLoading } = useLoading()
 
@@ -169,6 +171,24 @@ export default defineComponent({
         .finally(() => { endLoading() })
     }
 
+    function onImportWebsiteClick () {
+      startLoading()
+      importWebsite()
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+          addNotification(
+            notificationFactory('error', error)
+          )
+        })
+        .finally(() => {
+          initPathsSync()
+          endLoading()
+        })
+    }
+
     return {
       allWebsites,
       openWebsiteAndNavigate,
@@ -178,6 +198,7 @@ export default defineComponent({
       deleteWebsite,
       onDeleteWebsiteSuccess,
       onExportWebsiteClick,
+      onImportWebsiteClick,
       isLoading
     }
   }

@@ -96,6 +96,10 @@ contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   exportWebsite (item: WebsitePathItem): Promise<any> {
     return ipcRenderer.invoke('websites-manager-export-website', item)
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  importWebsite (): Promise<any> {
+    return ipcRenderer.invoke('websites-manager-import-website')
   }
 })
 
