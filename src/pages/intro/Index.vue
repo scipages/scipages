@@ -44,50 +44,52 @@
             v-else
             class="non-selectable"
           >
-            <template
-              v-for="(website) in allWebsites.items" :key="website.filename"
-            >
+            <transition-group name="list" type="transition">
+              <div
+                v-for="(website) in allWebsites.items" :key="website.uuid"
+              >
 
-              <q-item>
-                <q-item-section>
-                  <q-item-label class="text-weight-bold text-primary">
-                    {{ website.title }}
-                  </q-item-label>
-                  <q-item-label caption lines="2">{{ website.uuid }}</q-item-label>
-                </q-item-section>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="text-weight-bold text-primary">
+                      {{ website.title }}
+                    </q-item-label>
+                    <q-item-label caption lines="2">{{ website.uuid }}</q-item-label>
+                  </q-item-section>
 
-                <q-item-section side top>
-                  <q-item-label caption>5 min ago</q-item-label>
-                  <q-btn-group push>
-                    <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openWebsiteAndNavigate(website)" />
-                    <q-separator vertical />
-                    <q-btn-dropdown size="xs">
-                      <q-list>
-                        <q-item dense clickable label="Permanently Delete" v-close-popup v-on:click="deleteWebsite(website)">
-                          <q-item-section>
-                            <q-item-label>Permanently Delete</q-item-label>
-                          </q-item-section>
-                          <q-item-section side>
-                            <q-icon size="xs" name="far fa-trash-alt" color="red-4" />
-                          </q-item-section>
-                        </q-item>
-                        <q-item dense clickable label="Export ZIP File" v-close-popup v-on:click="onExportWebsiteClick(website)">
-                          <q-item-section>
-                            <q-item-label>Export to Zip File</q-item-label>
-                          </q-item-section>
-                          <q-item-section side>
-                            <q-icon size="xs" name="far fa-file-archive" color="grey-9" />
-                          </q-item-section>
-                        </q-item>
-                      </q-list>
-                    </q-btn-dropdown>
-                  </q-btn-group>
-                </q-item-section>
-              </q-item>
+                  <q-item-section side top>
+                    <q-item-label caption>5 min ago</q-item-label>
+                    <q-btn-group push>
+                      <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openWebsiteAndNavigate(website)" />
+                      <q-separator vertical />
+                      <q-btn-dropdown size="xs">
+                        <q-list>
+                          <q-item dense clickable label="Permanently Delete" v-close-popup v-on:click="deleteWebsite(website)">
+                            <q-item-section>
+                              <q-item-label>Permanently Delete</q-item-label>
+                            </q-item-section>
+                            <q-item-section side>
+                              <q-icon size="xs" name="far fa-trash-alt" color="red-4" />
+                            </q-item-section>
+                          </q-item>
+                          <q-item dense clickable label="Export ZIP File" v-close-popup v-on:click="onExportWebsiteClick(website)">
+                            <q-item-section>
+                              <q-item-label>Export to Zip File</q-item-label>
+                            </q-item-section>
+                            <q-item-section side>
+                              <q-icon size="xs" name="far fa-file-archive" color="grey-9" />
+                            </q-item-section>
+                          </q-item>
+                        </q-list>
+                      </q-btn-dropdown>
+                    </q-btn-group>
+                  </q-item-section>
+                </q-item>
 
-              <q-separator spaced inset />
+                <q-separator spaced inset />
 
-            </template>
+              </div>
+            </transition-group>
           </q-list>
 
         </q-scroll-area>
@@ -218,5 +220,16 @@ export default defineComponent({
       border: 1px solid #cbcbcb;
     }
   }
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  // transform: translateY(30px);
+  transform: scale(0.1, 0.1);
 }
 </style>
