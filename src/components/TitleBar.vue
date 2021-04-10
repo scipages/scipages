@@ -23,7 +23,8 @@ import {
   onMounted,
   computed
 } from 'vue'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
+import { useStore } from 'src/store'
 // import {
 //   farWindowRestore
 // } from '@quasar/extras/fontawesome-v5'
@@ -34,9 +35,7 @@ export default defineComponent({
   name: 'TitleBar',
   setup () {
     const store = useStore()
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
     const productName = computed(() => store.state.packageInfo.productName)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
     const version = computed(() => store.state.packageInfo.version)
 
     const { currentWebsite } = useWebsitesManager()

@@ -1,7 +1,8 @@
 import {
   computed
 } from 'vue'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
+import { useStore } from 'src/store'
 import { packageInfo } from 'src/helpers/packageInfo'
 
 export default function usePackageInfo () {
@@ -14,13 +15,9 @@ export default function usePackageInfo () {
     void store.dispatch('packageInfo/setVersion', packageInfo.version, { root: true })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   const name2 = computed(() => store.state.packageInfo.name)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   const productName2 = computed(() => store.state.packageInfo.productName)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   const description2 = computed(() => store.state.packageInfo.description)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   const version2 = computed(() => store.state.packageInfo.version)
 
   return {

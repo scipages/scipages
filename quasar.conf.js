@@ -10,7 +10,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { configure } = require('quasar/wrappers')
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli/supporting-ts
     supportTS: {
@@ -110,7 +110,22 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false
+      pwa: false,
+      // manualStoreHydration: true,
+      prodPort: 3000, // The default port that the production server should use
+      // (gets superseded if process.env.PORT is specified at runtime)
+
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      // Tell browser when a file from the server should expire from cache (in ms)
+
+      chainWebpackWebserver (/* chain */) {
+        //
+      },
+
+      middlewares: [
+        ctx.prod ? 'compression' : '',
+        'render' // keep this as last one
+      ]
     },
 
     // https://v2.quasar.dev/quasar-cli/developing-pwa/configuring-pwa
