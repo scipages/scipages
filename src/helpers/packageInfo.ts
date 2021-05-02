@@ -1,10 +1,10 @@
-import { name, productName, description, version } from '../../package.json'
+import pkg from '../../package.json'
 
 export const packageInfo = {
-  name,
-  productName,
-  description,
-  version
+  name: pkg.name,
+  productName: pkg.productName,
+  description: pkg.description,
+  version: pkg.version
 }
 
 export default packageInfo
