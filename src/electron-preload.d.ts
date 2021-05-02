@@ -23,6 +23,8 @@ declare global {
       getWebsitePathListSync: () => Array<WebsitePathItem>,
       openWebsiteSync: (item: WebsitePathItem) => void,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      createWebsite: (title: string, theme: string) => Promise<any>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       deleteWebsite: (item: WebsitePathItem) => Promise<any>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       exportWebsite: (item: WebsitePathItem) => Promise<any>

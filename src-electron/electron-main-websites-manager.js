@@ -8,10 +8,14 @@ import extract from 'extract-zip'
 import { electronData } from './electron-main-electron-data'
 // import { WebsitePathItem } from '../src/types/WebsitePathItem'
 import {
-  openConfigurationDB, ConfigurationDB, ConfigurationSimpleRepository
+  openConfigurationDB, configurationDB, ConfigurationSimpleRepository
 } from '../src/db/repositories/ConfigurationRepository'
-import { openPagesDB } from '../src/db/repositories/PagesRepository'
-import { openCoursesDB } from '../src/db/repositories/CoursesRepository'
+import {
+  openPagesDB //, PagesDatabaseCollections, pagesDB, PagesRepository,
+} from '../src/db/repositories/PagesRepository'
+import {
+  openCoursesDB //, coursesDB, CoursesRepository, CoursesDatabaseCollections,
+} from '../src/db/repositories/CoursesRepository'
 
 export default function initMainWebsitesManagerHandlers () {
   ipcMain.on('websites-manager-init-paths-sync', (event) => {
@@ -37,7 +41,7 @@ export default function initMainWebsitesManagerHandlers () {
 
         openConfigurationDB(pathTmp)
         const repository = new ConfigurationSimpleRepository(
-          ConfigurationDB
+          configurationDB
         )
         const title = repository.getValue('title')
 
@@ -57,6 +61,47 @@ export default function initMainWebsitesManagerHandlers () {
     openCoursesDB(item.path)
 
     event.returnValue = null
+  })
+  ipcMain.handle('websites-manager-create-website', async (event, title, theme) => {
+    return new Promise((resolve, reject) => {
+      console.log(title)
+      console.log(theme)
+      const newUuid = uuidv4()
+      const newFilename = 'website-' + newUuid
+      const newPath = path.join(electronData.userDataWebsitesPath, newFilename)
+      const newWebsite = {
+        filename: newFilename,
+        path: newPath,
+        title: title,
+        uuid: newUuid
+      }
+
+      try {
+        // Create the website/project directory
+        if (!fs.existsSync(newWebsite.path)) {
+          fs.mkdirSync(newWebsite.path, { recursive: true })
+        }
+
+        openConfigurationDB(newWebsite.path)
+        const configurationRepository = new ConfigurationSimpleRepository(
+          configurationDB
+        )
+        configurationRepository.setValue('title', title)
+        configurationRepository.setValue('theme', theme)
+        openPagesDB(newWebsite.path)
+        // const pagesRepository = new PagesRepository(
+        //   pagesDB, PagesDatabaseCollections.Pages
+        // )
+        openCoursesDB(newWebsite.path)
+        // const coursesRepository = new CoursesRepository(
+        //   coursesDB, CoursesDatabaseCollections.Courses
+        // )
+
+        resolve(`Success - Website creation completed: ${title}`)
+      } catch (err) {
+        reject('Error - Website creation failed')
+      }
+    })
   })
   ipcMain.handle('websites-manager-delete-website', async (event, item) => {
     if (item.path.startsWith(electronData.userDataWebsitesPath)) {

@@ -1,7 +1,7 @@
 <template>
   <q-menu>
     <q-list style="min-width: 130px">
-      <q-item dense clickable v-close-popup v-on:click="showPrompt = true">
+      <q-item dense clickable v-close-popup v-on:click="open()">
         <q-item-section>New Empty Website</q-item-section>
       </q-item>
       <q-separator />
@@ -36,14 +36,17 @@
       </q-item>
     </q-list>
   </q-menu>
-  <q-dialog v-model="showPrompt" persistent>
+  <q-dialog
+    v-model="showCopy"
+    persistent
+  >
     <q-card style="min-width: 350px">
       <q-card-section>
         <div class="text-h6">Create New Website</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        <q-input dense v-model="title" autofocus v-on:keyup.enter="showPrompt = false" label="Title" />
+        <q-input dense v-model="title" autofocus v-on:keyup.enter="onCreateWebsiteClick()" label="Title" />
       </q-card-section>
 
       <!--
@@ -55,24 +58,33 @@
       <!-- TODO: Git options will be added here (Credentials, Repository selection)  -->
 
       <q-card-section class="q-pt-none">
-        <q-select v-model="themeValue" :options="themeOptions" label="Theme" hint="* Can be changed later" emit-value>
-          <template v-slot:option="scope">
-            <q-item
-              v-bind="scope.itemProps"
-              v-on="scope.itemEvents"
-            >
-              <q-item-section>
-                <q-item-label v-html="scope.opt.label" />
-                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
+        <q-select
+          label="Theme"
+          hint="* Can be changed later"
+          v-model="themeValue"
+          :options="themeOptions"
+          :option-value="opt => Object(opt) === opt && 'value' in opt ? opt.value : null"
+          :option-label="opt => Object(opt) === opt && 'label' in opt ? opt.label : '- Null -'"
+          map-options
+          emit-value
+        >
+          <!--<template v-slot:option="scope">-->
+          <!--  <q-item-->
+          <!--    v-bind="scope.itemProps"-->
+          <!--    v-on="scope.itemEvents"-->
+          <!--  >-->
+          <!--    <q-item-section>-->
+          <!--      <q-item-label v-html="scope.opt.label" />-->
+          <!--      <q-item-label caption>{{ scope.opt.description }}</q-item-label>-->
+          <!--    </q-item-section>-->
+          <!--  </q-item>-->
+          <!--</template>-->
         </q-select>
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
-        <q-btn flat label="Cancel" v-close-popup />
-        <q-btn flat label="Ok" v-close-popup />
+        <q-btn flat label="Cancel" v-on:click="close()" />
+        <q-btn flat label="Ok" v-on:click="onCreateWebsiteClick()" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -87,14 +99,42 @@ import {
 
 export default defineComponent({
   name: 'NewWebsiteMenu',
+  model: {
+    prop: 'show',
+    event: 'update:show'
+  },
+  props: {
+    show: {
+      type: Boolean,
+      required: true
+    }
+  },
   emits: [
-    'import-website-clicked'
+    'create-website-clicked',
+    'import-website-clicked',
+    'update:show'
   ],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup (props, { emit }) {
-    const showPrompt = ref(false)
+    const showCopy = ref(props.show)
+    watch(() => props.show, (newValue) => {
+      showCopy.value = newValue
+    })
+    watch(showCopy, (newValue) => {
+      emit('update:show', newValue)
+    })
+    function open () {
+      showCopy.value = true
+      title.value = ''
+      themeValue.value = themeOptions.value[0]
+      emit('update:show', true)
+    }
+    function close () {
+      showCopy.value = false
+      emit('update:show', false)
+    }
+
     const title = ref('')
-    const themeValue = ref('')
     const themeOptions = ref([
       {
         label: 'Al-Folio',
@@ -107,20 +147,31 @@ export default defineComponent({
         description: 'Based on https://github.com/ojroques/hugo-researcher'
       }
     ])
+    const themeValue = ref(themeOptions.value[0])
 
-    watch(themeValue, (newValue) => {
-      console.log(newValue)
-    })
+    // watch(themeValue, (newValue) => {
+    //   console.log(newValue)
+    // })
+
+    function onCreateWebsiteClick () {
+      if (title.value === '') {
+        return
+      }
+      emit('create-website-clicked', title.value, themeValue.value.value)
+    }
 
     function onImportWebsiteClick () {
       emit('import-website-clicked')
     }
 
     return {
-      showPrompt,
+      showCopy,
       title,
       themeValue,
       themeOptions,
+      onCreateWebsiteClick,
+      open,
+      close,
       onImportWebsiteClick
     }
   }

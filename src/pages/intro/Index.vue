@@ -25,6 +25,8 @@
     <div class="q-pr-xl q-py-md text-weight-bolder text-right">
       <q-btn label="New Website" icon="fas fa-plus" text-color="green-8">
         <NewWebsiteMenu
+          v-model:show="createWebsiteShow"
+          v-on:create-website-clicked="onCreateWebsiteClick"
           v-on:import-website-clicked="onImportWebsiteClick"
         ></NewWebsiteMenu>
       </q-btn>
@@ -120,7 +122,15 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     // const route = useRoute()
-    const { allWebsites, openWebsite, closeWebsite, initPathsSync, exportWebsite, importWebsite } = useWebsitesManager()
+    const {
+      allWebsites,
+      openWebsite,
+      closeWebsite,
+      initPathsSync,
+      createWebsite,
+      exportWebsite,
+      importWebsite
+    } = useWebsitesManager()
     const { notificationFactory, addNotification } = useNotifications()
     const { startLoading, endLoading, isLoading } = useLoading()
 
@@ -173,6 +183,27 @@ export default defineComponent({
         .finally(() => { endLoading() })
     }
 
+    const createWebsiteShow = ref<boolean>(false)
+    function onCreateWebsiteClick (title: string, theme: string) {
+      createWebsiteShow.value = true
+      startLoading()
+      createWebsite(title, theme)
+        .then(response => {
+          console.log(response)
+          createWebsiteShow.value = false
+        })
+        .catch(error => {
+          console.log(error)
+          addNotification(
+            notificationFactory('error', error)
+          )
+        })
+        .finally(() => {
+          initPathsSync()
+          endLoading()
+        })
+    }
+
     function onImportWebsiteClick () {
       startLoading()
       importWebsite()
@@ -199,6 +230,8 @@ export default defineComponent({
       deleteWebsiteItem,
       deleteWebsite,
       onDeleteWebsiteSuccess,
+      onCreateWebsiteClick,
+      createWebsiteShow,
       onExportWebsiteClick,
       onImportWebsiteClick,
       isLoading

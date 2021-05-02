@@ -90,6 +90,10 @@ contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
     ipcRenderer.sendSync('websites-manager-open-website-sync', item)
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createWebsite (title: string, theme: string): Promise<any> {
+    return ipcRenderer.invoke('websites-manager-create-website', title, theme)
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteWebsite (item: WebsitePathItem): Promise<any> {
     return ipcRenderer.invoke('websites-manager-delete-website', item)
   },

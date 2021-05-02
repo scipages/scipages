@@ -51,9 +51,9 @@ export default function useWebsitesManager () {
     currentWebsite.title = null
     currentWebsite.uuid = null
   }
-  // function createWebsite () {
-  //   // TODO
-  // }
+  function createWebsite (title: string, theme: string) {
+    return window.myWebsitesManagerAPI.createWebsite(title, theme)
+  }
   function deleteWebsite (item: WebsitePathItem) {
     const itemCopy: WebsitePathItem = copyItem(item)
     return window.myWebsitesManagerAPI.deleteWebsite(itemCopy)
@@ -72,6 +72,7 @@ export default function useWebsitesManager () {
     currentWebsite: readonly(currentWebsite),
     openWebsite,
     closeWebsite,
+    createWebsite,
     deleteWebsite,
     exportWebsite,
     importWebsite

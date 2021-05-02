@@ -17,7 +17,7 @@ export interface ConfigurationDatabaseSchema {
   theme: string;
 }
 
-export let ConfigurationDB: lowdb.LowdbSync<ConfigurationDatabaseSchema>
+export let configurationDB: lowdb.LowdbSync<ConfigurationDatabaseSchema>
 const ConfigurationRepositoryFilename = 'configuration.json'
 const ConfigurationDatabaseDefault = {
   version: packageInfo.version,
@@ -26,12 +26,12 @@ const ConfigurationDatabaseDefault = {
 }
 
 export function openConfigurationDB (websitePath: string) {
-  ConfigurationDB = getDB<ConfigurationDatabaseSchema>(
+  configurationDB = getDB<ConfigurationDatabaseSchema>(
     websitePath,
     ConfigurationRepositoryFilename,
     ConfigurationDatabaseDefault
   )
-  return ConfigurationDB
+  return configurationDB
 }
 
 export class ConfigurationSimpleRepository extends BaseSimpleRepository<ConfigurationDatabaseSchema> {
