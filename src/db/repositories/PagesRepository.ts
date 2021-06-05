@@ -4,7 +4,7 @@ import { BaseCollectionRepository } from './base/BaseCollectionRepository'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 import { Page } from '../entities/Page'
 
-import lowdb from 'lowdb'
+import { LowSync } from 'lowdb'
 
 export enum PagesDatabaseCollections {
   Pages = 'pages'
@@ -14,7 +14,7 @@ export interface PagesDatabaseSchema {
   pages: Array<Page>;
 }
 
-export let pagesDB: lowdb.LowdbSync<PagesDatabaseSchema>
+export let pagesDB: LowSync<PagesDatabaseSchema>
 const pagesRepositoryFilename = 'pages.json'
 const pagesDatabaseDefault = {
   version: packageInfo.version,

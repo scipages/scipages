@@ -1,17 +1,19 @@
-import lowdb from 'lowdb'
-// import * as _ from 'lodash'
+import { LowSync } from 'lowdb'
+import * as _ from 'lodash'
 
 import { IWrite } from '../interfaces/IWrite'
 import { IRead } from '../interfaces/IRead'
 
 export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>, IRead<T> {
-  public readonly db: lowdb.LowdbSync<DBSchema>
+  public readonly db: LowSync<DBSchema>
   // public readonly table/collection: _.LoDashExplicitArrayWrapper<T>
   // public readonly table/collection: _.LoDashExplicitWrapper<Array<T>>
   public readonly collectionName: string
 
-  constructor (db: lowdb.LowdbSync<DBSchema>, collectionName: string) {
+  constructor (db: LowSync<DBSchema>, collectionName: string) {
     this.db = db
+    // @ts-ignore
+    this.db.chain = _.chain(db.data)
     this.collectionName = collectionName
   }
 
@@ -22,8 +24,9 @@ export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>
       return false
     }
 
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    const newItem: ArrayLike<T> = this.db.get(this.collectionName)
+    const newItem: ArrayLike<T> = this.db.chain.get(this.collectionName)
       // @ts-ignore
       .push(item)
       .write()
@@ -31,8 +34,9 @@ export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>
   }
 
   update (id: string, item: T): boolean {
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    const updatedItem: ArrayLike<T> = this.db.get(this.collectionName)
+    const updatedItem: ArrayLike<T> = this.db.chain.get(this.collectionName)
       // @ts-ignore
       .find({ id: id })
       .assign(item)
@@ -41,8 +45,9 @@ export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>
   }
 
   delete (id: string): boolean {
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    const removedItem: ArrayLike<T> = this.db.get(this.collectionName)
+    const removedItem: ArrayLike<T> = this.db.chain.get(this.collectionName)
       // @ts-ignore
       .remove({ id: id })
       .write()
@@ -50,15 +55,17 @@ export abstract class BaseCollectionRepository<T, DBSchema> implements IWrite<T>
   }
 
   findAll (): T[] {
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    const items: Array<T> = this.db.get(this.collectionName)
+    const items: Array<T> = this.db.chain.get(this.collectionName)
       .value()
     return items
   }
 
   findOne (id: string): T {
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    const item: T = this.db.get(this.collectionName)
+    const item: T = this.db.chain.get(this.collectionName)
       // @ts-ignore
       .find({ id: id })
       .value()

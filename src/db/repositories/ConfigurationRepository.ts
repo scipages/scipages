@@ -2,7 +2,7 @@ import { packageInfo } from '../../helpers/packageInfo'
 import { getDB } from '../db'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 
-import lowdb from 'lowdb'
+import { LowSync } from 'lowdb'
 
 export enum ConfigurationThemeEnum {
   AlFolio = 'AL_FOLIO',
@@ -17,7 +17,7 @@ export interface ConfigurationDatabaseSchema {
   theme: string;
 }
 
-export let configurationDB: lowdb.LowdbSync<ConfigurationDatabaseSchema>
+export let configurationDB: LowSync<ConfigurationDatabaseSchema>
 const ConfigurationRepositoryFilename = 'configuration.json'
 const ConfigurationDatabaseDefault = {
   version: packageInfo.version,
