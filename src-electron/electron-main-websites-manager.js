@@ -17,6 +17,30 @@ import {
   openCoursesDB //, coursesDB, CoursesRepository, CoursesDatabaseCollections,
 } from '../src/db/repositories/CoursesRepository'
 
+function timeDifference (current, previous) {
+  const msPerMinute = 60 * 1000
+  const msPerHour = msPerMinute * 60
+  const msPerDay = msPerHour * 24
+  const msPerMonth = msPerDay * 30
+  const msPerYear = msPerDay * 365
+
+  const elapsed = current - previous
+
+  if (elapsed < msPerMinute) {
+    return Math.round(elapsed / 1000).toString() + ' seconds ago'
+  } else if (elapsed < msPerHour) {
+    return Math.round(elapsed / msPerMinute).toString() + ' minutes ago'
+  } else if (elapsed < msPerDay) {
+    return Math.round(elapsed / msPerHour).toString() + ' hours ago'
+  } else if (elapsed < msPerMonth) {
+    return '~ ' + Math.round(elapsed / msPerDay).toString() + ' days ago'
+  } else if (elapsed < msPerYear) {
+    return '~ ' + Math.round(elapsed / msPerMonth).toString() + ' months ago'
+  } else {
+    return '~ ' + Math.round(elapsed / msPerYear).toString() + ' years ago'
+  }
+}
+
 export default function initMainWebsitesManagerHandlers () {
   ipcMain.on('websites-manager-init-paths-sync', (event) => {
     // Create the websites directory
@@ -45,11 +69,24 @@ export default function initMainWebsitesManagerHandlers () {
         )
         const title = repository.getValue('title')
 
+        let latestModifiedTimeDiff = 0
+        let latestModifiedTimeDiffStr = ''
+        fs.readdirSync(pathTmp).forEach(fileJson => {
+          const timeInMilliseconds = fs.lstatSync(path.resolve(electronData.userDataWebsitesPath, file, fileJson)).mtime.getTime()
+          const timeDiff = Date.now() - timeInMilliseconds
+          const timeDiffStr = timeDifference(Date.now(), timeInMilliseconds)
+          if (fileJson !== 'configuration.json' && (latestModifiedTimeDiff === 0 || latestModifiedTimeDiff > timeDiff)) {
+            latestModifiedTimeDiff = timeDiff
+            latestModifiedTimeDiffStr = timeDiffStr
+          }
+        })
+
         paths.push({
           filename: file,
           path: pathTmp,
           title: title,
-          uuid: file.substring('website-'.length)
+          uuid: file.substring('website-'.length),
+          dateModified: latestModifiedTimeDiffStr
         })
       }
     })
@@ -73,7 +110,8 @@ export default function initMainWebsitesManagerHandlers () {
         filename: newFilename,
         path: newPath,
         title: title,
-        uuid: newUuid
+        uuid: newUuid,
+        dateModified: timeDifference(Date.now(), Date.now())
       }
 
       try {

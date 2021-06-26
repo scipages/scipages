@@ -60,7 +60,7 @@
                   </q-item-section>
 
                   <q-item-section side top>
-                    <q-item-label caption>5 min ago</q-item-label>
+                    <q-item-label caption>{{ website.dateModified }}</q-item-label>
                     <q-btn-group push>
                       <q-btn size="xs" label="Open" icon="fas fa-folder-open" v-on:click="openWebsiteAndNavigate(website)" />
                       <q-separator vertical />
@@ -146,7 +146,7 @@ export default defineComponent({
     function openWebsiteAndNavigate (website: WebsitePathItem) {
       openWebsite(website)
 
-      if (website.filename === null || website.path === null || website.title === null || website.uuid === null) {
+      if (website.filename === null || website.path === null || website.title === null || website.uuid === null || website.dateModified === null) {
         return
       }
 

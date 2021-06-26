@@ -7,7 +7,8 @@ const currentWebsite: WebsitePathItem = reactive({
   filename: null,
   path: null,
   title: null,
-  uuid: null
+  uuid: null,
+  dateModified: null
 })
 
 export default function useWebsitesManager () {
@@ -30,7 +31,8 @@ export default function useWebsitesManager () {
       filename: item.filename,
       path: item.path,
       title: item.title,
-      uuid: item.uuid
+      uuid: item.uuid,
+      dateModified: item.dateModified
     }
     return itemCopy
   }
@@ -40,7 +42,8 @@ export default function useWebsitesManager () {
     currentWebsite.path = item.path
     currentWebsite.title = item.title
     currentWebsite.uuid = item.uuid
-    if (item.path !== null && item.filename !== null && item.title !== null && item.uuid !== null) {
+    currentWebsite.dateModified = item.dateModified
+    if (item.path !== null && item.filename !== null && item.title !== null && item.uuid !== null && item.dateModified !== null) {
       const itemCopy: WebsitePathItem = copyItem(item)
       window.myWebsitesManagerAPI.openWebsiteSync(itemCopy)
     }
@@ -50,6 +53,7 @@ export default function useWebsitesManager () {
     currentWebsite.path = null
     currentWebsite.title = null
     currentWebsite.uuid = null
+    currentWebsite.dateModified = null
   }
   function createWebsite (title: string, theme: string) {
     return window.myWebsitesManagerAPI.createWebsite(title, theme)
