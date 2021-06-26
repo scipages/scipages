@@ -4,7 +4,7 @@ import { BaseCollectionRepository } from './base/BaseCollectionRepository'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 import { Course } from '../entities/Course'
 
-import { LowSync } from 'lowdb'
+import lowdb from 'lowdb'
 
 export enum CoursesDatabaseCollections {
   Courses = 'courses'
@@ -14,7 +14,7 @@ export interface CoursesDatabaseSchema {
   courses: Array<Course>;
 }
 
-export let coursesDB: LowSync<CoursesDatabaseSchema>
+export let coursesDB: lowdb.LowdbSync<CoursesDatabaseSchema>
 const coursesRepositoryFilename = 'courses.json'
 const coursesDatabaseDefault = {
   version: packageInfo.version,
