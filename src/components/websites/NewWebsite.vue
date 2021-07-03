@@ -98,7 +98,6 @@ import {
 } from 'vue'
 
 export default defineComponent({
-  name: 'NewWebsiteMenu',
   model: {
     prop: 'show',
     event: 'update:show'

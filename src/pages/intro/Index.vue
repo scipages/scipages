@@ -2,13 +2,13 @@
 
   <LoadingComponent v-if="isLoading"></LoadingComponent>
 
-  <WebsiteDelete
+  <DeleteWebsite
     v-if="deleteWebsiteShow"
     v-bind:show="deleteWebsiteShow"
     v-bind:item="deleteWebsiteItem"
     v-on:close="deleteWebsiteShow=false"
     v-on:success="onDeleteWebsiteSuccess"
-  ></WebsiteDelete>
+  ></DeleteWebsite>
 
   <div class="fit websites-list-page-wrapper">
     <div class="row q-pr-xl q-pt-xl ">
@@ -24,11 +24,11 @@
 
     <div class="q-pr-xl q-py-md text-weight-bolder text-right">
       <q-btn label="New Website" icon="fas fa-plus" text-color="green-8">
-        <NewWebsiteMenu
+        <NewWebsite
           v-model:show="createWebsiteShow"
           v-on:create-website-clicked="onCreateWebsiteClick"
           v-on:import-website-clicked="onImportWebsiteClick"
-        ></NewWebsiteMenu>
+        ></NewWebsite>
       </q-btn>
     </div>
     <div class="q-pr-xl q-pb-xl row row-flex-1">
@@ -108,15 +108,15 @@ import useWebsitesManager from 'src/use/useWebsitesManager'
 import useNotifications from 'src/use/useNotifications'
 import useLoading from 'src/use/useLoading'
 import { WebsitePathItem } from 'src/types/WebsitePathItem'
-import NewWebsiteMenu from 'components/websites/NewWebsiteMenu.vue'
-import WebsiteDelete from 'components/websites/WebsiteDelete.vue'
+import NewWebsite from 'components/websites/NewWebsite.vue'
+import DeleteWebsite from 'components/websites/DeleteWebsite.vue'
 import LoadingComponent from 'src/components/LoadingComponent.vue'
 
 export default defineComponent({
   name: 'PageIntroIndex',
   components: {
-    NewWebsiteMenu,
-    WebsiteDelete,
+    NewWebsite,
+    DeleteWebsite,
     LoadingComponent
   },
   setup () {
