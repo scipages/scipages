@@ -9,7 +9,8 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'intro_index',
-        component: () => import('pages/intro/Index.vue')
+        component: () => import('pages/intro/Index.vue'),
+        meta: { title: '' }
       }
     ]
   },
@@ -29,7 +30,8 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'test',
         name: 'main_test',
-        component: () => import('pages/main/Test.vue')
+        component: () => import('pages/main/Test.vue'),
+        meta: { title: '' }
       }
     ]
   },

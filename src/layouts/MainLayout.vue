@@ -12,7 +12,7 @@
 
     <LeftDrawer v-model:show="showLeftDrawer"></LeftDrawer>
 
-    <RightDrawer v-model:show="showRightDrawer"></RightDrawer>
+    <!--<RightDrawer v-model:show="showRightDrawer"></RightDrawer>-->
 
     <q-page-container class="absolute-full">
       <div class="row fit">
@@ -33,7 +33,7 @@ import TitleBar from 'components/TitleBar.vue'
 // import MenuBar from 'components/main-layout/MenuBar.vue'
 import MainToolBar from 'components/main-layout/MainToolBar.vue'
 import Footer from 'components/main-layout/Footer.vue'
-import RightDrawer from 'components/main-layout/RightDrawer.vue'
+// import RightDrawer from 'components/main-layout/RightDrawer.vue'
 import LeftDrawer from 'components/main-layout/LeftDrawer.vue'
 
 export default defineComponent({
@@ -44,7 +44,7 @@ export default defineComponent({
     // MenuBar,
     MainToolBar,
     Footer,
-    RightDrawer,
+    // RightDrawer,
     LeftDrawer
   },
 

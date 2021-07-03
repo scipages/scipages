@@ -1,8 +1,21 @@
 <template>
   <!--<div class="q-pa-md q-gutter-y-sm">-->
     <q-toolbar class="bg-grey-3" v-if="show">
-      <q-btn icon="remove_red_eye" label="Preview" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
-      <q-btn icon="cloud_upload" label="Publish" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
+      <q-btn icon="remove_red_eye" label="Preview" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item">
+        <q-tooltip max-width="200px">
+          <strong>Preview</strong> the website locally on the browser
+        </q-tooltip>
+      </q-btn>
+      <q-btn icon="cloud_upload" label="Publish" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item">
+        <q-tooltip max-width="200px">
+          <strong>Deploy</strong> and <strong>Publish</strong> the website on a web server / remote host
+        </q-tooltip>
+      </q-btn>
+      <q-btn icon="done" label="Git Commit" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item">
+        <q-tooltip max-width="200px">
+          <strong>Commit</strong> and <strong>Push</strong> the latest changes on a remote git repository
+        </q-tooltip>
+      </q-btn>
       <!--
       <q-btn flat round dense style="color: #7A7D84; font-weight: 400;">
         <q-icon name="menu"></q-icon>
@@ -11,11 +24,14 @@
 
       <q-space></q-space>
 
+      <!--
       <q-btn icon="settings" label="Configuration" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
       <q-btn icon="fas fa-palette" label="Themes" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item"></q-btn>
       <q-btn icon="help_outline" label="Help ▼" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item">
         <q-menu anchor="bottom right" self="top right" square class="bg-grey-3 non-selectable">
+        -->
           <!--<q-item-label header>Header</q-item-label>-->
+          <!--
           <q-item clickable v-close-popup tabindex="0">
             <q-item-section>
               <q-item-label>Documentation</q-item-label>
@@ -52,7 +68,12 @@
         </q-menu>
       </q-btn>
       <q-separator inset spaced />
-      <q-btn icon="swap_horiz" label="Switch Website" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item" :to="{name: 'intro_index'}"></q-btn>
+      -->
+      <q-btn icon="swap_horiz" label="Switch Website" flat stack stretch no-caps push padding="sm" class="custom-toolbar-item" :to="{name: 'intro_index'}">
+        <q-tooltip max-width="200px">
+          Go back to the list of websites
+        </q-tooltip>
+      </q-btn>
     </q-toolbar>
   <!--</div>-->
 </template>
