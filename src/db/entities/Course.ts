@@ -10,6 +10,8 @@ export interface Course extends IEntity {
   organization: string // eg. 'University of Peloponnese'
   department: string // eg. 'Department of Computer Science'
   links: Array<Link>
+  enabled: boolean
+  enabledFrontpage: boolean
   dateCreated: Date
   dateUpdated: Date
 }

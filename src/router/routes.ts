@@ -25,6 +25,14 @@ const routes: RouteRecordRaw[] = [
         path: 'index',
         name: 'main_index',
         component: () => import('pages/main/Index.vue'),
+        meta: { title: 'Pages' },
+        props: true
+      },
+      {
+        path: 'courses',
+        name: 'main_courses',
+        component: () => import('pages/main/Courses.vue'),
+        meta: { title: 'Teaching/Courses' },
         props: true
       },
       {

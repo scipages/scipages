@@ -72,6 +72,8 @@ export default defineComponent({
         organization: '123',
         department: '123',
         links: [],
+        enabled: true,
+        enabledFrontpage: true,
         dateCreated: new Date(),
         dateUpdated: new Date()
       }

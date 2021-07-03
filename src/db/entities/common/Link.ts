@@ -5,6 +5,7 @@ export interface Link extends IEntity {
   title: string
   icon: string
   url: string
+  enabled: boolean
   dateCreated: Date
   dateUpdated: Date
 }

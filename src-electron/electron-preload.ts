@@ -28,6 +28,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { ElectronData } from 'src/types/ElectronData'
 import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
 import { WebsitePathItem } from 'src/types/WebsitePathItem'
+import { Course } from 'src/db/entities/Course'
 
 let isWindowMaxUnmaxListenerSet = false
 
@@ -107,13 +108,21 @@ contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   }
 })
 
-contextBridge.exposeInMainWorld('myDatabaseAPI', {
-  // getAdapter (websitePath, filename, databaseDefault) {
-  //   // const adapter = new FileSync<TSchema>(path.join(websitePath, filename))
-  //   // const adapter = new FileSync(path.join(websitePath, filename))
-  //   // const db = lowdb(adapter)
-  //   // void db.defaults(_.cloneDeep(databaseDefault)).write()
-  //   // return db
-  //   return new FileSync(path.join(websitePath, filename))
+contextBridge.exposeInMainWorld('myContentAPI', {
+  getCoursesListSync (website: WebsitePathItem): Array<Course> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return ipcRenderer.sendSync('content-get-courses-list-sync', website)
+  },
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // createCourse (website: WebsitePathItem, title: string, role: string, ...): Promise<any> {
+  //   return ipcRenderer.invoke('content-create-course', website, title, role, ...)
+  // },
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // updateCourse (website: WebsitePathItem, item: Course): Promise<any> {
+  //   return ipcRenderer.invoke('content-update-course', website, item)
+  // },
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // deleteCourse (website: WebsitePathItem, item: Course): Promise<any> {
+  //   return ipcRenderer.invoke('content-delete-course', website, item)
   // }
 })

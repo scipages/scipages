@@ -14,6 +14,7 @@ export interface PageSection extends IEntity {
   id: string
   title: string
   type: PageSectionTypeEnum
+  enabled: boolean
   dateCreated: Date
   dateUpdated: Date
 }
@@ -42,6 +43,7 @@ export interface Page extends IEntity {
     author: string
   }
   sections: Array<PageSection>
+  enabled: boolean
   dateCreated: Date
   dateUpdated: Date
 }

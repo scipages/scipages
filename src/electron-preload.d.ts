@@ -1,6 +1,7 @@
 import { ElectronData } from 'src/types/ElectronData'
 import { WebsitePathItem } from 'src/types/WebsitePathItem'
 import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
+import { Course } from 'src/db/entities/Course'
 
 declare global {
   interface Window {
@@ -31,8 +32,14 @@ declare global {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       importWebsite: () => Promise<any>
     },
-    'myDatabaseAPI': {
-      // getAdapter: <TSchema>(websitePath: string, filename: string, databaseDefault: TSchema) => AdapterSync<TSchema>
+    'myContentAPI': {
+      getCoursesListSync: (website: WebsitePathItem) => Array<Course>,
+      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // createCourse: (website: WebsitePathItem, title: string, role: string, ...) => Promise<any>
+      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // updateCourse: (website: WebsitePathItem, item: Course) => Promise<any>
+      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // deleteCourse: (website: WebsitePathItem, item: Course) => Promise<any>
     }
   }
 }

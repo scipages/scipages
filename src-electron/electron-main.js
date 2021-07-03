@@ -5,6 +5,7 @@ import path from 'path'
 import initMainWindowHandlers from './electron-main-window'
 import initMainElectronDataHandlers from './electron-main-electron-data'
 import initMainWebsitesManagerHandlers from './electron-main-websites-manager'
+import initMainContentHandlers from './electron-main-content'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -104,3 +105,4 @@ app.on('activate', () => {
 initMainWindowHandlers()
 initMainElectronDataHandlers()
 initMainWebsitesManagerHandlers()
+initMainContentHandlers()
