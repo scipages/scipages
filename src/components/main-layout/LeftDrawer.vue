@@ -143,21 +143,21 @@ export default defineComponent({
         { icon: 'web', text: 'Pages' }
       ],
       links2: [
-        { icon: fasAddressCard, text: 'Basic Info', caption: 'Title, Bio, Intro Text etc.', route_name: 'main_index' },
-        { icon: 'list_alt', text: 'Publications', route_name: 'main_index' },
-        { icon: 'handyman', text: 'Projects', route_name: 'main_index' },
-        { icon: farNewspaper, text: 'News', route_name: 'main_index' },
-        { icon: 'people', text: 'People', route_name: 'main_index' },
+        { icon: fasAddressCard, text: 'Basic Info', caption: 'Title, Bio, Intro Text etc.', route_name: 'main_basic_info' },
+        { icon: 'list_alt', text: 'Publications', route_name: 'main_publications' },
+        { icon: 'handyman', text: 'Projects', route_name: 'main_projects' },
+        { icon: farNewspaper, text: 'News', route_name: 'main_news' },
+        { icon: 'people', text: 'People', route_name: 'main_people' },
         { icon: fasGraduationCap, text: 'Teaching/Courses', route_name: 'main_courses' },
-        { icon: fasLaptopCode, text: 'Software/Code', route_name: 'main_index' },
-        { icon: 'tag', text: 'Social Media', route_name: 'main_index' },
-        { icon: fasImages, text: 'Static Files', route_name: 'main_index' }
+        { icon: fasLaptopCode, text: 'Software/Code', route_name: 'main_software' },
+        { icon: 'tag', text: 'Social Media', route_name: 'main_social_media' },
+        { icon: fasImages, text: 'Static Files', route_name: 'main_static_files' }
       ],
       links3: [
-        { icon: 'settings', text: 'Site Settings', route_name: 'main_index' },
-        { icon: fasPalette, text: 'Theme', route_name: 'main_index' },
-        { icon: fasServer, text: 'Server/Host', route_name: 'main_index' },
-        { icon: fabGitAlt, text: 'Git Synchronization', route_name: 'main_index' }
+        { icon: 'settings', text: 'Site Settings', route_name: 'main_site_settings' },
+        { icon: fasPalette, text: 'Theme', route_name: 'main_theme' },
+        { icon: fasServer, text: 'Server/Host', route_name: 'main_server' },
+        { icon: fabGitAlt, text: 'Git Synchronization', route_name: 'main_git' }
       ],
       links4: [
         { icon: 'fas fa-book', text: 'Documentation', action: () => { openURL('https://scipages.github.io/') } },
