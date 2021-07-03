@@ -211,13 +211,23 @@ module.exports = configure(function (ctx) {
         // https://www.electron.build/configuration/configuration
 
         appId: 'com.scipages.scipages',
+        productName: 'SciPages',
         win: {
           target: 'nsis'
+        },
+        nsis: {
+          oneClick: false,
+          perMachine: false,
+          allowElevation: true,
+          allowToChangeInstallationDirectory: false
+        },
+        linux: {
+          target: 'deb'
+        },
+        deb: {},
+        publish: {
+          provider: 'github'
         }
-        // publish: {
-        //   provider: 's3',
-        //   bucket: 'myS3bucket'
-        // }
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
