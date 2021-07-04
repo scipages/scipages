@@ -1,11 +1,11 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
 import fs from 'fs'
 import path from 'path'
-// import windowStateKeeper from './electron-window-state-keeper'
-import initMainWindowHandlers from './electron-main-window'
-import initMainElectronDataHandlers from './electron-main-electron-data'
-import initMainWebsitesManagerHandlers from './electron-main-websites-manager'
-import initMainContentHandlers from './electron-main-content'
+// import windowStateKeeper from './window-state-keeper.js'
+import initMainWindowHandlers from './handlers/main-window'
+import initElectronDataHandlers from './handlers/electron-data'
+import initWebsitesManagerHandlers from './handlers/websites-manager'
+import initContentHandlers from './handlers/content'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -103,6 +103,6 @@ app.on('activate', () => {
 })
 
 initMainWindowHandlers()
-initMainElectronDataHandlers()
-initMainWebsitesManagerHandlers()
-initMainContentHandlers()
+initElectronDataHandlers()
+initWebsitesManagerHandlers()
+initContentHandlers()

@@ -10,7 +10,7 @@ export const electronData = {
   userDataConfigurationPath: path.join(app.getPath('userData'), 'scipages-configuration')
 }
 
-export default function initMainElectronDataHandlers () {
+export default function initElectronDataHandlers () {
   ipcMain.handle('electron-data-retrieve', () => {
     return electronData
   })

@@ -5,17 +5,17 @@ import archiver from 'archiver'
 import { v4 as uuidv4 } from 'uuid'
 import extract from 'extract-zip'
 
-import { electronData } from './electron-main-electron-data'
-// import { WebsitePathItem } from '../src/types/WebsitePathItem'
+import { electronData } from './electron-data'
+// import { WebsitePathItem } from '../../src/types/WebsitePathItem'
 import {
   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
-} from '../src/db/repositories/ConfigurationRepository'
+} from '../../src/db/repositories/ConfigurationRepository'
 import {
   openPagesDB //, PagesDatabaseCollections, pagesDB, PagesRepository,
-} from '../src/db/repositories/PagesRepository'
+} from '../../src/db/repositories/PagesRepository'
 import {
   openCoursesDB //, coursesDB, CoursesRepository, CoursesDatabaseCollections,
-} from '../src/db/repositories/CoursesRepository'
+} from '../../src/db/repositories/CoursesRepository'
 
 function timeDifference (current, previous) {
   const msPerMinute = 60 * 1000
@@ -41,7 +41,7 @@ function timeDifference (current, previous) {
   }
 }
 
-export default function initMainWebsitesManagerHandlers () {
+export default function initWebsitesManagerHandlers () {
   ipcMain.on('websites-manager-init-paths-sync', (event) => {
     // Create the websites directory
     if (!fs.existsSync(electronData.userDataWebsitesPath)) {
