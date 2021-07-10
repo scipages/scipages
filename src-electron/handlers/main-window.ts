@@ -42,7 +42,7 @@ export default function initMainWindowHandlers () {
     app.exit()
   })
   // ipcMain.handle('window-show-modal', (e, args) => {
-  ipcMain.handle('window-show-modal', (e, url) => {
+  ipcMain.handle('window-show-modal', (e, url: string) => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return
@@ -56,7 +56,7 @@ export default function initMainWindowHandlers () {
     })
   })
   // ipcMain.handle('window-open-url', (e, args) => {
-  ipcMain.handle('window-open-url', (e, url) => {
+  ipcMain.handle('window-open-url', (e, url: string) => {
     void shell.openExternal(url)
   })
   ipcMain.on('window-get-current-url-sync', (event) => {

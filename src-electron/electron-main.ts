@@ -1,11 +1,13 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
 import fs from 'fs'
 import path from 'path'
-// import windowStateKeeper from './window-state-keeper.js'
+// import windowStateKeeper from './window-state-keeper'
 import initMainWindowHandlers from './handlers/main-window'
 import initElectronDataHandlers from './handlers/electron-data'
 import initWebsitesManagerHandlers from './handlers/websites-manager'
 import initContentHandlers from './handlers/content'
+
+// import './electron-main.dev'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -13,7 +15,7 @@ try {
   }
 } catch (_) { }
 
-let mainWindow
+let mainWindow: BrowserWindow | null
 
 function createWindow () {
   // Get window state
@@ -23,14 +25,15 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    // x: mainWindowStateKeeper.x,
-    // y: mainWindowStateKeeper.y,
-    // width: mainWindowStateKeeper.width,
-    // height: mainWindowStateKeeper.height,
+    // x: mainWindowStateKeeper.windowState.bounds.x,
+    // y: mainWindowStateKeeper.windowState.bounds.y,
+    // width: mainWindowStateKeeper.windowState.bounds.width,
+    // height: mainWindowStateKeeper.windowState.bounds.height,
     width: 1000,
     height: 600,
     minWidth: 1000,
     minHeight: 600,
+    center: true,
     // show: false,
     // backgroundColor: '#1976d2',
     frame: false,
@@ -42,9 +45,14 @@ function createWindow () {
       // (Electron 12+ has it enabled by default anyway)
       contextIsolation: true,
       // More info: /quasar-cli/developing-electron-apps/electron-preload-script
+      // @ts-ignore
       preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD)
     }
   })
+
+  // if (mainWindowStateKeeper.windowState.isMaximized) {
+  //   mainWindow.maximize()
+  // }
 
   // Track window state
   // mainWindowStateKeeper.track(mainWindow)
@@ -54,7 +62,8 @@ function createWindow () {
   //   mainWindow.focus()
   // })
 
-  mainWindow.loadURL(process.env.APP_URL)
+  // @ts-ignore
+  void mainWindow.loadURL(process.env.APP_URL)
 
   if (process.env.DEBUGGING) {
     // if on DEV or Production with debug enabled
@@ -62,7 +71,9 @@ function createWindow () {
   } else {
     // we're on production; no access to devtools pls
     mainWindow.webContents.on('devtools-opened', () => {
-      mainWindow.webContents.closeDevTools()
+      if (mainWindow !== null) {
+        mainWindow.webContents.closeDevTools()
+      }
     })
   }
 
@@ -70,12 +81,12 @@ function createWindow () {
     mainWindow = null
   })
 
-  mainWindow.on('maximize', (e) => {
+  mainWindow.on('maximize', () => {
     if (mainWindow !== null) {
       mainWindow.webContents.send('window-max-unmax', { max: true })
     }
   })
-  mainWindow.on('unmaximize', (e) => {
+  mainWindow.on('unmaximize', () => {
     if (mainWindow !== null) {
       mainWindow.webContents.send('window-max-unmax', { max: false })
     }

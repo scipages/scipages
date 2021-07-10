@@ -1,8 +1,10 @@
 import { app, ipcMain } from 'electron'
 
 import path from 'path'
+import { ElectronData } from '../../src/types/ElectronData'
 
-export const electronData = {
+export const electronData: ElectronData = {
+  // @ts-ignore
   debugging: process.env.DEBUGGING,
   electronVersion: app.getVersion(),
   userDataPath: app.getPath('userData'),
@@ -11,7 +13,7 @@ export const electronData = {
 }
 
 export default function initElectronDataHandlers () {
-  ipcMain.handle('electron-data-retrieve', () => {
+  ipcMain.handle('electron-data-retrieve', (): ElectronData => {
     return electronData
   })
   ipcMain.on('electron-data-retrieve-sync', (event) => {

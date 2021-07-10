@@ -3,7 +3,7 @@ import { ipcMain } from 'electron'
 // import fs from 'fs'
 
 // import { electronData } from './electron-data'
-// import { WebsitePathItem } from '../../src/types/WebsitePathItem'
+import { WebsitePathItem } from '../../src/types/WebsitePathItem'
 // import {
 //   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
 // } from '../../src/db/repositories/ConfigurationRepository'
@@ -15,7 +15,8 @@ import {
 } from '../../src/db/repositories/CoursesRepository'
 
 export default function initContentHandlers () {
-  ipcMain.on('content-get-courses-list-sync', (event, website) => {
+  ipcMain.on('content-get-courses-list-sync', (event, website: WebsitePathItem) => {
+    // @ts-ignore
     openCoursesDB(website.path)
     const repository = new CoursesRepository(
       coursesDB,

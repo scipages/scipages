@@ -1,4 +1,4 @@
-import { ipcMain, dialog, app, BrowserWindow } from 'electron'
+import { ipcMain, dialog, app, BrowserWindow, OpenDialogOptions } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import archiver from 'archiver'
@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import extract from 'extract-zip'
 
 import { electronData } from './electron-data'
-// import { WebsitePathItem } from '../../src/types/WebsitePathItem'
+import { WebsitePathItem } from '../../src/types/WebsitePathItem'
 import {
   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
 } from '../../src/db/repositories/ConfigurationRepository'
@@ -17,7 +17,7 @@ import {
   openCoursesDB //, coursesDB, CoursesRepository, CoursesDatabaseCollections,
 } from '../../src/db/repositories/CoursesRepository'
 
-function timeDifference (current, previous) {
+function timeDifference (current: number, previous: number) {
   const msPerMinute = 60 * 1000
   const msPerHour = msPerMinute * 60
   const msPerDay = msPerHour * 24
@@ -57,8 +57,8 @@ export default function initWebsitesManagerHandlers () {
     event.returnValue = null
   })
   ipcMain.on('websites-manager-get-website-path-list-sync', (event) => {
-    // const paths: Array<WebsitePathItem> = []
-    const paths = []
+    // const paths = []
+    const paths: Array<WebsitePathItem> = []
     fs.readdirSync(electronData.userDataWebsitesPath).forEach(file => {
       if (fs.lstatSync(path.resolve(electronData.userDataWebsitesPath, file)).isDirectory() && file.startsWith('website-')) {
         const pathTmp = path.join(electronData.userDataWebsitesPath, file)
@@ -84,6 +84,7 @@ export default function initWebsitesManagerHandlers () {
         paths.push({
           filename: file,
           path: pathTmp,
+          // @ts-ignore
           title: title,
           uuid: file.substring('website-'.length),
           dateModified: latestModifiedTimeDiffStr
@@ -92,14 +93,16 @@ export default function initWebsitesManagerHandlers () {
     })
     event.returnValue = paths
   })
-  ipcMain.on('websites-manager-open-website-sync', (event, item) => {
-    openConfigurationDB(item.path)
-    openPagesDB(item.path)
-    openCoursesDB(item.path)
+  ipcMain.on('websites-manager-open-website-sync', (event, item: WebsitePathItem) => {
+    if (item.path !== null) {
+      openConfigurationDB(item.path)
+      openPagesDB(item.path)
+      openCoursesDB(item.path)
+    }
 
     event.returnValue = null
   })
-  ipcMain.handle('websites-manager-create-website', async (event, title, theme) => {
+  ipcMain.handle('websites-manager-create-website', async (event, title: string, theme: string) => {
     return new Promise((resolve, reject) => {
       console.log(title)
       console.log(theme)
@@ -141,11 +144,12 @@ export default function initWebsitesManagerHandlers () {
       }
     })
   })
-  ipcMain.handle('websites-manager-delete-website', async (event, item) => {
-    if (item.path.startsWith(electronData.userDataWebsitesPath)) {
+  ipcMain.handle('websites-manager-delete-website', async (event, item: WebsitePathItem) => {
+    if (item.path !== null && item.path.startsWith(electronData.userDataWebsitesPath)) {
       return new Promise((resolve, reject) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        fs.rmdir(item.path, { recursive: true }, (err, result) => {
+        // @ts-ignore
+        fs.rmdir(item.path, { recursive: true }, (err) => {
           if (err) {
             reject('Error - Website path deletion failed')
           } else {
@@ -157,13 +161,15 @@ export default function initWebsitesManagerHandlers () {
       // fs.rmdirSync(item.path, { recursive: true })
     }
   })
-  ipcMain.handle('websites-manager-export-website', async (event, item) => {
+  ipcMain.handle('websites-manager-export-website', async (event, item: WebsitePathItem) => {
     const win = BrowserWindow.getFocusedWindow()
-    if (item.path.startsWith(electronData.userDataWebsitesPath) && win !== null) {
+    if (item.path !== null && item.path.startsWith(electronData.userDataWebsitesPath) && win !== null) {
       const options = {
-        title: "Save file for exported website",
+        title: 'Save file for exported website',
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/restrict-plus-operands
         defaultPath: path.join(app.getPath('documents'), (new Date()).toISOString().replaceAll(':', '.') + ' - ' + item.title),
-        buttonLabel: "Save Zip File",
+        buttonLabel: 'Save Zip File',
         filters: [
           { name: 'Zip files', extensions: ['zip'] }
           // { name: 'Custom File Type', extensions: ['as'] },
@@ -187,7 +193,7 @@ export default function initWebsitesManagerHandlers () {
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             resolve(`Success - Website exported to ${result.filePath}. ${archive.pointer().toString()} total bytes written. ${warnings.join(' - ')}`)
           })
-          const warnings = []
+          const warnings: Array<string> = []
           archive.on('warning', function (err) {
             if (err.code === 'ENOENT') {
               warnings.push(err.code + ', ' + err.name + ', ' + err.message)
@@ -199,22 +205,23 @@ export default function initWebsitesManagerHandlers () {
             throw err
           })
           archive.pipe(output)
+          // @ts-ignore
           archive.directory(item.path, false)
           void archive.finalize()
-        }).catch((err) => {
+        }).catch(() => {
           reject('Error - Website export failed')
         })
       })
     }
   })
-  ipcMain.handle('websites-manager-import-website', async (event) => {
+  ipcMain.handle('websites-manager-import-website', async () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win !== null) {
       const importPath = path.join(electronData.userDataWebsitesPath, 'website-' + uuidv4())
-      const options = {
-        title: "Select file for website import",
+      const options: OpenDialogOptions = {
+        title: 'Select file for website import',
         defaultPath: app.getPath('documents'),
-        buttonLabel: "Import Zip File",
+        buttonLabel: 'Import Zip File',
         filters: [
           { name: 'Zip files', extensions: ['zip'] }
           // { name: 'Custom File Type', extensions: ['as'] },
@@ -234,7 +241,7 @@ export default function initWebsitesManagerHandlers () {
           }
           await extract(result.filePaths[0], { dir: importPath })
           resolve(`Success - Website import completed: ${result.filePaths[0]}`)
-        }).catch((err) => {
+        }).catch(() => {
           reject('Error - Website import failed')
         })
       })
