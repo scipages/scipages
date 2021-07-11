@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-11, ubuntu-20.04, windows-2019]
+        os: [macos-latest, ubuntu-20.04, windows-2019]
         node_version: [16.x]
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
       - run: ls dist/electron
       - uses: actions/upload-artifact@v2
         with:
-          name: "${{ matrix.os }}-${{ matrix.node_version }}"
+          name: "${{ matrix.os }}-node-${{ matrix.node_version }}"
           path: dist/electron/SciPages-*
 #      - name: Release
 #        uses: softprops/action-gh-release@v1
