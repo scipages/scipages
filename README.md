@@ -10,7 +10,7 @@
     <strong>A CMS and Static Site Generator for academic websites.</strong>
   </p>
 
-  [Download](https://github.com/scipages/scipagesa/releases) | [Homepage](https://scipages.github.io/)
+  [Download](https://github.com/scipages/scipages/releases) | [Homepage](https://scipages.github.io/)
 
   <a href="https://github.com/scipages/scipages/actions">
     <img src="https://github.com/scipages/scipages/workflows/build/badge.svg" alt="build" />
