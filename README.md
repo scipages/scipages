@@ -1,21 +1,30 @@
-<h1 align="center">
-  <a href="https://github.com/scipages/scipages/">
-    <img alt="SciPages logo" src="https://github.com/scipages/scipages/blob/main/public/icons/favicon-96x96.png?raw=true" width="96">
-  </a>
-  <br />
-  SciPages
-</h1>
-<p align="center">
-  <strong>A CMS and Static Site Generator for academic websites.</strong>
-</p>
-<p align="center">
+<div align="center">
+  <h1>
+    <a href="https://github.com/scipages/scipages/">
+      <img alt="SciPages logo" src="https://github.com/scipages/scipages/blob/main/public/icons/favicon-96x96.png?raw=true" width="96">
+    </a>
+    <br />
+    SciPages
+  </h1>
+  <p align="center">
+    <strong>A CMS and Static Site Generator for academic websites.</strong>
+  </p>
+
+  [Download](https://github.com/scipages/scipagesa/releases) | [Homepage](https://scipages.github.io/)
+
   <a href="https://github.com/scipages/scipages/actions">
     <img src="https://github.com/scipages/scipages/workflows/build/badge.svg" alt="build" />
   </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/scipages/scipages" alt="license" />
   </a>
-</p>
+</div>
+
+<!--
+<div align="center">
+  <img src="screenshot.png">
+</div>
+-->
 
 
 ## Developer Notes
