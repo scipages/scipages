@@ -35,17 +35,6 @@
             <q-item-label>{{ link.text }}</q-item-label>
           </q-item-section>
         </q-item>
-
-        <q-separator class="q-my-md" />
-
-        <q-item v-ripple clickable :to="{name: 'main_test', params: { uuid: 'a_fake_uuid' }}">
-          <q-item-section avatar>
-            <q-icon color="grey" :name="'science'" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Test Page</q-item-label>
-          </q-item-section>
-        </q-item>
       </q-list>
     </q-scroll-area>
   </q-drawer>

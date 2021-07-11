@@ -118,12 +118,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/main/ConfigurationGit.vue'),
         meta: { title: 'Git Synchronization' },
         props: true
-      },
-      {
-        path: 'test',
-        name: 'main_test',
-        component: () => import('pages/main/Test.vue'),
-        meta: { title: '' }
       }
     ]
   },
