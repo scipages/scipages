@@ -34,12 +34,9 @@ declare global {
     },
     'myContentAPI': {
       getCoursesListSync: (website: WebsitePathItem) => Array<Course>,
-      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // createCourse: (website: WebsitePathItem, title: string, role: string, ...) => Promise<any>
-      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // updateCourse: (website: WebsitePathItem, item: Course) => Promise<any>
-      // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // deleteCourse: (website: WebsitePathItem, item: Course) => Promise<any>
+      createCourse: (website: WebsitePathItem, item: Course) => Promise<string>
+      updateCourse: (website: WebsitePathItem, item: Course) => Promise<string>
+      deleteCourse: (website: WebsitePathItem, item: Course) => Promise<string>
     }
   }
 }

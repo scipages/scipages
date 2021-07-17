@@ -10,12 +10,15 @@ import { WebsitePathItem } from '../../src/types/WebsitePathItem'
 import {
   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
 } from '../../src/db/repositories/ConfigurationRepository'
-import {
-  openPagesDB //, PagesDatabaseCollections, pagesDB, PagesRepository,
-} from '../../src/db/repositories/PagesRepository'
-import {
-  openCoursesDB //, coursesDB, CoursesRepository, CoursesDatabaseCollections,
-} from '../../src/db/repositories/CoursesRepository'
+import { openPagesDB } from '../../src/db/repositories/PagesRepository'
+import { openBasicInfoDB } from '../../src/db/repositories/BasicInfoRepository'
+import { openCoursesDB } from '../../src/db/repositories/CoursesRepository'
+import { openHighlightsDB } from '../../src/db/repositories/HighlightsRepository'
+import { openPersonsDB } from '../../src/db/repositories/PersonsRepository'
+import { openProjectsDB } from '../../src/db/repositories/ProjectsRepository'
+import { openPublicationsDB } from '../../src/db/repositories/PublicationsRepository'
+import { openSocialMediaDB } from '../../src/db/repositories/SocialMediaRepository'
+import { openSoftwareDB } from '../../src/db/repositories/SoftwareRepository'
 
 function timeDifference (current: number, previous: number) {
   const msPerMinute = 60 * 1000
@@ -42,7 +45,7 @@ function timeDifference (current: number, previous: number) {
 }
 
 export default function initWebsitesManagerHandlers () {
-  ipcMain.on('websites-manager-init-paths-sync', (event) => {
+  ipcMain.on('websites-manager:init-paths-sync', (event) => {
     // Create the websites directory
     if (!fs.existsSync(electronData.userDataWebsitesPath)) {
       fs.mkdirSync(electronData.userDataWebsitesPath, { recursive: true })
@@ -56,7 +59,7 @@ export default function initWebsitesManagerHandlers () {
     // will be blocked.
     event.returnValue = null
   })
-  ipcMain.on('websites-manager-get-website-path-list-sync', (event) => {
+  ipcMain.on('websites-manager:get-website-path-list-sync', (event) => {
     // const paths = []
     const paths: Array<WebsitePathItem> = []
     fs.readdirSync(electronData.userDataWebsitesPath).forEach(file => {
@@ -93,16 +96,23 @@ export default function initWebsitesManagerHandlers () {
     })
     event.returnValue = paths
   })
-  ipcMain.on('websites-manager-open-website-sync', (event, item: WebsitePathItem) => {
+  ipcMain.on('websites-manager:open-website-sync', (event, item: WebsitePathItem) => {
     if (item.path !== null) {
       openConfigurationDB(item.path)
       openPagesDB(item.path)
+      openBasicInfoDB(item.path)
       openCoursesDB(item.path)
+      openHighlightsDB(item.path)
+      openPersonsDB(item.path)
+      openProjectsDB(item.path)
+      openPublicationsDB(item.path)
+      openSocialMediaDB(item.path)
+      openSoftwareDB(item.path)
     }
 
     event.returnValue = null
   })
-  ipcMain.handle('websites-manager-create-website', async (event, title: string, theme: string) => {
+  ipcMain.handle('websites-manager:create-website', async (event, title: string, theme: string) => {
     return new Promise((resolve, reject) => {
       console.log(title)
       console.log(theme)
@@ -130,13 +140,14 @@ export default function initWebsitesManagerHandlers () {
         configurationRepository.setValue('title', title)
         configurationRepository.setValue('theme', theme)
         openPagesDB(newWebsite.path)
-        // const pagesRepository = new PagesRepository(
-        //   pagesDB, PagesDatabaseCollections.Pages
-        // )
+        openBasicInfoDB(newWebsite.path)
         openCoursesDB(newWebsite.path)
-        // const coursesRepository = new CoursesRepository(
-        //   coursesDB, CoursesDatabaseCollections.Courses
-        // )
+        openHighlightsDB(newWebsite.path)
+        openPersonsDB(newWebsite.path)
+        openProjectsDB(newWebsite.path)
+        openPublicationsDB(newWebsite.path)
+        openSocialMediaDB(newWebsite.path)
+        openSoftwareDB(newWebsite.path)
 
         resolve(`Success - Website creation completed: ${title}`)
       } catch (err) {
@@ -144,7 +155,7 @@ export default function initWebsitesManagerHandlers () {
       }
     })
   })
-  ipcMain.handle('websites-manager-delete-website', async (event, item: WebsitePathItem) => {
+  ipcMain.handle('websites-manager:delete-website', async (event, item: WebsitePathItem) => {
     if (item.path !== null && item.path.startsWith(electronData.userDataWebsitesPath)) {
       return new Promise((resolve, reject) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -161,7 +172,7 @@ export default function initWebsitesManagerHandlers () {
       // fs.rmdirSync(item.path, { recursive: true })
     }
   })
-  ipcMain.handle('websites-manager-export-website', async (event, item: WebsitePathItem) => {
+  ipcMain.handle('websites-manager:export-website', async (event, item: WebsitePathItem) => {
     const win = BrowserWindow.getFocusedWindow()
     if (item.path !== null && item.path.startsWith(electronData.userDataWebsitesPath) && win !== null) {
       const options = {
@@ -214,7 +225,7 @@ export default function initWebsitesManagerHandlers () {
       })
     }
   })
-  ipcMain.handle('websites-manager-import-website', async () => {
+  ipcMain.handle('websites-manager:import-website', async () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win !== null) {
       const importPath = path.join(electronData.userDataWebsitesPath, 'website-' + uuidv4())

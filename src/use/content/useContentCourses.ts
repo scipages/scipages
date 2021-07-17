@@ -14,20 +14,23 @@ export default function useContentCourses () {
     // }
   }
 
-  // function createItem (website: WebsitePathItem, title: string, role: string, ...) {
-  //   return window.myContentAPI.createCourse(title, role, ...)
-  // }
-  //
-  // function updateItem (website: WebsitePathItem, item: Course) {
-  //   return window.myContentAPI.updateCourse(_.cloneDeep(website), _.cloneDeep(item))
-  // }
-  //
-  // function deleteItem (website: WebsitePathItem, item: Course) {
-  //   return window.myContentAPI.deleteCourse(_.cloneDeep(website), _.cloneDeep(item))
-  // }
+  function createItem (website: WebsitePathItem, item: Course) {
+    return window.myContentAPI.createCourse(_.cloneDeep(website), _.cloneDeep(item))
+  }
+
+  function updateItem (website: WebsitePathItem, item: Course) {
+    return window.myContentAPI.updateCourse(_.cloneDeep(website), _.cloneDeep(item))
+  }
+
+  function deleteItem (website: WebsitePathItem, item: Course) {
+    return window.myContentAPI.deleteCourse(_.cloneDeep(website), _.cloneDeep(item))
+  }
 
   return {
     allItems: readonly(allItems),
-    getItems
+    getItems,
+    createItem,
+    updateItem,
+    deleteItem
   }
 }

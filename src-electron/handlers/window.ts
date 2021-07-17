@@ -1,16 +1,16 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 
-export default function initMainWindowHandlers () {
-  // ipcMain.handle('window-minimize', (e, args) => {
-  ipcMain.handle('window-minimize', () => {
+export default function initWindowHandlers () {
+  // ipcMain.handle('window:minimize', (e, args) => {
+  ipcMain.handle('window:minimize', () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return
     }
     win.minimize()
   })
-  // ipcMain.handle('window-toggleMaximize', (e, args) => {
-  ipcMain.handle('window-toggleMaximize', () => {
+  // ipcMain.handle('window:toggleMaximize', (e, args) => {
+  ipcMain.handle('window:toggleMaximize', () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return
@@ -21,8 +21,8 @@ export default function initMainWindowHandlers () {
       win.maximize()
     }
   })
-  // ipcMain.handle('window-close', (e, args) => {
-  ipcMain.handle('window-close', () => {
+  // ipcMain.handle('window:close', (e, args) => {
+  ipcMain.handle('window:close', () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return
@@ -36,13 +36,13 @@ export default function initMainWindowHandlers () {
     // app.quit()
     // app.exit(0)
   })
-  // ipcMain.handle('window-app-relaunch', (e, args) => {
-  ipcMain.handle('window-app-relaunch', () => {
+  // ipcMain.handle('window:app-relaunch', (e, args) => {
+  ipcMain.handle('window:app-relaunch', () => {
     app.relaunch()
     app.exit()
   })
-  // ipcMain.handle('window-show-modal', (e, args) => {
-  ipcMain.handle('window-show-modal', (e, url: string) => {
+  // ipcMain.handle('window:show-modal', (e, args) => {
+  ipcMain.handle('window:show-modal', (e, url: string) => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return
@@ -55,11 +55,11 @@ export default function initMainWindowHandlers () {
       child.show()
     })
   })
-  // ipcMain.handle('window-open-url', (e, args) => {
-  ipcMain.handle('window-open-url', (e, url: string) => {
+  // ipcMain.handle('window:open-url', (e, args) => {
+  ipcMain.handle('window:open-url', (e, url: string) => {
     void shell.openExternal(url)
   })
-  ipcMain.on('window-get-current-url-sync', (event) => {
+  ipcMain.on('window:get-current-url-sync', (event) => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
       return ''

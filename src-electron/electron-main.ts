@@ -2,7 +2,7 @@ import { app, BrowserWindow, nativeTheme } from 'electron'
 import fs from 'fs'
 import path from 'path'
 // import windowStateKeeper from './window-state-keeper'
-import initMainWindowHandlers from './handlers/main-window'
+import initWindowHandlers from './handlers/window'
 import initElectronDataHandlers from './handlers/electron-data'
 import initWebsitesManagerHandlers from './handlers/websites-manager'
 import initContentHandlers from './handlers/content'
@@ -83,12 +83,12 @@ function createWindow () {
 
   mainWindow.on('maximize', () => {
     if (mainWindow !== null) {
-      mainWindow.webContents.send('window-max-unmax', { max: true })
+      mainWindow.webContents.send('window:max-unmax', { max: true })
     }
   })
   mainWindow.on('unmaximize', () => {
     if (mainWindow !== null) {
-      mainWindow.webContents.send('window-max-unmax', { max: false })
+      mainWindow.webContents.send('window:max-unmax', { max: false })
     }
   })
   // mainWindow.on('minimize', (e) => {
@@ -113,7 +113,7 @@ app.on('activate', () => {
   }
 })
 
-initMainWindowHandlers()
+initWindowHandlers()
 initElectronDataHandlers()
 initWebsitesManagerHandlers()
 initContentHandlers()

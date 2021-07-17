@@ -13,10 +13,10 @@ export const electronData: ElectronData = {
 }
 
 export default function initElectronDataHandlers () {
-  ipcMain.handle('electron-data-retrieve', (): ElectronData => {
+  ipcMain.handle('electron-data:retrieve', (): ElectronData => {
     return electronData
   })
-  ipcMain.on('electron-data-retrieve-sync', (event) => {
+  ipcMain.on('electron-data:retrieve-sync', (event) => {
     event.returnValue = electronData
   })
 }
