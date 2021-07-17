@@ -3,7 +3,7 @@ import {
 } from 'vue'
 // import { useStore } from 'vuex'
 import { useStore } from 'src/store'
-import { packageInfo } from 'src/helpers/packageInfo'
+import { packageInfo } from 'app/src-common/packageInfo'
 
 export default function usePackageInfo () {
   const store = useStore()

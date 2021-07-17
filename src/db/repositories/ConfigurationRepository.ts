@@ -1,4 +1,4 @@
-import { packageInfo } from '../../helpers/packageInfo'
+import { packageInfo } from '../../../src-common/packageInfo'
 import { getDB } from '../db'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
 
