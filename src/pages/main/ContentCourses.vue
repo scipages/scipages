@@ -323,7 +323,9 @@ export default defineComponent({
       },
 
       getSelectedString () {
-        return selected.value.length === 0 ? '' : `${selected.value.length} record${selected.value.length > 1 ? 's' : ''} selected of ${allItems.value.length}`
+        return selected.value.length === 0
+          ? ''
+          : `${selected.value.length} record${selected.value.length > 1 ? 's' : ''} selected of ${allItems.value.length}`
       }
     }
   }

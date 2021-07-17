@@ -53,7 +53,7 @@ const routes: RouteRecordRaw[] = [
         path: 'news',
         name: 'main_news',
         component: () => import('pages/main/ContentNews.vue'),
-        meta: { title: 'News' },
+        meta: { title: 'News/Highlights' },
         props: true
       },
       {

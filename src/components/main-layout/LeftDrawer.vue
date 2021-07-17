@@ -146,7 +146,7 @@ export default defineComponent({
         { icon: fasAddressCard, text: 'Basic Info', caption: 'Title, Bio, Intro Text etc.', route_name: 'main_basic_info' },
         { icon: 'list_alt', text: 'Publications', route_name: 'main_publications' },
         { icon: 'handyman', text: 'Projects', route_name: 'main_projects' },
-        { icon: farNewspaper, text: 'News', route_name: 'main_news' },
+        { icon: farNewspaper, text: 'News/Highlights', route_name: 'main_news' },
         { icon: 'people', text: 'People', route_name: 'main_people' },
         { icon: fasGraduationCap, text: 'Teaching/Courses', route_name: 'main_courses' },
         { icon: fasLaptopCode, text: 'Software/Code', route_name: 'main_software' },

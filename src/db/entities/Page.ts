@@ -1,6 +1,31 @@
 import { IEntity } from './interfaces/IEntity'
 
-export enum PageSectionTypeEnum {
+export enum MenuItemTypeEnum {
+  Page = 'PAGE',
+  PageSection = 'PAGE_SECTION',
+  External = 'External'
+}
+
+export interface MenuItem extends IEntity {
+  id: string
+  title: string
+  pathOrUrl: string
+  targetId: string
+  order: number
+  type: MenuItemTypeEnum
+  enabled: boolean
+  dateCreated: Date
+  dateUpdated: Date
+}
+
+export interface IPageSection {
+  title: string
+  enabled: boolean
+  dateCreated: Date
+  dateUpdated: Date
+}
+
+export enum ContentPageSectionTypeEnum {
   Publications = 'PUBLICATIONS',
   Projects = 'PROJECTS',
   News = 'NEWS',
@@ -10,10 +35,19 @@ export enum PageSectionTypeEnum {
   SocialMedia = 'SOCIAL_MEDIA'
 }
 
-export interface PageSection extends IEntity {
+export interface ContentPageSection extends IEntity, IPageSection {
   id: string
   title: string
-  type: PageSectionTypeEnum
+  type: ContentPageSectionTypeEnum
+  enabled: boolean
+  dateCreated: Date
+  dateUpdated: Date
+}
+
+export interface CustomPageSection extends IEntity, IPageSection {
+  id: string
+  title: string
+  content: string
   enabled: boolean
   dateCreated: Date
   dateUpdated: Date
@@ -21,28 +55,20 @@ export interface PageSection extends IEntity {
 
 export enum PageTypeEnum {
   Home = 'HOME',
-  Publications = 'PUBLICATIONS',
-  Projects = 'PROJECTS',
-  News = 'NEWS',
-  People = 'PEOPLE',
-  Courses = 'COURSES',
-  Software = 'SOFTWARE',
-  SocialMedia = 'SOCIAL_MEDIA'
+  Other = 'OTHER'
 }
 
 export interface Page extends IEntity {
   id: string
   title: string
   type: PageTypeEnum
-  menu: {
-    title: string
-  }
+  menuItem: MenuItem
   meta: {
     description: string
     keywords: string
     author: string
   }
-  sections: Array<PageSection>
+  sections: Array<IPageSection>
   enabled: boolean
   dateCreated: Date
   dateUpdated: Date
