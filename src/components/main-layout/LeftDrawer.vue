@@ -45,7 +45,14 @@
           Content
         </q-item-label>
 
-        <q-item v-for="link in links2" :key="link.text" v-ripple clickable :to="{name: link.route_name, params: { uuid: currentWebsite.uuid }}">
+        <q-item
+          v-for="link in links2"
+          :key="link.text"
+          v-ripple
+          clickable
+          :to="{ name: link.route_name, params: { uuid: currentWebsite.uuid } }"
+          :class="{ 'q-router-link--exact-active q-router-link--active': isParentActive(link.parent_route_url) }"
+        >
           <q-item-section avatar>
             <q-icon color="grey" :name="link.icon" />
           </q-item-section>
@@ -61,7 +68,14 @@
           Configuration
         </q-item-label>
 
-        <q-item v-for="link in links3" :key="link.text" v-ripple clickable :to="{name: link.route_name, params: { uuid: currentWebsite.uuid }}">
+        <q-item
+          v-for="link in links3"
+          :key="link.text"
+          v-ripple
+          clickable
+          :to="{name: link.route_name, params: { uuid: currentWebsite.uuid }}"
+          :class="{ 'q-router-link--exact-active q-router-link--active': isParentActive(link.parent_route_url) }"
+        >
           <q-item-section avatar>
             <q-icon color="grey" :name="link.icon" />
           </q-item-section>
@@ -97,7 +111,7 @@ import {
   ref,
   watch
 } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import {
   farNewspaper,
   fasGraduationCap,
@@ -123,6 +137,7 @@ export default defineComponent({
   emits: ['update:show'],
   setup (props, { emit }) {
     const router = useRouter()
+    const route = useRoute()
     const { currentWebsite } = useWebsitesManager()
 
     const show = ref(props.show)
@@ -136,19 +151,34 @@ export default defineComponent({
 
     const { openURL } = useMainWindow()
 
+    function getParentUrl (parent: string) : string | null {
+      if (currentWebsite.uuid === null) {
+        return ''
+      }
+      return `/main/${currentWebsite.uuid}/${parent}`
+    }
+    function isParentActive (parentRouteUrl: string | null) {
+      if (typeof parentRouteUrl === 'undefined' || parentRouteUrl === null || parentRouteUrl === '') {
+        return false
+      }
+      // Current path starts with the path of the parent?
+      return route.path.indexOf(parentRouteUrl) === 0
+    }
+
     return {
       currentWebsite,
       closeWebsite,
       links1: [
         { icon: 'web', text: 'Pages' }
       ],
+      isParentActive: isParentActive,
       links2: [
         { icon: fasAddressCard, text: 'Basic Info', caption: 'Title, Bio, Intro Text etc.', route_name: 'main_basic_info' },
         { icon: 'list_alt', text: 'Publications', route_name: 'main_publications' },
         { icon: 'handyman', text: 'Projects', route_name: 'main_projects' },
         { icon: farNewspaper, text: 'News/Highlights', route_name: 'main_news' },
         { icon: 'people', text: 'People', route_name: 'main_people' },
-        { icon: fasGraduationCap, text: 'Teaching/Courses', route_name: 'main_courses' },
+        { icon: fasGraduationCap, text: 'Teaching/Courses', route_name: 'main_courses_index', parent_route_url: getParentUrl('courses') },
         { icon: fasLaptopCode, text: 'Software/Code', route_name: 'main_software' },
         { icon: 'tag', text: 'Social Media', route_name: 'main_social_media' },
         { icon: fasImages, text: 'Static Files', route_name: 'main_static_files' }

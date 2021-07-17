@@ -9,3 +9,15 @@ body {
 .q-btn--actionable {
   cursor: default !important;
 }
+
+.custom_table_no_wrap {
+  white-space: nowrap;
+}
+
+.custom_hyperlink {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.custom_hyperlink:hover {
+  text-decoration: none;
+}

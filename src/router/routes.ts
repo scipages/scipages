@@ -66,9 +66,32 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'courses',
         name: 'main_courses',
-        component: () => import('pages/main/ContentCourses.vue'),
+        component: () => import('pages/main/content/Content.vue'),
         meta: { title: 'Teaching/Courses' },
-        props: true
+        props: true,
+        children: [
+          {
+            path: 'index',
+            name: 'main_courses_index',
+            component: () => import('pages/main/content/courses/ContentCoursesIndex.vue'),
+            meta: { title: 'Teaching/Courses' },
+            props: true
+          },
+          {
+            path: 'create',
+            name: 'main_courses_create',
+            component: () => import('pages/main/content/courses/ContentCoursesCreate.vue'),
+            meta: { title: 'Teaching/Courses - New Course' },
+            props: true
+          }
+          // {
+          //   path: 'update/:id',
+          //   name: 'main_courses_update',
+          //   component: () => import('pages/main/content/courses/ContentCoursesUpdate.vue'),
+          //   meta: { title: 'Teaching/Courses - Update Course' },
+          //   props: true
+          // }
+        ]
       },
       {
         path: 'software',
