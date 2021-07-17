@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { WebsitePathItem } from '../types/WebsitePathItem'
-import { Course } from '../../src/db/entities/Course'
+import { Course } from '../../src-common/entities/Course'
 
 contextBridge.exposeInMainWorld('myContentAPI', {
   getCoursesListSync (website: WebsitePathItem): Array<Course> {

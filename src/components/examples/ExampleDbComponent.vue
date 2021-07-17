@@ -44,7 +44,7 @@ import useMainElectronData from 'src/use/useMainElectronData'
 import useMainWindow from 'src/use/useMainWindow'
 
 import { v4 as uuidv4 } from 'uuid'
-import { Course } from 'src/db/entities/Course'
+import { Course } from 'app/src-common/entities/Course'
 // import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from 'src/db/repositories/CoursesRepository'
 import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from 'src/db/repositories/CoursesRepository'
 

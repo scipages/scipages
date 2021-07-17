@@ -1,7 +1,7 @@
 import { ElectronData } from 'app/src-electron/types/ElectronData'
 import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
 import { WindowMaxUnmaxParam } from 'app/src-electron/types/WindowMaxUnmaxParam'
-import { Course } from 'src/db/entities/Course'
+import { Course } from 'app/src-common/entities/Course'
 
 declare global {
   interface Window {

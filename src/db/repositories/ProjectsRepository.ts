@@ -2,7 +2,7 @@ import { packageInfo } from '../../../src-common/packageInfo'
 import { getDB } from '../db'
 import { BaseCollectionRepository } from './base/BaseCollectionRepository'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
-import { Project } from '../entities/Project'
+import { Project } from '../../../src-common/entities/Project'
 
 import lowdb from 'lowdb'
 
