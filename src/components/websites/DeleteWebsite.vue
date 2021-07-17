@@ -34,7 +34,7 @@
 import {
   defineComponent, PropType, ref
 } from 'vue'
-import { WebsitePathItem } from 'src/types/WebsitePathItem'
+import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 import useNotifications from 'src/use/useNotifications'
 import useLoading from 'src/use/useLoading'

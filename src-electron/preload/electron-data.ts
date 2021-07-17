@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { ElectronData } from '../../src/types/ElectronData'
+import { ElectronData } from '../types/ElectronData'
 
 contextBridge.exposeInMainWorld('myElectronDataAPI', {
   retrieveElectronData (func: (data: ElectronData) => void) {

@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { WindowMaxUnmaxParam } from '../../src/types/WindowMaxUnmaxParam'
+import { WindowMaxUnmaxParam } from '../types/WindowMaxUnmaxParam'
 
 let isWindowMaxUnmaxListenerSet = false
 

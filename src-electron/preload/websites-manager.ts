@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { WebsitePathItem } from '../../src/types/WebsitePathItem'
+import { WebsitePathItem } from '../types/WebsitePathItem'
 
 contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   initPathsSync () {

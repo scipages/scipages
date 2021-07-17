@@ -3,7 +3,7 @@ import { ipcMain } from 'electron'
 // import fs from 'fs'
 
 // import { electronData } from '../electron-data'
-import { WebsitePathItem } from '../../../src/types/WebsitePathItem'
+import { WebsitePathItem } from '../../types/WebsitePathItem'
 import {
   openCoursesDB, coursesDB, CoursesRepository, CoursesDatabaseCollections
 } from '../../../src/db/repositories/CoursesRepository'

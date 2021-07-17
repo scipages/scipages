@@ -1,5 +1,5 @@
 import { readonly, ref, Ref } from 'vue'
-import { WebsitePathItem } from 'src/types/WebsitePathItem'
+import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
 import { Course } from 'src/db/entities/Course'
 import _ from 'lodash'
 

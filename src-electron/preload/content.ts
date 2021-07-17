@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { WebsitePathItem } from '../../src/types/WebsitePathItem'
+import { WebsitePathItem } from '../types/WebsitePathItem'
 import { Course } from '../../src/db/entities/Course'
 
 contextBridge.exposeInMainWorld('myContentAPI', {

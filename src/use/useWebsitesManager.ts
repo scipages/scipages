@@ -1,6 +1,6 @@
 import { reactive, readonly } from 'vue'
-import { WebsitePathItem } from 'src/types/WebsitePathItem'
-import { WebsitePathList } from 'src/types/WebsitePathList'
+import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
+import { WebsitePathList } from 'app/src-electron/types/WebsitePathList'
 
 const allWebsites: WebsitePathList = reactive({ items: [] })
 const currentWebsite: WebsitePathItem = reactive({

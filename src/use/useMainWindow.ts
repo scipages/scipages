@@ -1,7 +1,7 @@
 import {
   ref
 } from 'vue'
-import { WindowMaxUnmaxParam } from 'src/types/WindowMaxUnmaxParam'
+import { WindowMaxUnmaxParam } from 'app/src-electron/types/WindowMaxUnmaxParam'
 
 export default function useMainWindow () {
   const maximized = ref(false)
