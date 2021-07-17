@@ -6,7 +6,7 @@ import { ipcMain } from 'electron'
 import { WebsitePathItem } from '../../types/WebsitePathItem'
 import {
   openCoursesDB, coursesDB, CoursesRepository, CoursesDatabaseCollections
-} from '../../../src/db/repositories/CoursesRepository'
+} from '../../db/repositories/CoursesRepository'
 import { Course } from '../../../src-common/entities/Course'
 
 export default function initContentCoursesHandlers () {

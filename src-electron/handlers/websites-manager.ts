@@ -9,16 +9,16 @@ import { electronData } from './electron-data'
 import { WebsitePathItem } from '../types/WebsitePathItem'
 import {
   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
-} from '../../src/db/repositories/ConfigurationRepository'
-import { openPagesDB } from '../../src/db/repositories/PagesRepository'
-import { openBasicInfoDB } from '../../src/db/repositories/BasicInfoRepository'
-import { openCoursesDB } from '../../src/db/repositories/CoursesRepository'
-import { openHighlightsDB } from '../../src/db/repositories/HighlightsRepository'
-import { openPersonsDB } from '../../src/db/repositories/PersonsRepository'
-import { openProjectsDB } from '../../src/db/repositories/ProjectsRepository'
-import { openPublicationsDB } from '../../src/db/repositories/PublicationsRepository'
-import { openSocialMediaDB } from '../../src/db/repositories/SocialMediaRepository'
-import { openSoftwareDB } from '../../src/db/repositories/SoftwareRepository'
+} from '../db/repositories/ConfigurationRepository'
+import { openPagesDB } from '../db/repositories/PagesRepository'
+import { openBasicInfoDB } from '../db/repositories/BasicInfoRepository'
+import { openCoursesDB } from '../db/repositories/CoursesRepository'
+import { openHighlightsDB } from '../db/repositories/HighlightsRepository'
+import { openPersonsDB } from '../db/repositories/PersonsRepository'
+import { openProjectsDB } from '../db/repositories/ProjectsRepository'
+import { openPublicationsDB } from '../db/repositories/PublicationsRepository'
+import { openSocialMediaDB } from '../db/repositories/SocialMediaRepository'
+import { openSoftwareDB } from '../db/repositories/SoftwareRepository'
 
 function timeDifference (current: number, previous: number) {
   const msPerMinute = 60 * 1000

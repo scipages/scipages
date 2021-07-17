@@ -45,8 +45,8 @@ import useMainWindow from 'src/use/useMainWindow'
 
 import { v4 as uuidv4 } from 'uuid'
 import { Course } from 'app/src-common/entities/Course'
-// import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from 'src/db/repositories/CoursesRepository'
-import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from 'src/db/repositories/CoursesRepository'
+// import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from '../../../src-electron/db/repositories/CoursesRepository'
+import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from '../../../src-electron/db/repositories/CoursesRepository'
 
 export default defineComponent({
   name: 'ExampleDbComponent',
