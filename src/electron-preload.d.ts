@@ -4,6 +4,7 @@ import { WindowMaxUnmaxParam } from 'app/src-electron/types/WindowMaxUnmaxParam'
 import { Course } from 'app/src-common/entities/Course'
 import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
+import { PostRequestResult } from 'app/src-electron/types/PostRequestResult'
 
 declare global {
   interface Window {
@@ -41,7 +42,7 @@ declare global {
     },
     'myContentAPI': {
       getCoursesListSync: (website: WebsitePathItem) => Array<Course>,
-      createCourse: (website: WebsitePathItem, item: Course) => Promise<string>
+      createCourse: (website: WebsitePathItem, item: Course) => Promise<PostRequestResult>
       updateCourse: (website: WebsitePathItem, item: Course) => Promise<string>
       deleteCourse: (website: WebsitePathItem, item: Course) => Promise<string>
     }

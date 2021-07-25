@@ -1,6 +1,127 @@
 <template>
   <div class="q-pa-md">
+    <q-card class="q-pa-md" style="min-width: 350px">
+      <q-btn
+        size="sm"
+        icon="fas fa-plus-circle"
+        color="green-5"
+        text-color="white"
+        class="q-ma-xs"
+        label="New Course"
+        :to="{name: 'main_courses_create', params: { uuid: uuid }}"
+      />
+
+      <!--<q-btn-dropdown-->
+      <!--  size="xs"-->
+      <!--  label="Actions"-->
+      <!--  class="q-mx-xs"-->
+      <!--  v-bind:disable-main-btn="selected.length === 0"-->
+      <!--  v-bind:disable-dropdown="selected.length === 0"-->
+      <!--&gt;-->
+      <!--  <q-list>-->
+      <!--    <q-item dense clickable label="Duplicate" v-close-popup>-->
+      <!--      <q-item-section>-->
+      <!--        <q-item-label>Duplicate</q-item-label>-->
+      <!--      </q-item-section>-->
+      <!--      <q-item-section side>-->
+      <!--        <q-icon size="xs" name="fas fa-copy" color="grey-9" />-->
+      <!--      </q-item-section>-->
+      <!--    </q-item>-->
+      <!--    <q-separator />-->
+      <!--    <q-item dense clickable label="Publish" v-close-popup>-->
+      <!--      <q-item-section>-->
+      <!--        <q-item-label>Publish</q-item-label>-->
+      <!--      </q-item-section>-->
+      <!--      <q-item-section side>-->
+      <!--        <q-icon size="xs" name="fas fa-check-circle" color="green-4" />-->
+      <!--      </q-item-section>-->
+      <!--    </q-item>-->
+      <!--    <q-item dense clickable label="Unpublish" v-close-popup>-->
+      <!--      <q-item-section>-->
+      <!--        <q-item-label>Unpublish</q-item-label>-->
+      <!--      </q-item-section>-->
+      <!--      <q-item-section side>-->
+      <!--        <q-icon size="xs" name="fas fa-minus-circle" color="red-4" />-->
+      <!--      </q-item-section>-->
+      <!--    </q-item>-->
+      <!--    <q-separator />-->
+      <!--    <q-item dense clickable label="Delete" v-close-popup>-->
+      <!--      <q-item-section>-->
+      <!--        <q-item-label>Delete</q-item-label>-->
+      <!--      </q-item-section>-->
+      <!--      <q-item-section side>-->
+      <!--        <q-icon size="xs" name="far fa-trash-alt" color="red-4" />-->
+      <!--      </q-item-section>-->
+      <!--    </q-item>-->
+      <!--  </q-list>-->
+      <!--</q-btn-dropdown>-->
+
+      <q-btn-group
+        push
+        class="q-ma-xs"
+      >
+        <q-btn
+          size="sm"
+          icon="fas fa-check-circle"
+          text-color="green-4"
+          label="Publish"
+          v-bind:disable="selected.length === 0"
+        />
+        <q-separator vertical />
+        <q-btn
+          size="sm"
+          icon="fas fa-minus-circle"
+          text-color="red-4"
+          label="Unpublish"
+          v-bind:disable="selected.length === 0"
+        />
+      </q-btn-group>
+
+      <q-btn-group
+        push
+        class="q-ma-xs"
+      >
+        <q-btn
+          size="sm"
+          icon="fas fa-star"
+          text-color="green-4"
+          label="Display on Frontpage"
+          v-bind:disable="selected.length === 0"
+        />
+        <q-separator vertical />
+        <q-btn
+          size="sm"
+          icon="fas fa-star"
+          text-color="grey"
+          label="Hide from Frontpage"
+          v-bind:disable="selected.length === 0"
+        />
+      </q-btn-group>
+
+      <q-btn-group
+        push
+        class="q-ma-xs"
+      >
+        <q-btn
+          size="sm"
+          icon="fas fa-copy"
+          text-color="grey-9"
+          label="Duplicate"
+          v-bind:disable="selected.length === 0"
+        />
+        <q-separator vertical />
+        <q-btn
+          size="sm"
+          icon="far fa-trash-alt"
+          text-color="red-4"
+          label="Delete"
+          v-bind:disable="selected.length === 0"
+        />
+      </q-btn-group>
+    </q-card>
+
     <q-table
+      class="q-mt-lg"
       :title="currentRouteMetaTitle"
       :rows="rows"
       :columns="columns"
@@ -12,129 +133,8 @@
       :pagination="initialPagination"
       hide-pagination
     >
-      <template v-slot:top-right>
-        <q-btn
-          size="xs"
-          icon="fas fa-plus-circle"
-          color="green-5"
-          text-color="white"
-          class="q-mx-xs"
-          label="New Course"
-          :to="{name: 'main_courses_create', params: { uuid: uuid }}"
-        />
-
-        <!--<q-btn-dropdown-->
-        <!--  size="xs"-->
-        <!--  label="Actions"-->
-        <!--  class="q-mx-xs"-->
-        <!--  v-bind:disable-main-btn="selected.length === 0"-->
-        <!--  v-bind:disable-dropdown="selected.length === 0"-->
-        <!--&gt;-->
-        <!--  <q-list>-->
-        <!--    <q-item dense clickable label="Duplicate" v-close-popup>-->
-        <!--      <q-item-section>-->
-        <!--        <q-item-label>Duplicate</q-item-label>-->
-        <!--      </q-item-section>-->
-        <!--      <q-item-section side>-->
-        <!--        <q-icon size="xs" name="fas fa-copy" color="grey-9" />-->
-        <!--      </q-item-section>-->
-        <!--    </q-item>-->
-        <!--    <q-separator />-->
-        <!--    <q-item dense clickable label="Publish" v-close-popup>-->
-        <!--      <q-item-section>-->
-        <!--        <q-item-label>Publish</q-item-label>-->
-        <!--      </q-item-section>-->
-        <!--      <q-item-section side>-->
-        <!--        <q-icon size="xs" name="fas fa-check-circle" color="green-4" />-->
-        <!--      </q-item-section>-->
-        <!--    </q-item>-->
-        <!--    <q-item dense clickable label="Unpublish" v-close-popup>-->
-        <!--      <q-item-section>-->
-        <!--        <q-item-label>Unpublish</q-item-label>-->
-        <!--      </q-item-section>-->
-        <!--      <q-item-section side>-->
-        <!--        <q-icon size="xs" name="fas fa-minus-circle" color="red-4" />-->
-        <!--      </q-item-section>-->
-        <!--    </q-item>-->
-        <!--    <q-separator />-->
-        <!--    <q-item dense clickable label="Delete" v-close-popup>-->
-        <!--      <q-item-section>-->
-        <!--        <q-item-label>Delete</q-item-label>-->
-        <!--      </q-item-section>-->
-        <!--      <q-item-section side>-->
-        <!--        <q-icon size="xs" name="far fa-trash-alt" color="red-4" />-->
-        <!--      </q-item-section>-->
-        <!--    </q-item>-->
-        <!--  </q-list>-->
-        <!--</q-btn-dropdown>-->
-
-        <q-separator vertical class="q-mx-xs" />
-
-        <q-btn-group
-          push
-          class="q-mx-xs"
-        >
-          <q-btn
-            size="xs"
-            icon="fas fa-check-circle"
-            text-color="green-4"
-            label="Publish"
-            v-bind:disable="selected.length === 0"
-          />
-          <q-separator vertical />
-          <q-btn
-            size="xs"
-            icon="fas fa-minus-circle"
-            text-color="red-4"
-            label="Unpublish"
-            v-bind:disable="selected.length === 0"
-          />
-        </q-btn-group>
-
-        <q-btn-group
-          push
-          class="q-mx-xs"
-        >
-          <q-btn
-            size="xs"
-            icon="fas fa-star"
-            text-color="green-4"
-            label="Display on Frontpage"
-            v-bind:disable="selected.length === 0"
-          />
-          <q-separator vertical />
-          <q-btn
-            size="xs"
-            icon="fas fa-star"
-            text-color="grey"
-            label="Hide from Frontpage"
-            v-bind:disable="selected.length === 0"
-          />
-        </q-btn-group>
-
-        <q-separator vertical class="q-mx-xs" />
-
-        <q-btn-group
-          push
-          class="q-mx-xs"
-        >
-          <q-btn
-            size="xs"
-            icon="fas fa-copy"
-            text-color="grey-9"
-            label="Duplicate"
-            v-bind:disable="selected.length === 0"
-          />
-          <q-separator vertical />
-          <q-btn
-            size="xs"
-            icon="far fa-trash-alt"
-            text-color="red-4"
-            label="Delete"
-            v-bind:disable="selected.length === 0"
-          />
-        </q-btn-group>
-      </template>
+      <!--<template v-slot:top-right>-->
+      <!--</template>-->
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td auto-width>
