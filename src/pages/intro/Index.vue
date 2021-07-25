@@ -111,6 +111,8 @@ import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
 import NewWebsite from 'components/websites/NewWebsite.vue'
 import DeleteWebsite from 'components/websites/DeleteWebsite.vue'
 import LoadingComponent from 'src/components/LoadingComponent.vue'
+import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 
 export default defineComponent({
   name: 'PageIntroIndex',
@@ -184,10 +186,15 @@ export default defineComponent({
     }
 
     const createWebsiteShow = ref<boolean>(false)
-    function onCreateWebsiteClick (title: string, theme: string) {
+    function onCreateWebsiteClick (
+      title: string,
+      theme: ConfigurationThemeEnum,
+      websiteType: NewWebsiteTypeEnum,
+      websiteSinglePage: boolean
+    ) {
       createWebsiteShow.value = true
       startLoading()
-      createWebsite(title, theme)
+      createWebsite(title, theme, websiteType, websiteSinglePage)
         .then(response => {
           console.log(response)
           createWebsiteShow.value = false

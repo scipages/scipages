@@ -19,6 +19,8 @@ import { openProjectsDB } from '../db/repositories/ProjectsRepository'
 import { openPublicationsDB } from '../db/repositories/PublicationsRepository'
 import { openSocialMediaDB } from '../db/repositories/SocialMediaRepository'
 import { openSoftwareDB } from '../db/repositories/SoftwareRepository'
+import { ConfigurationThemeEnum } from '../../src-common/enums/ConfigurationThemeEnum'
+import { NewWebsiteTypeEnum } from '../../src-common/enums/NewWebsiteTypeEnum'
 
 function timeDifference (current: number, previous: number) {
   const msPerMinute = 60 * 1000
@@ -112,10 +114,20 @@ export default function initWebsitesManagerHandlers () {
 
     event.returnValue = null
   })
-  ipcMain.handle('websites-manager:create-website', async (event, title: string, theme: string) => {
+  ipcMain.handle('websites-manager:create-website', async (
+    event,
+    title: string,
+    theme: ConfigurationThemeEnum,
+    websiteType: NewWebsiteTypeEnum,
+    websiteSinglePage: boolean
+  ) => {
     return new Promise((resolve, reject) => {
+      console.log('========================')
       console.log(title)
       console.log(theme)
+      console.log(websiteType)
+      console.log(websiteSinglePage)
+      console.log('========================')
       const newUuid = uuidv4()
       const newFilename = 'website-' + newUuid
       const newPath = path.join(electronData.userDataWebsitesPath, newFilename)

@@ -1,6 +1,8 @@
 import { reactive, readonly } from 'vue'
 import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
 import { WebsitePathList } from 'app/src-electron/types/WebsitePathList'
+import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 
 const allWebsites: WebsitePathList = reactive({ items: [] })
 const currentWebsite: WebsitePathItem = reactive({
@@ -55,8 +57,18 @@ export default function useWebsitesManager () {
     currentWebsite.uuid = null
     currentWebsite.dateModified = null
   }
-  function createWebsite (title: string, theme: string) {
-    return window.myWebsitesManagerAPI.createWebsite(title, theme)
+  function createWebsite (
+    title: string,
+    theme: ConfigurationThemeEnum,
+    websiteType: NewWebsiteTypeEnum,
+    websiteSinglePage: boolean
+  ) {
+    return window.myWebsitesManagerAPI.createWebsite(
+      title,
+      theme,
+      websiteType,
+      websiteSinglePage
+    )
   }
   function deleteWebsite (item: WebsitePathItem) {
     const itemCopy: WebsitePathItem = copyItem(item)

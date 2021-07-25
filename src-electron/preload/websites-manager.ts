@@ -1,5 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { WebsitePathItem } from '../types/WebsitePathItem'
+import { ConfigurationThemeEnum } from '../../src-common/enums/ConfigurationThemeEnum'
+import { NewWebsiteTypeEnum } from '../../src-common/enums/NewWebsiteTypeEnum'
 
 contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   initPathsSync () {
@@ -12,9 +14,20 @@ contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {
   openWebsiteSync (item: WebsitePathItem) {
     ipcRenderer.sendSync('websites-manager:open-website-sync', item)
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createWebsite (title: string, theme: string): Promise<any> {
-    return ipcRenderer.invoke('websites-manager:create-website', title, theme)
+  createWebsite (
+    title: string,
+    theme: ConfigurationThemeEnum,
+    websiteType: NewWebsiteTypeEnum,
+    websiteSinglePage: boolean
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Promise<any> {
+    return ipcRenderer.invoke(
+      'websites-manager:create-website',
+      title,
+      theme,
+      websiteType,
+      websiteSinglePage
+    )
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteWebsite (item: WebsitePathItem): Promise<any> {

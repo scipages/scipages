@@ -1,13 +1,9 @@
 import { packageInfo } from '../../../src-common/packageInfo'
 import { getDB } from '../db'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
+import { ConfigurationThemeEnum } from '../../../src-common/enums/ConfigurationThemeEnum'
 
 import lowdb from 'lowdb'
-
-export enum ConfigurationThemeEnum {
-  AlFolio = 'AL_FOLIO',
-  MonoResearcher = 'MONO_RESEARCHER'
-}
 
 export enum ConfigurationDatabaseCollections {
 }
