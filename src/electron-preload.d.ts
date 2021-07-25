@@ -1,10 +1,10 @@
-import { ElectronData } from 'app/src-electron/types/ElectronData'
-import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
-import { WindowMaxUnmaxParam } from 'app/src-electron/types/WindowMaxUnmaxParam'
+import { ElectronData } from 'app/src-common/types/ElectronData'
+import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
+import { WindowMaxUnmaxParam } from 'app/src-common/types/WindowMaxUnmaxParam'
 import { Course } from 'app/src-common/entities/Course'
 import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
-import { PostRequestResult } from 'app/src-electron/types/PostRequestResult'
+import { PostRequestResult } from 'app/src-common/types/PostRequestResult'
 
 declare global {
   interface Window {

@@ -5,8 +5,8 @@ import { ipcMain } from 'electron'
 import { v4 as uuidv4 } from 'uuid'
 
 // import { electronData } from '../electron-data'
-import { WebsitePathItem } from '../../types/WebsitePathItem'
-import { PostRequestResult } from '../../types/PostRequestResult'
+import { WebsitePathItem } from '../../../src-common/types/WebsitePathItem'
+import { PostRequestResult } from '../../../src-common/types/PostRequestResult'
 import {
   openCoursesDB, coursesDB, CoursesRepository, CoursesDatabaseCollections
 } from '../../db/repositories/CoursesRepository'

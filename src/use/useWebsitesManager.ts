@@ -1,6 +1,6 @@
 import { reactive, readonly } from 'vue'
-import { WebsitePathItem } from 'app/src-electron/types/WebsitePathItem'
-import { WebsitePathList } from 'app/src-electron/types/WebsitePathList'
+import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
+import { WebsitePathList } from 'app/src-common/types/WebsitePathList'
 import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 

@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue'
-import { ElectronData } from 'app/src-electron/types/ElectronData'
+import { ElectronData } from 'app/src-common/types/ElectronData'
 
 const electronData: ElectronData = reactive({
   debugging: false,

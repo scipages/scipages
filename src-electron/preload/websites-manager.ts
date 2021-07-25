@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { WebsitePathItem } from '../types/WebsitePathItem'
+import { WebsitePathItem } from '../../src-common/types/WebsitePathItem'
 import { ConfigurationThemeEnum } from '../../src-common/enums/ConfigurationThemeEnum'
 import { NewWebsiteTypeEnum } from '../../src-common/enums/NewWebsiteTypeEnum'
 

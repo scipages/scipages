@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import extract from 'extract-zip'
 
 import { electronData } from './electron-data'
-import { WebsitePathItem } from '../types/WebsitePathItem'
+import { WebsitePathItem } from '../../src-common/types/WebsitePathItem'
 import {
   openConfigurationDB, configurationDB, ConfigurationSimpleRepository
 } from '../db/repositories/ConfigurationRepository'

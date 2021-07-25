@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron'
 
 import path from 'path'
-import { ElectronData } from '../types/ElectronData'
+import { ElectronData } from '../../src-common/types/ElectronData'
 
 export const electronData: ElectronData = {
   // @ts-ignore
