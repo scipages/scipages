@@ -40,20 +40,20 @@ import {
   defineComponent,
   ref
 } from 'vue'
-import useMainElectronData from 'src/use/useMainElectronData'
+import useElectronData from 'src/use/useElectronData'
 import useMainWindow from 'src/use/useMainWindow'
 
 import { v4 as uuidv4 } from 'uuid'
 import { Course } from 'app/src-common/entities/Course'
-// import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from '../../../src-electron/db/repositories/CoursesRepository'
-import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from '../../../src-electron/db/repositories/CoursesRepository'
+// import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from 'app/src-electron/db/repositories/CoursesRepository'
+import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from 'app/src-electron/db/repositories/CoursesRepository'
 
 export default defineComponent({
   name: 'ExampleDbComponent',
   setup () {
     const { appRelaunch } = useMainWindow()
 
-    const { electronData } = useMainElectronData()
+    const { electronData } = useElectronData()
 
     const tempCurrentWebsite = ref('website-a')
     function testLowDbCreate () {

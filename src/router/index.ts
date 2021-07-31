@@ -8,8 +8,8 @@ import {
 import { StateInterface } from '../store'
 import routes from './routes'
 
-import useMainElectronData from './../use/useMainElectronData'
-const { electronData } = useMainElectronData()
+import useElectronData from './../use/useElectronData'
+const { electronData } = useElectronData()
 
 /*
  * If not building with SSR mode, you can

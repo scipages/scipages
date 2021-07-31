@@ -9,7 +9,7 @@ const electronData: ElectronData = reactive({
   userDataConfigurationPath: ''
 })
 
-export default function useMainElectronData () {
+export default function useElectronData () {
   function retrieveElectronData () {
     // if (process.env.MODE === 'electron') {
     window.myElectronDataAPI.retrieveElectronData((data: ElectronData) => {

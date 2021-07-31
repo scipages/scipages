@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import usePackageInfo from 'src/use/usePackageInfo'
-import useMainElectronData from 'src/use/useMainElectronData'
+import useElectronData from 'src/use/useElectronData'
 import NotificationsComponent from 'src/components/NotificationsComponent.vue'
 
 export default defineComponent({
@@ -15,7 +15,7 @@ export default defineComponent({
   },
   setup () {
     const { setPackageInfo } = usePackageInfo()
-    const { retrieveElectronData } = useMainElectronData()
+    const { retrieveElectronData } = useElectronData()
 
     onMounted(() => {
       setPackageInfo()
