@@ -124,7 +124,7 @@ import {
 } from '@quasar/extras/fontawesome-v5'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 
-import useMainWindow from 'src/use/useMainWindow'
+import useWindow from 'src/use/useWindow'
 
 export default defineComponent({
   name: 'LeftDrawer',
@@ -149,7 +149,7 @@ export default defineComponent({
       void router.push({ name: 'index' })
     }
 
-    const { openURL } = useMainWindow()
+    const { openURL } = useWindow()
 
     function getParentUrl (parent: string) : string | null {
       if (currentWebsite.uuid === null) {

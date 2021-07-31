@@ -41,7 +41,7 @@ import {
   ref
 } from 'vue'
 import useElectronData from 'src/use/useElectronData'
-import useMainWindow from 'src/use/useMainWindow'
+import useWindow from 'src/use/useWindow'
 
 import { v4 as uuidv4 } from 'uuid'
 import { Course } from 'app/src-common/entities/Course'
@@ -51,7 +51,7 @@ import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from 'app/sr
 export default defineComponent({
   name: 'ExampleDbComponent',
   setup () {
-    const { appRelaunch } = useMainWindow()
+    const { appRelaunch } = useWindow()
 
     const { electronData } = useElectronData()
 

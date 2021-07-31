@@ -29,7 +29,7 @@ import { useStore } from 'src/store'
 //   farWindowRestore
 // } from '@quasar/extras/fontawesome-v5'
 import useWebsitesManager from 'src/use/useWebsitesManager'
-import useMainWindow from 'src/use/useMainWindow'
+import useWindow from 'src/use/useWindow'
 
 export default defineComponent({
   name: 'TitleBar',
@@ -46,7 +46,7 @@ export default defineComponent({
       minimizeWindow,
       toggleMaximizeWindow,
       closeWindow
-    } = useMainWindow()
+    } = useWindow()
 
     onMounted(() => {
       receiveMaxUnmax()

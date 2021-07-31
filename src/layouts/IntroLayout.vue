@@ -40,7 +40,7 @@
 import { defineComponent } from 'vue'
 import TitleBar from 'components/TitleBar.vue'
 import Footer from 'components/main-layout/Footer.vue'
-import useMainWindow from 'src/use/useMainWindow'
+import useWindow from 'src/use/useWindow'
 
 export default defineComponent({
   name: 'IntroLayout',
@@ -51,7 +51,7 @@ export default defineComponent({
   },
 
   setup () {
-    const { openURL } = useMainWindow()
+    const { openURL } = useWindow()
 
     return {
       openURL

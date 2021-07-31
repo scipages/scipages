@@ -236,7 +236,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import useMainWindow from 'src/use/useMainWindow'
+import useWindow from 'src/use/useWindow'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 import useContentCourses from 'src/use/content/useContentCourses'
 import { Course } from 'app/src-common/entities/Course'
@@ -282,7 +282,7 @@ export default defineComponent({
     }
   },
   setup () {
-    const { openURL } = useMainWindow()
+    const { openURL } = useWindow()
     const currentRouteMetaTitle = computed(() => {
       return useRoute().meta.title
     })

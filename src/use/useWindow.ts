@@ -3,7 +3,7 @@ import {
 } from 'vue'
 import { WindowMaxUnmaxParam } from 'app/src-common/types/WindowMaxUnmaxParam'
 
-export default function useMainWindow () {
+export default function useWindow () {
   const maximized = ref(false)
   function receiveMaxUnmax () {
     // if (process.env.MODE === 'electron') {
