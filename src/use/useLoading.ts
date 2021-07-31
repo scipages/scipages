@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-export default function useMainWindow () {
+export default function useLoading () {
   const isLoading = ref(false)
 
   function startLoading () {
