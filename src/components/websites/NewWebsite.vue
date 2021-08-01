@@ -197,6 +197,12 @@ export default defineComponent({
         value: ConfigurationThemeEnum.MonoResearcher,
         description: 'Based on https://github.com/ojroques/hugo-researcher'
       }
+      // },
+      // {
+      //   label: 'Other (Custom Theme)',
+      //   value: ConfigurationThemeEnum.Other,
+      //   description: ''
+      // }
     ])
     const themeValue = ref(themeOptions.value[0])
 
