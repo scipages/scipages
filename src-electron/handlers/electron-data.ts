@@ -6,7 +6,7 @@ import { ElectronData } from '../../src-common/types/ElectronData'
 export const electronData: ElectronData = {
   // @ts-ignore
   debugging: process.env.DEBUGGING,
-  electronVersion: app.getVersion(),
+  electronVersion: process.versions.electron,
   userDataPath: app.getPath('userData'),
   userDataWebsitesPath: path.join(app.getPath('userData'), 'scipages-websites'),
   userDataConfigurationPath: path.join(app.getPath('userData'), 'scipages-configuration')
