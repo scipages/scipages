@@ -19,6 +19,7 @@
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
     "quasar": "^2.0.3",
+    "semver": "^7.3.5",
     "uuid": "^8.3.2",
     "vue-i18n": "^9.1.6",
     "vuex": "^4.0.1"
@@ -28,6 +29,7 @@
     "@types/archiver": "^5.1.0",
     "@types/lowdb": "^1.0.10",
     "@types/node": "^16.3.1",
+    "@types/semver": "^7.3.8",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",

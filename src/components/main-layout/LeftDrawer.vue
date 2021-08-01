@@ -1,4 +1,10 @@
 <template>
+  <CheckForUpdates
+    v-if="checkForUpdatesShow"
+    v-bind:show="checkForUpdatesShow"
+    v-on:close="checkForUpdatesShow=false"
+  ></CheckForUpdates>
+
   <q-drawer
     :model-value="show"
     side="left"
@@ -126,8 +132,13 @@ import useWebsitesManager from 'src/use/useWebsitesManager'
 
 import useWindow from 'src/use/useWindow'
 
+import CheckForUpdates from 'components/CheckForUpdates.vue'
+
 export default defineComponent({
   name: 'LeftDrawer',
+  components: {
+    CheckForUpdates
+  },
   props: {
     show: {
       type: Boolean,
@@ -165,6 +176,8 @@ export default defineComponent({
       return route.path.indexOf(parentRouteUrl) === 0
     }
 
+    const checkForUpdatesShow = ref<boolean>(false)
+
     return {
       currentWebsite,
       closeWebsite,
@@ -193,9 +206,10 @@ export default defineComponent({
         { icon: 'fas fa-book', text: 'Documentation', action: () => { openURL('https://scipages.github.io/') } },
         { icon: 'fab fa-github', text: 'GitHub', action: () => { openURL('https://github.com/scipages/scipages') } },
         { icon: 'bug_report', text: 'Report Issue', action: () => { openURL('https://github.com/scipages/scipages/issues') } },
-        { icon: 'update', text: 'Check for Updates', action: () => { return false } },
+        { icon: 'update', text: 'Check for Updates', action: () => { checkForUpdatesShow.value = true } },
         { icon: 'info', text: 'About', action: () => { showAboutDialog() } }
-      ]
+      ],
+      checkForUpdatesShow
     }
   }
 })
