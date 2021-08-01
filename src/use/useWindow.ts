@@ -27,12 +27,16 @@ export default function useWindow () {
     window.myWindowAPI.appRelaunch()
   }
 
+  function openURL (url: string) {
+    window.myWindowAPI.openURL(url)
+  }
+
   function showModal (url: string) {
     window.myWindowAPI.showModal(url)
   }
 
-  function openURL (url: string) {
-    window.myWindowAPI.openURL(url)
+  function showAboutDialog () {
+    window.myWindowAPI.showAboutDialog()
   }
 
   return {
@@ -42,8 +46,9 @@ export default function useWindow () {
     toggleMaximizeWindow,
     closeWindow,
     appRelaunch,
+    openURL,
     showModal,
-    openURL
+    showAboutDialog
     // farWindowRestore,
   }
 }

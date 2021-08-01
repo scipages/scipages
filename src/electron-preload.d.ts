@@ -14,9 +14,10 @@ declare global {
       toggleMaximize: () => void,
       close: () => void,
       appRelaunch: () => void,
-      showModal: (url: string) => void,
       openURL: (url: string) => void,
-      getCurrentURLSync: () => string
+      getCurrentURLSync: () => string,
+      showModal: (url: string) => void,
+      showAboutDialog: () => void
     },
     'myElectronDataAPI': {
       retrieveElectronData: (func: (data: ElectronData) => void) => void,

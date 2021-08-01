@@ -19,7 +19,7 @@
               <q-btn flat round size="20px" padding="10px" icon="fab fa-github" title="GitHub" v-on:click="openURL('https://github.com/scipages/scipages')" />
               <q-btn flat round size="20px" padding="10px" icon="bug_report" title="Report Issue" v-on:click="openURL('https://github.com/scipages/scipages/issues')" />
               <q-btn flat round size="20px" padding="10px" icon="update" title="Check for Updates" />
-              <q-btn flat round size="20px" padding="10px" icon="info" title="About" />
+              <q-btn flat round size="20px" padding="10px" icon="info" title="About" v-on:click="showAboutDialog()" />
             </div>
           </div>
         </div>
@@ -51,10 +51,11 @@ export default defineComponent({
   },
 
   setup () {
-    const { openURL } = useWindow()
+    const { openURL, showAboutDialog } = useWindow()
 
     return {
-      openURL
+      openURL,
+      showAboutDialog
     }
   }
 })

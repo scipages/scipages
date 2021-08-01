@@ -149,7 +149,7 @@ export default defineComponent({
       void router.push({ name: 'index' })
     }
 
-    const { openURL } = useWindow()
+    const { openURL, showAboutDialog } = useWindow()
 
     function getParentUrl (parent: string) : string | null {
       if (currentWebsite.uuid === null) {
@@ -194,7 +194,7 @@ export default defineComponent({
         { icon: 'fab fa-github', text: 'GitHub', action: () => { openURL('https://github.com/scipages/scipages') } },
         { icon: 'bug_report', text: 'Report Issue', action: () => { openURL('https://github.com/scipages/scipages/issues') } },
         { icon: 'update', text: 'Check for Updates', action: () => { return false } },
-        { icon: 'info', text: 'About', action: () => { return false } }
+        { icon: 'info', text: 'About', action: () => { showAboutDialog() } }
       ]
     }
   }

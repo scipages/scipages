@@ -1,4 +1,7 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, shell, dialog, clipboard } from 'electron'
+import os from 'os'
+
+import packageInfo from '../../src-common/packageInfo'
 
 export default function initWindowHandlers () {
   // ipcMain.handle('window:minimize', (e, args) => {
@@ -41,6 +44,17 @@ export default function initWindowHandlers () {
     app.relaunch()
     app.exit()
   })
+  // ipcMain.handle('window:open-url', (e, args) => {
+  ipcMain.handle('window:open-url', (e, url: string) => {
+    void shell.openExternal(url)
+  })
+  ipcMain.on('window:get-current-url-sync', (event) => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win === null) {
+      return ''
+    }
+    event.returnValue = win.webContents.getURL()
+  })
   // ipcMain.handle('window:show-modal', (e, args) => {
   ipcMain.handle('window:show-modal', (e, url: string) => {
     const win = BrowserWindow.getFocusedWindow()
@@ -55,15 +69,44 @@ export default function initWindowHandlers () {
       child.show()
     })
   })
-  // ipcMain.handle('window:open-url', (e, args) => {
-  ipcMain.handle('window:open-url', (e, url: string) => {
-    void shell.openExternal(url)
-  })
-  ipcMain.on('window:get-current-url-sync', (event) => {
+  ipcMain.handle('window:show-about-dialog', () => {
     const win = BrowserWindow.getFocusedWindow()
     if (win === null) {
-      return ''
+      return
     }
-    event.returnValue = win.webContents.getURL()
+    const detail = `Version: ${packageInfo.version}\n` +
+      `Electron: ${process.versions.electron}\n` +
+      `Chrome: ${process.versions.chrome}\n` +
+      `Node.js: ${process.version}\n` +
+      `V8: ${process.versions.v8}\n` +
+      `OS: ${os.type()} ${os.arch()} ${os.release()}`
+      // `OS: ${os.type()} - ${os.platform()} - ${os.arch()} - ${os.release()} - ${os.version()}`
+
+    const buttons = ['OK', 'Copy']
+
+    dialog.showMessageBox(
+      win,
+      {
+        title: packageInfo.productName,
+        type: 'info',
+        message: packageInfo.productName,
+        detail: detail,
+        buttons: buttons,
+        noLink: true,
+        defaultId: buttons.indexOf('OK'),
+        cancelId: buttons.indexOf('OK')
+      }
+    )
+      .then(result => {
+        if (buttons[result.response] === 'Ok') {
+          console.log('Ok button clicked.')
+        } else if (buttons[result.response] === 'Copy') {
+          clipboard.writeText(detail)
+          console.log('Copied to clipboard.')
+        }
+      })
+      .catch(() => {
+        console.log('Action failed on window:show-about-dialog')
+      })
   })
 }
