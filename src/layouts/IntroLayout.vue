@@ -20,7 +20,7 @@
             <div class="welcome-text-title">Welcome to SciPages</div>
             <div class="welcome-text-subtitle">CMS and Static Site Generator for academic websites</div>
             <div class="welcome-text-icons">
-              <q-btn flat round size="17px" padding="13px" icon="fas fa-book" title="Documentation" v-on:click="openURL('https://scipages.github.io/')" />
+              <q-btn flat round size="17px" padding="13px" icon="fas fa-book" title="Documentation" v-on:click="openURL('https://www.scipages.org')" />
               <q-btn flat round size="20px" padding="10px" icon="fab fa-github" title="GitHub" v-on:click="openURL('https://github.com/scipages/scipages')" />
               <q-btn flat round size="20px" padding="10px" icon="bug_report" title="Report Issue" v-on:click="openURL('https://github.com/scipages/scipages/issues')" />
               <q-btn flat round size="20px" padding="10px" icon="update" title="Check for Updates" v-on:click="checkForUpdatesShow = true" />
