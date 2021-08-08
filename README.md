@@ -47,6 +47,12 @@ git clone https://github.com/scipages/scipages.git
 # After this, the 'gen' and 'scipages' projects will be cloned in the same directory.
 # They must stay like this.
 
+# Build the @scipages/gen npm package
+cd gen
+npm install
+npm run build
+cd ..
+
 cd scipages
 
 # Install the dependencies
