@@ -21,16 +21,25 @@ jobs:
           repository: scipages/gen
           ref: main
           path: gen
+      - run: |
+          pwd
+          ls
       - uses: actions/checkout@v2
         with:
           path: scipages
+      - run: |
+          pwd
+          ls
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node_version }}
-      - name: see directory
-        run: ls
+      - run: |
+          pwd
+          ls
       - run: cd scipages
-      - run: ls
+      - run: |
+          pwd
+          ls
       - run: npm install -g @quasar/cli
       - run: npm install
       - run: quasar build -m electron
