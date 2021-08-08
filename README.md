@@ -38,6 +38,17 @@ npm install -g @quasar/cli
 #### Build Setup
 
 ```bash
+# Clone the source code of the @scipages/gen npm package
+git clone https://github.com/scipages/gen.git
+
+# Clone this repository
+git clone https://github.com/scipages/scipages.git
+
+# After this, the 'gen' and 'scipages' projects will be cloned in the same directory.
+# They must stay like this.
+
+cd scipages
+
 # Install the dependencies
 npm install
 
