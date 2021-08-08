@@ -8,7 +8,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "icons": "icongenie generate -i AppIcon.png --skip-trim --theme-color 1976d2",
-    "link-gen": "npm link ../gen --save"
+    "link-gen": "npm link ../gen --save",
+    "install-gen-pack": "cp ../gen/scipages-gen-0.0.1.tgz ./scipages-gen-package.tgz && npm install ./scipages-gen-package.tgz --save",
+    "rm-gen": "npm rm @scipages/gen"
   },
   "dependencies": {
     "@quasar/extras": "^1.10.10",

@@ -31,11 +31,15 @@ jobs:
           ls
           ls gen
           ls scipages
+      - working-directory: ./gen
+        run: |
+          npm install
+          npm run build
       - run: npm install -g @quasar/cli
       - working-directory: ./scipages
-        run: npm install
-      - working-directory: ./scipages
-        run: quasar build -m electron
+        run: |
+          npm install
+          quasar build -m electron
       - run: ls scipages/dist/electron
       - uses: actions/upload-artifact@v2
         with:
