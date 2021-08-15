@@ -1,4 +1,4 @@
-import { MutationTree } from 'vuex'
+import type { MutationTree } from 'vuex'
 import { PackageInfoStateInterface } from './state'
 
 export enum PackageInfoMutationTypes {

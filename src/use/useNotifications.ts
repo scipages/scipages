@@ -1,7 +1,5 @@
-import {
-  computed,
-  ComputedRef
-} from 'vue'
+import type { ComputedRef } from 'vue'
+import { computed } from 'vue'
 import { Notification } from 'src/store/module-notifications/state'
 // import { useStore } from 'vuex'
 import { useStore } from 'src/store'

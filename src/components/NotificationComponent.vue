@@ -9,9 +9,8 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, PropType, ref, onBeforeUnmount, ComputedRef, computed
-} from 'vue'
+import type { PropType, ComputedRef } from 'vue'
+import { defineComponent, ref, onBeforeUnmount, computed } from 'vue'
 import useNotifications from 'src/use/useNotifications'
 import { Notification } from 'src/store/module-notifications/state'
 

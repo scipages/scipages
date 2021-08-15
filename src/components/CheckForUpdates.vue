@@ -71,7 +71,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, Ref } from 'vue'
+import type { Ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import usePackageInfo from 'src/use/usePackageInfo'
 import useWindow from 'src/use/useWindow'
 import useLoading from 'src/use/useLoading'

@@ -1,4 +1,5 @@
-import { readonly, ref, Ref } from 'vue'
+import type { Ref } from 'vue'
+import { readonly, ref } from 'vue'
 import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
 import { Course } from '@scipages/gen/lib/entities/Course'
 import _ from 'lodash'

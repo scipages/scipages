@@ -18,7 +18,9 @@ const ConfigurationDatabaseDefault = {
   title: '',
   theme: ConfigurationThemeEnum.AlFolio,
   customTheme: '',
-  urlPrefix: ''
+  urlPrefix: '',
+  scssCodeInternal: '',
+  scssCodeExternal: ''
 }
 
 export function openConfigurationDB (websitePath: string) {

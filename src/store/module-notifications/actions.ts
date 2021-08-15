@@ -1,4 +1,4 @@
-import { ActionContext, ActionTree } from 'vuex'
+import type { ActionContext, ActionTree } from 'vuex'
 import { StateInterface } from '../index'
 import { NotificationsStateInterface, Notification } from './state'
 import { Mutations, NotificationsMutationTypes } from './mutations'

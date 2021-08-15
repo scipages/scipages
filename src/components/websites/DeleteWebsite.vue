@@ -31,9 +31,8 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, PropType, ref
-} from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 import useNotifications from 'src/use/useNotifications'
