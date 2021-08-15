@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
 import { WebsitePathList } from 'app/src-common/types/WebsitePathList'
-import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 
 const allWebsites: WebsitePathList = reactive({ items: [] })

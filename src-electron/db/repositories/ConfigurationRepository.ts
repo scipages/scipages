@@ -1,16 +1,14 @@
 import { packageInfo } from '../../../src-common/packageInfo'
 import { getDB } from '../db'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
-import { ConfigurationThemeEnum } from '../../../src-common/enums/ConfigurationThemeEnum'
+import { Configuration, ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 
 import lowdb from 'lowdb'
 
 export enum ConfigurationDatabaseCollections {
 }
-export interface ConfigurationDatabaseSchema {
-  version: string;
-  title: string;
-  theme: string;
+export interface ConfigurationDatabaseSchema extends Configuration {
+  version: string
 }
 
 export let configurationDB: lowdb.LowdbSync<ConfigurationDatabaseSchema>
@@ -18,7 +16,9 @@ const ConfigurationRepositoryFilename = 'configuration.json'
 const ConfigurationDatabaseDefault = {
   version: packageInfo.version,
   title: '',
-  theme: ConfigurationThemeEnum.AlFolio
+  theme: ConfigurationThemeEnum.AlFolio,
+  customTheme: '',
+  urlPrefix: ''
 }
 
 export function openConfigurationDB (websitePath: string) {

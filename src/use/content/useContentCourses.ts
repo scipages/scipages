@@ -1,6 +1,6 @@
 import { readonly, ref, Ref } from 'vue'
 import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
-import { Course } from 'app/src-common/entities/Course'
+import { Course } from '@scipages/gen/lib/entities/Course'
 import _ from 'lodash'
 
 const allItems: Ref<Array<Course>> = ref([])

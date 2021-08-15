@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { WebsitePathItem } from '../../src-common/types/WebsitePathItem'
-import { ConfigurationThemeEnum } from '../../src-common/enums/ConfigurationThemeEnum'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum } from '../../src-common/enums/NewWebsiteTypeEnum'
 
 contextBridge.exposeInMainWorld('myWebsitesManagerAPI', {

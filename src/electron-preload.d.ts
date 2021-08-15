@@ -1,8 +1,8 @@
 import { ElectronData } from 'app/src-common/types/ElectronData'
 import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
 import { WindowMaxUnmaxParam } from 'app/src-common/types/WindowMaxUnmaxParam'
-import { Course } from 'app/src-common/entities/Course'
-import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { Course } from '@scipages/gen/lib/entities/Course'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 import { PostRequestResult } from 'app/src-common/types/PostRequestResult'
 

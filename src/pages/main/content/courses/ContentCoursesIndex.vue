@@ -239,7 +239,7 @@ import { useRoute } from 'vue-router'
 import useWindow from 'src/use/useWindow'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 import useContentCourses from 'src/use/content/useContentCourses'
-import { Course } from 'app/src-common/entities/Course'
+import { Course } from '@scipages/gen/lib/entities/Course'
 
 const columns = [
   { name: 'enabled', align: 'center', label: 'Status', field: 'enabled', sortable: true },

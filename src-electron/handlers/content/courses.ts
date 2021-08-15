@@ -10,7 +10,7 @@ import { PostRequestResult } from '../../../src-common/types/PostRequestResult'
 import {
   openCoursesDB, coursesDB, CoursesRepository, CoursesDatabaseCollections
 } from '../../db/repositories/CoursesRepository'
-import { Course } from '../../../src-common/entities/Course'
+import { Course } from '@scipages/gen/lib/entities/Course'
 
 export default function initContentCoursesHandlers () {
   ipcMain.on('content:courses:list-sync', (

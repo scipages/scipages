@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { WebsitePathItem } from '../../src-common/types/WebsitePathItem'
-import { Course } from '../../src-common/entities/Course'
+import { Course } from '@scipages/gen/lib/entities/Course'
 import { PostRequestResult } from '../../src-common/types/PostRequestResult'
 
 contextBridge.exposeInMainWorld('myContentAPI', {

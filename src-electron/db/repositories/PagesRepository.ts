@@ -2,7 +2,7 @@ import { packageInfo } from '../../../src-common/packageInfo'
 import { getDB } from '../db'
 import { BaseCollectionRepository } from './base/BaseCollectionRepository'
 import { BaseSimpleRepository } from './base/BaseSimpleRepository'
-import { Page } from '../../../src-common/entities/Page'
+import { Page } from '@scipages/gen/lib/entities/Page'
 
 import lowdb from 'lowdb'
 

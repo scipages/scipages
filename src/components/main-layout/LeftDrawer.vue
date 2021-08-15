@@ -36,7 +36,14 @@
         <q-separator class="q-my-md" />
         -->
 
-        <q-item v-for="link in links1" :key="link.text" v-ripple clickable :to="{name: 'main_index', params: { uuid: currentWebsite.uuid }}">
+        <q-item
+          v-for="link in links1"
+          :key="link.text"
+          v-ripple
+          clickable
+          :to="{ name: link.route_name, params: { uuid: currentWebsite.uuid } }"
+          :class="{ 'q-router-link--exact-active q-router-link--active': isParentActive(link.parent_route_url) }"
+        >
           <q-item-section avatar>
             <q-icon color="grey" :name="link.icon" />
           </q-item-section>
@@ -182,7 +189,8 @@ export default defineComponent({
       currentWebsite,
       closeWebsite,
       links1: [
-        { icon: 'web', text: 'Pages' }
+        { icon: 'web', text: 'Pages', route_name: 'main_index' },
+        { icon: 'web', text: 'Menu', route_name: 'main_menu_items' }
       ],
       isParentActive: isParentActive,
       links2: [

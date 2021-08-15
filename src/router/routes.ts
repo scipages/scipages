@@ -29,6 +29,13 @@ const routes: RouteRecordRaw[] = [
         props: true
       },
       {
+        path: 'menu-items',
+        name: 'main_menu_items',
+        component: () => import('pages/main/ContentMenuItems.vue'),
+        meta: { title: 'Menu Items' },
+        props: true
+      },
+      {
         path: 'basic-info',
         name: 'main_basic_info',
         component: () => import('pages/main/ContentBasicInfo.vue'),

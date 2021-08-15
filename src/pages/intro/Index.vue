@@ -111,7 +111,7 @@ import { WebsitePathItem } from 'app/src-common/types/WebsitePathItem'
 import NewWebsite from 'components/websites/NewWebsite.vue'
 import DeleteWebsite from 'components/websites/DeleteWebsite.vue'
 import LoadingComponent from 'src/components/LoadingComponent.vue'
-import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum } from 'app/src-common/enums/NewWebsiteTypeEnum'
 
 export default defineComponent({

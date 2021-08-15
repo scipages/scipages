@@ -143,7 +143,7 @@
 
 <script lang="ts">
 import { defineComponent, Ref, ref, watch } from 'vue'
-import { ConfigurationThemeEnum } from 'app/src-common/enums/ConfigurationThemeEnum'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum, newWebsiteTypeStrings } from 'app/src-common/enums/NewWebsiteTypeEnum'
 import { Errors } from 'src/helpers/errors'
 

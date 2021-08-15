@@ -44,7 +44,7 @@ import useElectronData from 'src/use/useElectronData'
 import useWindow from 'src/use/useWindow'
 
 import { v4 as uuidv4 } from 'uuid'
-import { Course } from 'app/src-common/entities/Course'
+import { Course } from '@scipages/gen/lib/entities/Course'
 // import { coursesDB, openCoursesDB, CoursesDatabaseCollections, CoursesRepository } from 'app/src-electron/db/repositories/CoursesRepository'
 import { coursesDB, CoursesDatabaseCollections, CoursesRepository } from 'app/src-electron/db/repositories/CoursesRepository'
 

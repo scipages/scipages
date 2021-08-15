@@ -19,7 +19,7 @@ import { openProjectsDB } from '../db/repositories/ProjectsRepository'
 import { openPublicationsDB } from '../db/repositories/PublicationsRepository'
 import { openSocialMediaDB } from '../db/repositories/SocialMediaRepository'
 import { openSoftwareDB } from '../db/repositories/SoftwareRepository'
-import { ConfigurationThemeEnum } from '../../src-common/enums/ConfigurationThemeEnum'
+import { ConfigurationThemeEnum } from '@scipages/gen/lib/entities/Configuration'
 import { NewWebsiteTypeEnum } from '../../src-common/enums/NewWebsiteTypeEnum'
 
 function timeDifference (current: number, previous: number) {
