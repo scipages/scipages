@@ -28,6 +28,11 @@ const basicInfoDatabaseDefault = {
     rel: '',
     href: '',
     type: ''
+  },
+  og: {
+    locale: '',
+    site_name: '',
+    image: ''
   }
 }
 

@@ -18,7 +18,8 @@ const ConfigurationDatabaseDefault = {
   title: '',
   theme: ConfigurationThemeEnum.AlFolio,
   customTheme: '',
-  urlPrefix: '',
+  url: 'http://127.0.0.1:8080',
+  urlPrefix: '/',
   scssCodeInternal: '',
   scssCodeExternal: ''
 }
