@@ -40,7 +40,7 @@ function createWindow () {
     titleBarStyle: 'hidden',
     useContentSize: true,
     webPreferences: {
-      enableRemoteModule: false,
+      // enableRemoteModule: false,
       nodeIntegration: false,
       // (Electron 12+ has it enabled by default anyway)
       contextIsolation: true,
