@@ -83,7 +83,7 @@ export default defineComponent({
           // errors.value.record(error)
           close()
           addNotification(
-            notificationFactory('error', error)
+            notificationFactory('error', error as string)
           )
         })
         .finally(() => { endLoading() })

@@ -101,6 +101,10 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": "off",
     // https://github.com/typescript-eslint/typescript-eslint/issues/2621#issuecomment-701970389
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    // https://eslint.vuejs.org/rules/multi-word-component-names.html
+    'vue/multi-word-component-names': 'off',
+    // https://stackoverflow.com/questions/47635509/eslint-object-shorthand-error-with-variable-passed-in
+    "object-shorthand": 0
   }
 }

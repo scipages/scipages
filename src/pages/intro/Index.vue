@@ -179,7 +179,7 @@ export default defineComponent({
         .catch(error => {
           console.log(error)
           addNotification(
-            notificationFactory('error', error)
+            notificationFactory('error', error as string)
           )
         })
         .finally(() => { endLoading() })
@@ -202,7 +202,7 @@ export default defineComponent({
         .catch(error => {
           console.log(error)
           addNotification(
-            notificationFactory('error', error)
+            notificationFactory('error', error as string)
           )
         })
         .finally(() => {
@@ -220,7 +220,7 @@ export default defineComponent({
         .catch(error => {
           console.log(error)
           addNotification(
-            notificationFactory('error', error)
+            notificationFactory('error', error as string)
           )
         })
         .finally(() => {
