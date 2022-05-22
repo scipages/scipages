@@ -5,7 +5,7 @@
     </q-header>
 
     <q-footer class="bg-grey-2" bordered>
-      <Footer></Footer>
+      <PageFooter></PageFooter>
     </q-footer>
 
     <q-page-container class="absolute-full">
@@ -44,7 +44,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import TitleBar from 'components/TitleBar.vue'
-import Footer from 'components/main-layout/Footer.vue'
+import PageFooter from 'components/main-layout/PageFooter.vue'
 import useWindow from 'src/use/useWindow'
 import CheckForUpdates from 'components/CheckForUpdates.vue'
 
@@ -53,7 +53,7 @@ export default defineComponent({
 
   components: {
     TitleBar,
-    Footer,
+    PageFooter,
     CheckForUpdates
   },
 

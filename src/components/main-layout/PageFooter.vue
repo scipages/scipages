@@ -27,7 +27,7 @@ import { useStore } from 'src/store'
 import useWebsitesManager from 'src/use/useWebsitesManager'
 
 export default defineComponent({
-  name: 'Footer',
+  name: 'PageFooter',
   setup () {
     const { currentWebsite } = useWebsitesManager()
     const currentRouteMetaTitle = computed(() => {

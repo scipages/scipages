@@ -7,7 +7,7 @@
     </q-header>
 
     <q-footer class="bg-grey-2" bordered>
-      <Footer></Footer>
+      <PageFooter></PageFooter>
     </q-footer>
 
     <LeftDrawer v-model:show="showLeftDrawer"></LeftDrawer>
@@ -32,7 +32,7 @@ import { defineComponent, ref } from 'vue'
 import TitleBar from 'components/TitleBar.vue'
 // import MenuBar from 'components/main-layout/MenuBar.vue'
 import MainToolBar from 'components/main-layout/MainToolBar.vue'
-import Footer from 'components/main-layout/Footer.vue'
+import PageFooter from 'components/main-layout/PageFooter.vue'
 // import RightDrawer from 'components/main-layout/RightDrawer.vue'
 import LeftDrawer from 'components/main-layout/LeftDrawer.vue'
 
@@ -43,7 +43,7 @@ export default defineComponent({
     TitleBar,
     // MenuBar,
     MainToolBar,
-    Footer,
+    PageFooter,
     // RightDrawer,
     LeftDrawer
   },
