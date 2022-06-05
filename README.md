@@ -51,6 +51,7 @@ git clone https://github.com/scipages/scipages.git
 cd gen
 npm install
 npm run build
+npm pack # Only on production/build
 cd ..
 
 cd scipages
@@ -58,14 +59,21 @@ cd scipages
 # Install the dependencies
 npm install
 
+# Link the @scipages/gen package (Only on development)
+npm run rm-gen
+npm run link-gen
 # Start the app in development mode (hot-code reloading, error reporting, etc.)
 quasar dev -m electron
 
-# Lint the files
-npm run lint
-
+# Install the @scipages/gen package (Only on production/build)
+# ('npm pack' on the @scipages/gen must precede)
+npm run rm-gen
+npm run install-gen-pack
 # Build the app for production
 quasar build -m electron
+
+# Lint the files
+npm run lint
 ```
 
 ## License

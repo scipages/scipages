@@ -35,10 +35,13 @@ jobs:
         run: |
           npm install
           npm run build
+          npm pack
       - run: npm install -g @quasar/cli
       - working-directory: ./scipages
         run: |
           npm install
+          npm run rm-gen
+          npm run install-gen-pack
           quasar build -m electron
       - run: ls scipages/dist/electron
       - uses: actions/upload-artifact@v2
