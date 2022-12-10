@@ -172,7 +172,7 @@ export default function initWebsitesManagerHandlers () {
       return new Promise((resolve, reject) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         // @ts-ignore
-        fs.rmdir(item.path, { recursive: true }, (err) => {
+        fs.rm(item.path, { recursive: true, force: true }, (err) => {
           if (err) {
             reject('Error - Website path deletion failed')
           } else {

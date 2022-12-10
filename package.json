@@ -6,6 +6,8 @@
   "author": "Christos",
   "private": true,
   "scripts": {
+    "dev": "npm run rm-gen && npm run link-gen && quasar dev -m electron",
+    "build": "npm run rm-gen && npm run install-gen-pack && quasar build -m electron",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "icons": "icongenie generate -i AppIcon.png --skip-trim --theme-color 1976d2",
     "link-gen": "npm link ../gen --save",
@@ -13,7 +15,7 @@
     "rm-gen": "npm rm @scipages/gen"
   },
   "dependencies": {
-    "@quasar/extras": "^1.14.0",
+    "@quasar/extras": "^1.15.7",
     "@scipages/gen": "file:../gen",
     "archiver": "^5.3.0",
     "axios": "^0.27.2",
@@ -22,9 +24,10 @@
     "extract-zip": "^2.0.1",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
-    "quasar": "^2.7.1",
+    "quasar": "^2.10.2",
     "semver": "^7.3.5",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
+    "vue": "^3.2.45",
     "vue-i18n": "^9.1.6",
     "vuex": "^4.0.1"
   },
@@ -40,7 +43,7 @@
     "@vue/devtools": "^6.0.0-beta.15",
     "babel-eslint": "^10.0.1",
     "devtron": "^1.4.0",
-    "electron": "^18.2.4",
+    "electron": "^22.0.0",
     "electron-builder": "^22.10.5",
     "electron-debug": "^3.2.0",
     "electron-devtools-installer": "^3.2.0",

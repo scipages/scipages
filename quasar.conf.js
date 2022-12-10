@@ -43,6 +43,7 @@ module.exports = configure(function (ctx) {
       // 'ionicons-v4',
       // 'mdi-v5',
       'fontawesome-v5',
+      // 'fontawesome-v6',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -81,7 +82,10 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: false,
+      // https: false,
+      server: {
+        type: 'http'
+      },
       port: 8080,
       open: true // opens browser window automatically
     },
