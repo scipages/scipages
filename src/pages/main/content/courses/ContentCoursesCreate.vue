@@ -195,7 +195,7 @@ export default defineComponent({
     function onCreateClick (close = false) {
       errors.value.clear()
       startLoading()
-      createItem(currentWebsite, newItem)
+      void createItem(currentWebsite, newItem)
         .then((response: PostRequestResult) => {
           if (!response.status) {
             if (
@@ -230,7 +230,7 @@ export default defineComponent({
         // .catch(error => {
         //   console.log(error)
         //   addNotification(
-        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
         //     notificationFactory('error', error)
         //   )
         // })
