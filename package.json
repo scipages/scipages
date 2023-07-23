@@ -15,7 +15,7 @@
     "rm-gen": "npm rm @scipages/gen"
   },
   "dependencies": {
-    "@quasar/extras": "^1.15.7",
+    "@quasar/extras": "^1.16.5",
     "@scipages/gen": "file:../gen",
     "archiver": "^5.3.0",
     "axios": "^0.27.2",
@@ -24,7 +24,7 @@
     "extract-zip": "^2.0.1",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
-    "quasar": "^2.10.2",
+    "quasar": "^2.12.3",
     "semver": "^7.3.5",
     "uuid": "^9.0.0",
     "vue": "^3.2.45",
@@ -32,7 +32,7 @@
     "vuex": "^4.0.1"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.5.3",
+    "@quasar/app-webpack": "^3.9.2",
     "@types/archiver": "^5.1.0",
     "@types/lowdb": "^1.0.10",
     "@types/node": "^17.0.18",
